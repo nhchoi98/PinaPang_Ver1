@@ -1,9 +1,7 @@
 
-using Battery;
 using Daily_Reward;
 using Data;
 using Setting;
-using shop;
 using UnityEngine;
 
 

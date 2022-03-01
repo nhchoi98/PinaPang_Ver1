@@ -28,7 +28,6 @@ namespace Battery
             {
                 var json_string = File.ReadAllText(DATA_PATH);
                 DATA = JsonMapper.ToObject<BatteryVO>(json_string);
-                Debug.Log(DATA.accessTime);
             }
 
             else
@@ -67,7 +66,11 @@ namespace Battery
 
         public void Ingame_Start()
         {
+            var prevCount = data.count;
             data.count -= game_discharge;
+            if(prevCount>29 && data.count<30)
+                data.accessTime = DateTime.UtcNow;
+            
             Write_Data();
         }
 
@@ -123,7 +126,6 @@ namespace Battery
         public void Loading_Charge()
         {
             TimeSpan delta = DateTime.UtcNow - data.accessTime;
-            Debug.Log(delta + " + " + data.accessTime);
             //  기본 차지 할 필요 없다면 
             if (data.count > 29)
             {
@@ -132,9 +134,7 @@ namespace Battery
                 
                 while (true)
                 {
-                    Debug.Log(data.accessTime);
                     data.accessTime += TimeSpan.FromMinutes(6);
-                    Debug.Log(data.accessTime);
                     delta = DateTime.UtcNow - data.accessTime;
                     if (delta < TimeSpan.FromMinutes(6))
                         break;
