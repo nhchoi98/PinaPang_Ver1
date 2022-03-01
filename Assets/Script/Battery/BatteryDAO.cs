@@ -158,14 +158,11 @@ namespace Battery
                 
                 while (true)
                 {
-                    Debug.Log(data.accessTime);
                     data.accessTime += TimeSpan.FromMinutes(6);
-                    Debug.Log(data.accessTime);
                     delta = DateTime.UtcNow - data.accessTime;
                     if (delta < TimeSpan.FromMinutes(6))
-                    {
                         break;
-                    }
+                    
 
                     if (data.count < 30)
                         data.count += 1;
