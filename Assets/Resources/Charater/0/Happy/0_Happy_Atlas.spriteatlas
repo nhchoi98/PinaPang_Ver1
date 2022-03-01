@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 0_Happy_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 256
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: abfd9cf5cccf28c46a2cc70c5cc8984e, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 75440953411edab449c427776d33c87d, type: 3}
+  - {fileID: 21300000, guid: e59ff9a4437b1034ca83cc1acd3a3ffa, type: 3}
+  - {fileID: 21300000, guid: d892705557773b9438480648f432b0f1, type: 3}
+  - {fileID: 21300000, guid: 49560226b06e46f4e8bec075083458b9, type: 3}
+  - {fileID: 21300000, guid: 115e1186d1bb30f4e92e73fc83f5701f, type: 3}
+  - {fileID: 21300000, guid: b9721869084b2bd46b6a5d3634da33b8, type: 3}
+  - {fileID: 21300000, guid: 155b69dbbfe96054ebc19d4a3599d3e2, type: 3}
+  - {fileID: 21300000, guid: b16d7a5dd3802874294655ed4f71380e, type: 3}
+  - {fileID: 21300000, guid: 17325aeeee43ddd47be0763a2c8257dd, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Kevin_Expression0006
+  - Kevin_Expression0001
+  - Kevin_Expression0003
+  - Kevin_Expression0004
+  - Kevin_Expression0007
+  - Kevin_Expression0000
+  - Kevin_Expression0008
+  - Kevin_Expression0002
+  - Kevin_Expression0005
+  m_RenderDataMap: {}
+  m_Tag: 0_Happy_Atlas
+  m_IsVariant: 0

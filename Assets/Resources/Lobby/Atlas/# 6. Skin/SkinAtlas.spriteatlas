@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SkinAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: 5e6a4633529b105419d87e2dc4e454f4, type: 3}
+    - {fileID: 21300000, guid: 9acefd299904bc349887f6b6739b9997, type: 3}
+    - {fileID: 21300000, guid: f5d9ed3f3855adb42a8efa35cc621a7c, type: 3}
+    - {fileID: 21300000, guid: 4f796b6ee816edd46aa676cee9acdff7, type: 3}
+    - {fileID: 21300000, guid: a9a01c7bbe4ab7546900951a9629727b, type: 3}
+    - {fileID: 21300000, guid: 018f6e80ef679664dad5015f317aa4c7, type: 3}
+    - {fileID: 21300000, guid: 080d9444c16d04846ac4492a0ad21295, type: 3}
+    - {fileID: 21300000, guid: 351dd1656edb2f94c8da14d1efeebf7b, type: 3}
+    - {fileID: 21300000, guid: 4d52fd759763b604aa94fd237a786d5b, type: 3}
+    - {fileID: 21300000, guid: 9adc4bdb6c159db4cb58d24dc5bc057d, type: 3}
+    - {fileID: 21300000, guid: ee86b88c6e9ca3c418e0a2e5dbe2656b, type: 3}
+    - {fileID: 21300000, guid: 4f2b3df4ef829a845a3566b4cc175e07, type: 3}
+    - {fileID: 21300000, guid: 80753204ed4aa1b44b8f8fef8f4e9866, type: 3}
+    - {fileID: 21300000, guid: 04428e60d2ade134d834ab6f4664e992, type: 3}
+    - {fileID: 21300000, guid: f1d4639fd10d9784c8f41d7e3abb46bf, type: 3}
+    - {fileID: 21300000, guid: 4109069eb21e21e4aa7d58559a132263, type: 3}
+    - {fileID: 21300000, guid: 3e567b07b54823c4daba1bb6e1ca85e5, type: 3}
+    - {fileID: 21300000, guid: fa01f5aae5d1e6c459bebabacf83c493, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 04428e60d2ade134d834ab6f4664e992, type: 3}
+  - {fileID: 21300000, guid: 018f6e80ef679664dad5015f317aa4c7, type: 3}
+  - {fileID: 21300000, guid: 5e6a4633529b105419d87e2dc4e454f4, type: 3}
+  - {fileID: 21300000, guid: 80753204ed4aa1b44b8f8fef8f4e9866, type: 3}
+  - {fileID: 21300000, guid: 080d9444c16d04846ac4492a0ad21295, type: 3}
+  - {fileID: 21300000, guid: 4f2b3df4ef829a845a3566b4cc175e07, type: 3}
+  - {fileID: 21300000, guid: 351dd1656edb2f94c8da14d1efeebf7b, type: 3}
+  - {fileID: 21300000, guid: 4d52fd759763b604aa94fd237a786d5b, type: 3}
+  - {fileID: 21300000, guid: 3e567b07b54823c4daba1bb6e1ca85e5, type: 3}
+  - {fileID: 21300000, guid: 9acefd299904bc349887f6b6739b9997, type: 3}
+  - {fileID: 21300000, guid: fa01f5aae5d1e6c459bebabacf83c493, type: 3}
+  - {fileID: 21300000, guid: a9a01c7bbe4ab7546900951a9629727b, type: 3}
+  - {fileID: 21300000, guid: 9adc4bdb6c159db4cb58d24dc5bc057d, type: 3}
+  - {fileID: 21300000, guid: ee86b88c6e9ca3c418e0a2e5dbe2656b, type: 3}
+  - {fileID: 21300000, guid: 4f796b6ee816edd46aa676cee9acdff7, type: 3}
+  - {fileID: 21300000, guid: 4109069eb21e21e4aa7d58559a132263, type: 3}
+  - {fileID: 21300000, guid: f5d9ed3f3855adb42a8efa35cc621a7c, type: 3}
+  - {fileID: 21300000, guid: f1d4639fd10d9784c8f41d7e3abb46bf, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Skin_Ability_Badge_Case2
+  - Skin_Tier_Rare
+  - Skin_Bg
+  - Skin_Use_Btn
+  - Skin_Tier_Normal
+  - Skin_Main_Panel
+  - Unique
+  - Skin_Tier_Unique
+  - Skin_Ability_Badge_Slot_Select2
+  - Skin_Equipped_Icon
+  - Skin_Ability_Badge_Case2-1
+  - Skin_Care_Unique
+  - Skin_Ability_Badge_Case_Lock
+  - Skin_Ability_Badge_Case_Plus
+  - Skin_Card_Normal
+  - Skin_Ability_Badge_Slot_198
+  - Skin_Equipped_Icon
+  - Skin_Ability_Badge_Slot_132
+  m_RenderDataMap: {}
+  m_Tag: SkinAtlas
+  m_IsVariant: 0

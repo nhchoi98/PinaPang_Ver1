@@ -1,0 +1,36 @@
+{
+  "project_info": {
+    "project_number": "673649595747",
+    "project_id": "pinapang-4c7da",
+    "storage_bucket": "pinapang-4c7da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673649595747:ios:e3e95b5ef9228b46142f56",
+        "android_client_info": {
+          "package_name": "com.Anydog.PinaPang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673649595747-840e3abt3u3348du18eekuqfkf5dfqls.apps.googleusercontent.com"
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4cmcWUrwDPR5iyVEuD7xj46zqhwvY16k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

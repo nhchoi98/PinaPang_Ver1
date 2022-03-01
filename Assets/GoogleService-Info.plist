@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>673649595747-840e3abt3u3348du18eekuqfkf5dfqls.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.673649595747-840e3abt3u3348du18eekuqfkf5dfqls</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>673649595747-5kg416oh9es7ovkgclregr32kkctj083.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD4cmcWUrwDPR5iyVEuD7xj46zqhwvY16k</string>
+	<key>GCM_SENDER_ID</key>
+	<string>673649595747</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Anydog.PinaPang</string>
+	<key>PROJECT_ID</key>
+	<string>pinapang-4c7da</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pinapang-4c7da.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:673649595747:ios:e3e95b5ef9228b46142f56</string>
+</dict>
+</plist>

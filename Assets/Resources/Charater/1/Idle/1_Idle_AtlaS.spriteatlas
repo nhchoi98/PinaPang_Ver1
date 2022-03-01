@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 1_Idle_AtlaS
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 256
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 076d39ba88b5043458633a5db64a653c, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f3c039b089bb4b24896ba1e77ecfbe10, type: 3}
+  - {fileID: 21300000, guid: 845f26d0517686d48963120834b9b9a2, type: 3}
+  - {fileID: 21300000, guid: 65e1eee081571ea4183a0c200402f570, type: 3}
+  - {fileID: 21300000, guid: c168235172dc8f84792eefe6a6566c36, type: 3}
+  - {fileID: 21300000, guid: 621d87618340cba4cb80325b0b5dc4a5, type: 3}
+  - {fileID: 21300000, guid: 315db2a1dc8553b4ead2f51e84aaf214, type: 3}
+  - {fileID: 21300000, guid: 2b6b04b108c48aa468664f95fefdc82f, type: 3}
+  - {fileID: 21300000, guid: 50c33ee16060bf8438660d0e7bc250e9, type: 3}
+  - {fileID: 21300000, guid: 540d5e524597221458d531b589c0bc9e, type: 3}
+  - {fileID: 21300000, guid: 3368e5e306cc59b448e5ec613fbc62c2, type: 3}
+  - {fileID: 21300000, guid: de1d6ec6e3baed24184b040e190472d6, type: 3}
+  - {fileID: 21300000, guid: cdf55bf60b5586343b81970a9a5d22a0, type: 3}
+  - {fileID: 21300000, guid: a5324729a60ba8146bd89b30ba235c19, type: 3}
+  - {fileID: 21300000, guid: f61ffd3af086fa840bae2c9de5d0559f, type: 3}
+  - {fileID: 21300000, guid: 54c6ba7aa9f20ab40a639bcc04fa21c6, type: 3}
+  - {fileID: 21300000, guid: 81450eeb2cf93c640a9da42c35435474, type: 3}
+  - {fileID: 21300000, guid: cd938b5eb755c5a4291c2ab539787626, type: 3}
+  - {fileID: 21300000, guid: 409d25af3cee4544ebedf7f294ade052, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Minx_Blink0000
+  - Minx_Blink0007
+  - Minx_Blink0002
+  - Minx_Blink0003
+  - Minx_Blink0008
+  - Minx_Breathe0002
+  - Minx_Breathe0004
+  - Minx_Blink0006
+  - Minx_Breathe0005
+  - Minx_Blink0005
+  - Minx_Breathe0003
+  - Minx_Blink0001
+  - Minx_Breathe0001
+  - Minx_Breathe0008
+  - Minx_Breathe0007
+  - Minx_Blink0004
+  - Minx_Breathe0000
+  - Minx_Breathe0006
+  m_RenderDataMap: {}
+  m_Tag: 1_Idle_AtlaS
+  m_IsVariant: 0

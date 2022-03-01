@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Lobby_Btn
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 512
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: bad26c4eaef54284e82e58a7bea87d0f, type: 3}
+    - {fileID: 21300000, guid: 022ecf67e11c29c46a633c98922f111a, type: 3}
+    - {fileID: 21300000, guid: 71723b241a79b4b42aec5b2a3bf6176d, type: 3}
+    - {fileID: 21300000, guid: ae7bc35e2da16f84490050c64e0d0512, type: 3}
+    - {fileID: 21300000, guid: b921dab3b134b634e93a784fdc79c88a, type: 3}
+    - {fileID: 21300000, guid: 322a3fe336da0a4408faf1fb87bbccc0, type: 3}
+    - {fileID: 21300000, guid: 4314df612d46eb84ba70db146586026d, type: 3}
+    - {fileID: 21300000, guid: ac9dd8ad7f51d5648b6e976de979688c, type: 3}
+    - {fileID: 21300000, guid: 37d497eb0f4100549832d8fcf80b4c62, type: 3}
+    - {fileID: 21300000, guid: f6173cbed353936428de0203267792eb, type: 3}
+    - {fileID: 21300000, guid: 09cb1c0790aecc149a82a2ea3aee24d9, type: 3}
+    - {fileID: 21300000, guid: 3369270bcf2300049b23f8ff655e9317, type: 3}
+    - {fileID: 21300000, guid: b2fa866c55c692346bf7f7eef0dc64cb, type: 3}
+    - {fileID: 21300000, guid: a1056b5ca52b0df4f8f9ca901e72e11f, type: 3}
+    - {fileID: 21300000, guid: e7d10e13fca92914281cf523f90b1399, type: 3}
+    - {fileID: 21300000, guid: 0077d9cbdb117734e9638e02692b5ba1, type: 3}
+    - {fileID: 21300000, guid: a39f0e7b0b433d244b2b397434c432a4, type: 3}
+    - {fileID: 21300000, guid: 1c7c0d24c47c3884c8e1cfb3474a3d88, type: 3}
+    - {fileID: 21300000, guid: 9fc85c91261119045add80815027b0af, type: 3}
+    - {fileID: 21300000, guid: bdb1d91fc34719c40b16ffb5788b7000, type: 3}
+    - {fileID: 21300000, guid: 15856060fbca88a499829e043170c177, type: 3}
+    - {fileID: 21300000, guid: 31e03b9d8d26c374fa6bb6318690a58a, type: 3}
+    - {fileID: 21300000, guid: 11dad03558a7cfe439bd5f220d0c1589, type: 3}
+    - {fileID: 21300000, guid: 5da13395b358bc04caf2b8b6d21e2b2d, type: 3}
+    - {fileID: 21300000, guid: 52232e6ece3a4c14a9784be6ecb2be63, type: 3}
+    - {fileID: 21300000, guid: 36ec483f082c9ac4eab32dd326293f6b, type: 3}
+    - {fileID: 21300000, guid: 46627e7ca719d094fbbecedbe29b57cf, type: 3}
+    - {fileID: 21300000, guid: 1c7c0d24c47c3884c8e1cfb3474a3d88, type: 3}
+    - {fileID: 21300000, guid: 80f29efd1104c424a807edd2695915d1, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 15856060fbca88a499829e043170c177, type: 3}
+  - {fileID: 21300000, guid: 4314df612d46eb84ba70db146586026d, type: 3}
+  - {fileID: 21300000, guid: 9fc85c91261119045add80815027b0af, type: 3}
+  - {fileID: 21300000, guid: e7d10e13fca92914281cf523f90b1399, type: 3}
+  - {fileID: 21300000, guid: b921dab3b134b634e93a784fdc79c88a, type: 3}
+  - {fileID: 21300000, guid: 322a3fe336da0a4408faf1fb87bbccc0, type: 3}
+  - {fileID: 21300000, guid: 71723b241a79b4b42aec5b2a3bf6176d, type: 3}
+  - {fileID: 21300000, guid: 1c7c0d24c47c3884c8e1cfb3474a3d88, type: 3}
+  - {fileID: 21300000, guid: 11dad03558a7cfe439bd5f220d0c1589, type: 3}
+  - {fileID: 21300000, guid: 5da13395b358bc04caf2b8b6d21e2b2d, type: 3}
+  - {fileID: 21300000, guid: 09cb1c0790aecc149a82a2ea3aee24d9, type: 3}
+  - {fileID: 21300000, guid: 022ecf67e11c29c46a633c98922f111a, type: 3}
+  - {fileID: 21300000, guid: 3369270bcf2300049b23f8ff655e9317, type: 3}
+  - {fileID: 21300000, guid: a39f0e7b0b433d244b2b397434c432a4, type: 3}
+  - {fileID: 21300000, guid: 0077d9cbdb117734e9638e02692b5ba1, type: 3}
+  - {fileID: 21300000, guid: 37d497eb0f4100549832d8fcf80b4c62, type: 3}
+  - {fileID: 21300000, guid: a1056b5ca52b0df4f8f9ca901e72e11f, type: 3}
+  - {fileID: 21300000, guid: b2fa866c55c692346bf7f7eef0dc64cb, type: 3}
+  - {fileID: 21300000, guid: 46627e7ca719d094fbbecedbe29b57cf, type: 3}
+  - {fileID: 21300000, guid: 31e03b9d8d26c374fa6bb6318690a58a, type: 3}
+  - {fileID: 21300000, guid: ac9dd8ad7f51d5648b6e976de979688c, type: 3}
+  - {fileID: 21300000, guid: 80f29efd1104c424a807edd2695915d1, type: 3}
+  - {fileID: 21300000, guid: bad26c4eaef54284e82e58a7bea87d0f, type: 3}
+  - {fileID: 21300000, guid: ae7bc35e2da16f84490050c64e0d0512, type: 3}
+  - {fileID: 21300000, guid: 52232e6ece3a4c14a9784be6ecb2be63, type: 3}
+  - {fileID: 21300000, guid: f6173cbed353936428de0203267792eb, type: 3}
+  - {fileID: 21300000, guid: bdb1d91fc34719c40b16ffb5788b7000, type: 3}
+  - {fileID: 21300000, guid: 36ec483f082c9ac4eab32dd326293f6b, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Ingame_Heart
+  - Lobby_Starter_Package_100 1
+  - Lobby_Gem
+  - Collection_Gem
+  - Lobby_Toy_Btn_icon
+  - Lobby_Shop_Btn_icon
+  - Lobby_Quest_Btn
+  - Lobby_Panel
+  - Ingame_Star2
+  - Lobby_BG_2
+  - Lobby_Check_Btn
+  - Lobby_Quest_Btn_icon
+  - Lobby_Heart_PopUp
+  - Lobby_Set_Btn
+  - Ingame_Candy
+  - Lobby_Skin_Btn
+  - Lobby_Heart_PopUp_Ad_Btn
+  - Lobby_Heart_PopUp_Gem_Btn
+  - Lobby_Starter_Timer
+  - Sign_Red_Circle
+  - Lobby_Toy_Btn
+  - Lobby_Coin
+  - Lobby_Start_Btn
+  - Lobby_ToyBox_Btn
+  - Title_2 1
+  - Lobby_Exchange_Btn2
+  - Ingame_Hearts3
+  - Lobby_Skin_Btn_icon
+  m_RenderDataMap: {}
+  m_Tag: Lobby_Btn
+  m_IsVariant: 0

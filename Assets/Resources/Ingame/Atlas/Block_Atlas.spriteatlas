@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Block_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 256
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: d6886eaea8e4ce94cba176e8e8616bb6, type: 3}
+    - {fileID: 21300000, guid: ec8199c96c0826a41a26b8e3e20d5992, type: 3}
+    - {fileID: 21300000, guid: 9a8f18f2eddff2c4384d4e5bc753f7c8, type: 3}
+    - {fileID: 21300000, guid: f4ee4df331c4c374f9259281c8260964, type: 3}
+    - {fileID: 21300000, guid: 51e690cd5174be743a10a4d53c550fc6, type: 3}
+    - {fileID: 21300000, guid: 66c3693b29913274aa8b40bb29075051, type: 3}
+    - {fileID: 21300000, guid: 753c8c057fe0fdb4fb2337419dd60bfe, type: 3}
+    - {fileID: 21300000, guid: 5cd4b363cb6dc5540b0566d50eea9fdc, type: 3}
+    - {fileID: 21300000, guid: a8b08575740ab744283fcb9aa0d42121, type: 3}
+    - {fileID: 21300000, guid: e3ad25423cd77e24ab082fd5c31754e3, type: 3}
+    - {fileID: 21300000, guid: 329ea84d5aa180c4f898faff9b9841dc, type: 3}
+    - {fileID: 21300000, guid: 2e228044499dd004abc7b8459d639669, type: 3}
+    - {fileID: 21300000, guid: eb30f4ec232ca854b98d5b68a0746210, type: 3}
+    - {fileID: 21300000, guid: 984160a778d7a2040be4141a8afdfcf0, type: 3}
+    - {fileID: 21300000, guid: 2b2a7d5e930cd054f944ad53cce883ec, type: 3}
+    - {fileID: 21300000, guid: 3d60ea22a75d4d64598e305eb67b381b, type: 3}
+    - {fileID: 21300000, guid: 07c68a1c0ea53ce4dbf2b4ed02ab6cf3, type: 3}
+    - {fileID: 21300000, guid: 289dfdb34d7f08e429295f61c0078593, type: 3}
+    - {fileID: 21300000, guid: c8fefded88aabea4ca53399e526af231, type: 3}
+    - {fileID: 21300000, guid: 6bafac72be798654e80b3999c0944cf8, type: 3}
+    - {fileID: 21300000, guid: 41115dc5c9d0f104190f1a7743973917, type: 3}
+    - {fileID: 21300000, guid: eaee4c63fa323354ea3608bfd0c75a48, type: 3}
+    - {fileID: 21300000, guid: abbfa9f52c190aa49bdaf61ebbfe05fc, type: 3}
+    - {fileID: 21300000, guid: fd7c4487a4f10aa40906353155abba44, type: 3}
+    - {fileID: 21300000, guid: 2c1910910fe0c48419ee5aa5b8dc274e, type: 3}
+    - {fileID: 21300000, guid: 8066c10bcd3220b4aae2d7b9692572f9, type: 3}
+    - {fileID: 21300000, guid: b7952692f2ed05c40aa6d4004b386333, type: 3}
+    - {fileID: 21300000, guid: 660235210ec559640bc57d22e491e79d, type: 3}
+    - {fileID: 21300000, guid: 1e50191291331194fab3f0c9577b462b, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 660235210ec559640bc57d22e491e79d, type: 3}
+  - {fileID: 21300000, guid: 2c1910910fe0c48419ee5aa5b8dc274e, type: 3}
+  - {fileID: 21300000, guid: 1e50191291331194fab3f0c9577b462b, type: 3}
+  - {fileID: 21300000, guid: 3d60ea22a75d4d64598e305eb67b381b, type: 3}
+  - {fileID: 21300000, guid: e3ad25423cd77e24ab082fd5c31754e3, type: 3}
+  - {fileID: 21300000, guid: 6bafac72be798654e80b3999c0944cf8, type: 3}
+  - {fileID: 21300000, guid: b7952692f2ed05c40aa6d4004b386333, type: 3}
+  - {fileID: 21300000, guid: 9a8f18f2eddff2c4384d4e5bc753f7c8, type: 3}
+  - {fileID: 21300000, guid: 5cd4b363cb6dc5540b0566d50eea9fdc, type: 3}
+  - {fileID: 21300000, guid: eaee4c63fa323354ea3608bfd0c75a48, type: 3}
+  - {fileID: 21300000, guid: 289dfdb34d7f08e429295f61c0078593, type: 3}
+  - {fileID: 21300000, guid: f4ee4df331c4c374f9259281c8260964, type: 3}
+  - {fileID: 21300000, guid: 2e228044499dd004abc7b8459d639669, type: 3}
+  - {fileID: 21300000, guid: 753c8c057fe0fdb4fb2337419dd60bfe, type: 3}
+  - {fileID: 21300000, guid: a8b08575740ab744283fcb9aa0d42121, type: 3}
+  - {fileID: 21300000, guid: 41115dc5c9d0f104190f1a7743973917, type: 3}
+  - {fileID: 21300000, guid: abbfa9f52c190aa49bdaf61ebbfe05fc, type: 3}
+  - {fileID: 21300000, guid: fd7c4487a4f10aa40906353155abba44, type: 3}
+  - {fileID: 21300000, guid: 984160a778d7a2040be4141a8afdfcf0, type: 3}
+  - {fileID: 21300000, guid: ec8199c96c0826a41a26b8e3e20d5992, type: 3}
+  - {fileID: 21300000, guid: 8066c10bcd3220b4aae2d7b9692572f9, type: 3}
+  - {fileID: 21300000, guid: 66c3693b29913274aa8b40bb29075051, type: 3}
+  - {fileID: 21300000, guid: 07c68a1c0ea53ce4dbf2b4ed02ab6cf3, type: 3}
+  - {fileID: 21300000, guid: eb30f4ec232ca854b98d5b68a0746210, type: 3}
+  - {fileID: 21300000, guid: 329ea84d5aa180c4f898faff9b9841dc, type: 3}
+  - {fileID: 21300000, guid: 51e690cd5174be743a10a4d53c550fc6, type: 3}
+  - {fileID: 21300000, guid: c8fefded88aabea4ca53399e526af231, type: 3}
+  - {fileID: 21300000, guid: 2b2a7d5e930cd054f944ad53cce883ec, type: 3}
+  - {fileID: 21300000, guid: d6886eaea8e4ce94cba176e8e8616bb6, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Circle
+  - Triangle_4_Candle
+  - Triangle
+  - Ingame_Tri_3_Border
+  - Ingame_Tri_1_pattern_
+  - Ingame_Tri_4_Collider
+  - Circle_Candy
+  - rect_outline
+  - Ingame_Obstacle_Tri_3
+  - Triangle_1_Candle
+  - Ingame_Tri_3_pattern
+  - Square_Base
+  - Ingame_Tri_1_Border
+  - Ingame_Obstacle_Tri_2
+  - Ingame_Obstacle_Tri_4
+  - Ingame_Tri_4_pattern
+  - Triangle_2_Candle
+  - Triangle_3_Candle
+  - Ingame_Tri_2_Collider
+  - Rec_special
+  - Circle
+  - Ingame_Obstacle_Tri_1
+  - Ingame_Tri_3_Collider
+  - Ingame_Tri_2_Border
+  - Ingame_Tri_1_Collider
+  - Ingame_Obstacle
+  - Ingame_Tri_4_Border
+  - Ingame_Tri_2_pattern
+  - Ingame_Rec_pattern
+  m_RenderDataMap: {}
+  m_Tag: Block_Atlas
+  m_IsVariant: 0

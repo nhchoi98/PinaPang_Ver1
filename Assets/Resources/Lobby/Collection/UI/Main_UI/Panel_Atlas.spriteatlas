@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Panel_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 2
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: 46bb56ca7c140e14abae75a006bd2dce, type: 3}
+    - {fileID: 21300000, guid: fb6b6ae23bbfb9148b53f01a6ccb1d1b, type: 3}
+    - {fileID: 21300000, guid: fd18d9f66e136ab4883ff352350cd925, type: 3}
+    - {fileID: 21300000, guid: 55c012ccfdf578d4d8329960a50f6c8b, type: 3}
+    - {fileID: 21300000, guid: 3268021f14126b041bfeed826ea26c85, type: 3}
+    - {fileID: 21300000, guid: 6609987927986ee42bf57058b98bda0a, type: 3}
+    - {fileID: 21300000, guid: 52f62e226a964564e955274967457408, type: 3}
+    - {fileID: 21300000, guid: f30171bd9900d5d4b8af8b7255873490, type: 3}
+    - {fileID: 21300000, guid: 267cf27f3bc75ce44954946105a69c8f, type: 3}
+    - {fileID: 21300000, guid: 23216024dfa5c6b4f8a1b0c6f432c052, type: 3}
+    - {fileID: 21300000, guid: 7bfc76b5d92d7144695824a43d716e58, type: 3}
+    - {fileID: 21300000, guid: 9768e2315207631468d0b90a94647812, type: 3}
+    - {fileID: 21300000, guid: e7d10e13fca92914281cf523f90b1399, type: 3}
+    - {fileID: 21300000, guid: 1c7c0d24c47c3884c8e1cfb3474a3d88, type: 3}
+    - {fileID: 21300000, guid: 9fc85c91261119045add80815027b0af, type: 3}
+    - {fileID: 21300000, guid: 976873443b4f6cc41bec0a200d3c0fbe, type: 3}
+    - {fileID: 21300000, guid: a2f233c3ec3a6c5458b8be5221947756, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 9768e2315207631468d0b90a94647812, type: 3}
+  - {fileID: 21300000, guid: 9fc85c91261119045add80815027b0af, type: 3}
+  - {fileID: 21300000, guid: 52f62e226a964564e955274967457408, type: 3}
+  - {fileID: 21300000, guid: fb6b6ae23bbfb9148b53f01a6ccb1d1b, type: 3}
+  - {fileID: 21300000, guid: e7d10e13fca92914281cf523f90b1399, type: 3}
+  - {fileID: 21300000, guid: a2f233c3ec3a6c5458b8be5221947756, type: 3}
+  - {fileID: 21300000, guid: 23216024dfa5c6b4f8a1b0c6f432c052, type: 3}
+  - {fileID: 21300000, guid: 1c7c0d24c47c3884c8e1cfb3474a3d88, type: 3}
+  - {fileID: 21300000, guid: 976873443b4f6cc41bec0a200d3c0fbe, type: 3}
+  - {fileID: 21300000, guid: 7bfc76b5d92d7144695824a43d716e58, type: 3}
+  - {fileID: 21300000, guid: fd18d9f66e136ab4883ff352350cd925, type: 3}
+  - {fileID: 21300000, guid: 6609987927986ee42bf57058b98bda0a, type: 3}
+  - {fileID: 21300000, guid: 46bb56ca7c140e14abae75a006bd2dce, type: 3}
+  - {fileID: 21300000, guid: 55c012ccfdf578d4d8329960a50f6c8b, type: 3}
+  - {fileID: 21300000, guid: f30171bd9900d5d4b8af8b7255873490, type: 3}
+  - {fileID: 21300000, guid: 3268021f14126b041bfeed826ea26c85, type: 3}
+  - {fileID: 21300000, guid: 267cf27f3bc75ce44954946105a69c8f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Gauge
+  - Lobby_Gem
+  - Collection_Exchange_Inactivated_Btn
+  - Collection_Main_Grid_Toy_Bg
+  - Collection_Gem
+  - Exchange_Arrow
+  - Collection_Toy_Explain_Panel
+  - Lobby_Panel
+  - Lobby_Event_Close_Btn
+  - Collection_ToyGauge_Bg
+  - Collection_Main_Grid_Toy_Not_Acquired_Bg
+  - Collection_Exchange_Activated_Btn
+  - Collection_Main_Grid_Panel
+  - Collection_Main_Level_Panel
+  - Collection_Exchange_Panel
+  - Collection_Main_Panel
+  - Collection_Toy_Explain_Bg
+  m_RenderDataMap: {}
+  m_Tag: Panel_Atlas
+  m_IsVariant: 0

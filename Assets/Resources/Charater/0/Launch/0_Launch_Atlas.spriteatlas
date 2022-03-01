@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 0_Launch_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 256
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: f1b7c1c58bc7fc042a535b1b09790bd7, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: d17eb342ace41294bb4ea1ea2e557031, type: 3}
+  - {fileID: 21300000, guid: 3d3be5a4d48a17f4db0919c9be664432, type: 3}
+  - {fileID: 21300000, guid: c131ee35d10027041bcfe05d6c3135bd, type: 3}
+  - {fileID: 21300000, guid: ea9d18b6f548fb04fa5cad2db0e13f1b, type: 3}
+  - {fileID: 21300000, guid: 6576c3c95e981944c8b453a322c2a76c, type: 3}
+  - {fileID: 21300000, guid: 4f5a81e974ffd6a49b5bea471287f490, type: 3}
+  - {fileID: 21300000, guid: c46624f931aff4b48b81702de5f02a03, type: 3}
+  - {fileID: 21300000, guid: 2c0f617b09134ef4da0f1d33a3ebc733, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Kevin_Throw0001
+  - Kevin_Throw0004
+  - Kevin_Throw0000
+  - Kevin_Throw0006
+  - Kevin_Throw0002
+  - Kevin_Throw0005
+  - Kevin_Throw0007
+  - Kevin_Throw0003
+  m_RenderDataMap: {}
+  m_Tag: 0_Launch_Atlas
+  m_IsVariant: 0
