@@ -73,7 +73,7 @@ namespace Ingame
 
         #region Ad_Ingame
         BANNER,
-        SCORE_AD,
+        SPEED_AD,
         LINE_AD,
         CROSS_AD,
         MOMMY_AD,
