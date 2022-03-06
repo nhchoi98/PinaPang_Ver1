@@ -19,7 +19,7 @@ using System.Collections;
          [SerializeField] private SettingManager _settingManager;
          [SerializeField] private Line_Animation _lineAnimation;
          
-         public Button gem_btn, ad_btn, gem_score, gem_both; //gem_mommy
+         public Button gem_btn, ad_btn, gem_speed, gem_both; 
          public Transform buttonTR;
          public Text timer, timer_lower;
          public Transform item_icon;
@@ -155,13 +155,13 @@ using System.Collections;
              {
                  gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                      new Color(255f / 255f, 28f / 255f, 26f / 255f);
-                 gem_score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
+                 gem_speed.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                      new Color(255f / 255f, 28f / 255f, 26f / 255f);
 
                  gem_both.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                      new Color(255f / 255f, 28f / 255f, 26f / 255f);
 
-                 gem_score.interactable = false;
+                 gem_speed.interactable = false;
                  gem_both.interactable = false;
              }
              
