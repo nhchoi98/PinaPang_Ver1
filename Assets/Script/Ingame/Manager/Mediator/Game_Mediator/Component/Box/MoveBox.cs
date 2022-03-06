@@ -141,7 +141,7 @@ namespace Ingame
                 {
                     TR.DOKill(true);
                 });
-            if (TR.position.y < -515f)
+            if (TR.position.y < -510f)
             { // 특정 줄 이하로 내려가면
                 TR.GetComponent<Determine_Destroy>().Set_Animation();
                 yield return null;
