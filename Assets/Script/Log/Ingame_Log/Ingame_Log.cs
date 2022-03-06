@@ -34,8 +34,6 @@ namespace Log
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
                 }
             }
 
@@ -48,8 +46,7 @@ namespace Log
                 
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
+            
                 }
             }
         }
@@ -63,8 +60,6 @@ namespace Log
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
                 }
             }
 
@@ -77,8 +72,33 @@ namespace Log
                 
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
+                }
+            }
+            
+        }
+
+        public static void Speed_Item(bool is_gem)
+        {
+            if (is_gem)
+            {
+                try
+                {
+                    FirebaseAnalytics.LogEvent("SpeedItem_Gem");
+                }
+                catch (Exception e)
+                {
+                }
+            }
+
+            else
+            {
+                try
+                {
+                    FirebaseAnalytics.LogEvent("SpeedItem_Ad");
+                }
+                
+                catch (Exception e)
+                {
                 }
             }
             
@@ -94,8 +114,6 @@ namespace Log
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
                 }
             }
 
@@ -108,42 +126,11 @@ namespace Log
                 
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
                 }
             }
             
         }
-        public static void Extra_Score(bool is_gem)
-        {
-            if (is_gem)
-            {
-                try
-                {
-                    FirebaseAnalytics.LogEvent("ExtraScore_Gem");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-            }
-
-            else
-            {
-                try
-                {
-                    FirebaseAnalytics.LogEvent("ExtraScore_Ad");
-                }
-                
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-            }
-            
-        }
+      
         #endregion
 
         #region Heart_Log
