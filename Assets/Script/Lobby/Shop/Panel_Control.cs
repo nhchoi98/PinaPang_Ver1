@@ -24,32 +24,32 @@ namespace Shop
         
         private void Determine_Beginner_On(bool is_avatar_none = false)
         {
-            Package_DataDAO starterData = new Package_DataDAO(0);
-            Determine_StarterDAO _starter_Time = new Determine_StarterDAO();
             int available_count = 0;
-            if (starterData.Get_Data() || !_starter_Time.Get_Purchasable()) // 결제 한 경우
-            {
-                ++available_count;
-                starter_panel.SetActive(false);
-                tr.GetChild(2).gameObject.SetActive(false); // 상품에서 제외시켜줌 
-            }
 
+            // 구버전 Noads 구매시
             if (Noads_instance.Get_Is_Noads())
             {
                 available_count+=2;
+                tr.GetChild(2).gameObject.SetActive(false);
                 tr.GetChild(3).gameObject.SetActive(false);
-                tr.GetChild(4).gameObject.SetActive(false);
+            }
+
+            // 신버전 Noads 구매시 
+            if (Noads_instance.Get_Is_Noads_New())
+            {
+                ++available_count;
+                tr.GetChild(2).gameObject.SetActive(false);
             }
 
             if (Noads_instance.Get_ItemAds())
             {
                 ++available_count;
-                tr.GetChild(4).gameObject.SetActive(false);
+                tr.GetChild(3).gameObject.SetActive(false);
             }
 
             if (available_count == 2)
             {
-                tr.GetChild(1).gameObject.SetActive(false);
+                tr.GetChild(1).gameObject.SetActive(false); // 구분선을 꺼줌
                 if(is_avatar_none)
                     emptyPanel.SetActive(true);
             }
@@ -72,25 +72,25 @@ namespace Shop
             
             if (!science.Get_Locked())
             {
-                tr.GetChild(6).gameObject.SetActive(false);
+                tr.GetChild(5).gameObject.SetActive(false);
                 ++available_Count;
             }
 
             if (!party.Get_Locked())
             {
-                tr.GetChild(7).gameObject.SetActive(false);
+                tr.GetChild(6).gameObject.SetActive(false);
                 ++available_Count;
             }
             
             if (!astro.Get_Locked())
             {
-                tr.GetChild(8).gameObject.SetActive(false);
+                tr.GetChild(7).gameObject.SetActive(false);
                 ++available_Count;
             }
             
             if (!teddy.Get_Locked())
             {
-                tr.GetChild(9).gameObject.SetActive(false);
+                tr.GetChild(8).gameObject.SetActive(false);
                 ++available_Count;
             }
 
@@ -98,22 +98,22 @@ namespace Shop
             {
                 if (science.Get_Locked())
                 {
-                    tr.GetChild(6).gameObject.SetActive(true);
+                    tr.GetChild(5).gameObject.SetActive(true);
                 }
 
                 if (party.Get_Locked())
                 {
-                    tr.GetChild(7).gameObject.SetActive(true);
+                    tr.GetChild(6).gameObject.SetActive(true);
                 }
             
                 if (astro.Get_Locked())
                 {
-                    tr.GetChild(8).gameObject.SetActive(true);
+                    tr.GetChild(7).gameObject.SetActive(true);
                 }
             
                 if (teddy.Get_Locked())
                 {
-                    tr.GetChild(9).gameObject.SetActive(true);
+                    tr.GetChild(8).gameObject.SetActive(true);
                 }
 
             }
@@ -127,7 +127,7 @@ namespace Shop
             // 4개 다 구매한 경우 
             if (available_Count == 4)
             {
-                tr.GetChild(5).gameObject.SetActive(false); // 띠를 없애줌 
+                tr.GetChild(4).gameObject.SetActive(false); // 띠를 없애줌 
                 tr.GetChild(0).gameObject.SetActive(false); // 슈퍼세일도 꺼줌 
                 Determine_Beginner_On(true);
             }
