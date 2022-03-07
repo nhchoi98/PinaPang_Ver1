@@ -27,12 +27,12 @@ using System.Collections;
          public GameObject activation;
          
          private IMediator _mediator;
-
+         
          [Header("Tutorial")] 
          public GameObject tutorial_part;
          public GameObject exitBtn;
          public Button pauseBtn;
-         public GameObject crossButton;
+         public GameObject crossButton,speedButton;
          /// <summary>
          /// 1. Ad 버튼 활성 유무
          /// 2. 시간 체크 
@@ -81,6 +81,7 @@ using System.Collections;
              {
                  PlayerPrefs.SetInt("Tutorial_Item_End", 1);
                  crossButton.SetActive(true);
+                 speedButton.SetActive(true);
              }
 
              tutorial_part.SetActive(false);
@@ -113,6 +114,7 @@ using System.Collections;
 
              gem_btn.interactable = false;
              StartCoroutine(Timer());
+             
          }
          
          
@@ -140,7 +142,12 @@ using System.Collections;
          {
              _mediator.Event_Receive(Event_num.LINE_AD);
          }
-         
+
+         public void Set_BallSpeed_Const(bool is_Activating)
+         {
+             
+             
+         }
 
          public void OnClick_Gem()
          {

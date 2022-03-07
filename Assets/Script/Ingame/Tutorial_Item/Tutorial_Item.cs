@@ -16,7 +16,7 @@ namespace Tutorial
         public Button tutorial_button;
         public GameObject itemPanel;
 
-        public GameObject crossButton;
+        public GameObject crossButton, speedButton;
 
         [SerializeField] private Line_Ad _lineAd;
         
@@ -26,6 +26,7 @@ namespace Tutorial
             mainItemBtn.SetActive(true);
             tutorial_button.interactable = false;
             crossButton.SetActive(false);
+            speedButton.SetActive(false);
             Tutorial_Log.Item_Tutorial_Start();
             StartCoroutine(First_Mention());
         }
@@ -44,7 +45,5 @@ namespace Tutorial
             Tutorial_Log.Item_Tutorial_End();
             this.gameObject.SetActive(false);
         }
-        
-
     }
 }
