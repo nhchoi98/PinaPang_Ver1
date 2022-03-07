@@ -119,19 +119,20 @@ namespace Ingame
         /// <param name="eventNum"></param>
         public void Event_Receive(Event_num eventNum)
         {
-            if(eventNum == Event_num.USER_DIE)
-            {
-                if(!Noads_instance.Get_Is_Noads())
-                    ShowInterstitial();
-            }
-            
-            else if (eventNum == Event_num.BANNER)
-                Destroy_Banner();
 
-            else
+            switch (eventNum)
             {
-                if (eventNum != Event_num.SET_ITEM)
-                {
+                case Event_num.USER_DIE:
+                    if(!Noads_instance.Get_Is_Noads() || !Noads_instance.Get_Is_Noads_New())
+                        ShowInterstitial();
+                    break;
+                
+                
+                case Event_num.BANNER :
+                    Destroy_Banner();
+                    break;
+                
+                default:
                     this._eventNum = eventNum;
                     if (MaxSdk.IsRewardedAdReady(RewardedAdUnitId))
                         MaxSdk.ShowRewardedAd(RewardedAdUnitId);
@@ -142,8 +143,11 @@ namespace Ingame
                         Instantiate(adNotshow);
                         LoadRewardedAd();
                     }
-                }
+                    break;
+                    
+                    
             }
+           
         }
         
         
@@ -219,7 +223,7 @@ namespace Ingame
         private void InitializeBannerAds()
         {
             // Attach Callbacks
-            if (!Noads_instance.Get_Is_Noads())
+            if (!Noads_instance.Get_Is_Noads() || !Noads_instance.Get_Is_Noads_New())
             {
                 MaxSdkCallbacks.Banner.OnAdLoadedEvent += OnBannerAdLoadedEvent;
                 MaxSdkCallbacks.Banner.OnAdLoadFailedEvent += OnBannerAdFailedEvent;

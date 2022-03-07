@@ -38,6 +38,8 @@ namespace Shop
         
         [Header("Package_Item")]
         private static string Noads = "no_ads";
+        private static string Noads_2 = "no_ads_new";
+        
         private static string ItemPackage = "item_package";
         private static string Astronaut = "astronaut";
         private static string Party = "party";
@@ -109,16 +111,19 @@ namespace Shop
             
             // Continue adding the non-consumable product
             builder.AddProduct(Noads , ProductType.NonConsumable);
+            builder.AddProduct(Noads_2 , ProductType.NonConsumable);
             builder.AddProduct(Astronaut , ProductType.NonConsumable);
             builder.AddProduct(Party , ProductType.NonConsumable);
             builder.AddProduct(Bear , ProductType.NonConsumable);
             builder.AddProduct(Science , ProductType.NonConsumable);
+            
 
             // 세일 상품 등록하기 
             builder.AddProduct(astro_sale, ProductType.NonConsumable);
             builder.AddProduct(party_sale, ProductType.NonConsumable);
             builder.AddProduct(bear_sale, ProductType.NonConsumable);
             builder.AddProduct(science_sale, ProductType.NonConsumable);
+            builder.AddProduct(ItemPackage, ProductType.NonConsumable);
             
             #endregion
             
@@ -168,6 +173,10 @@ namespace Shop
                 
                 case 6:
                     BuyProductID_NonConsumable(ItemPackage);
+                    break;
+                
+                case 7:
+                    BuyProductID_NonConsumable(Noads_2);
                     break;
             }
             
@@ -461,10 +470,19 @@ namespace Shop
                     _panelControl.Set_SuperSale();
             }
             
+            // 구버전의 NoAds
             else if (String.Equals(args.purchasedProduct.definition.id, Noads, StringComparison.Ordinal))
             {
                 Noads_instance.Set_Is_Noads();
                 _panelControl.Purchase_Noads();
+                _panelControl.Determine_Avatar_On();
+                Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            }
+            
+            // 신버전의 Noads
+            else if (String.Equals(args.purchasedProduct.definition.id, Noads_2, StringComparison.Ordinal))
+            {
+                Noads_instance.Set_Is_Noads_New();
                 _panelControl.Determine_Avatar_On();
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             }
