@@ -47,6 +47,7 @@ using System.Collections;
                  // 기능 영구 활성화 
                  _lineAnimation.Set_SecondLine(true);
                  _launchManage.Set_Item();
+                 gem_btn.gameObject.SetActive(false);
              }
 
              else

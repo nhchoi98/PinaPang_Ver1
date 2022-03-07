@@ -36,32 +36,36 @@ namespace Ad
 
         void Start()
         {
-            EXP_DAO level_data = new EXP_DAO();
             if (Noads_instance.Get_Is_Noads())
             {
                 ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
                 gem_btn.gameObject.SetActive(false);
-            }
-             
-            else
-                ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
-             
-            ad_btn.gameObject.SetActive(true);
-            
-            if (Playerdata_DAO.Player_Gem() < 5)
-            {
-                gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
-                    new Color(255f / 255f, 28f / 255f, 26f / 255f);
-                gem_btn.interactable = false;
+                // 영구 활성화 글씨 띄워줌
+                // 기능 활성화 
+                Change_Item_To_CrossRazer();
+                _mediator.Event_Receive(Event_num.SET_ITEM);
             }
 
             else
-                gem_btn.interactable = true;
-            
+            {
+                ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
+                ad_btn.gameObject.SetActive(true);
+                if (Playerdata_DAO.Player_Gem() < 5)
+                {
+                    gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
+                        new Color(255f / 255f, 28f / 255f, 26f / 255f);
+                    gem_btn.interactable = false;
+                }
+
+                else
+                    gem_btn.interactable = true;
+
                 timer.text = 300.ToString();
                 timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
                     "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
-                
+
+            }
+
         }
 
         public void UserChoseToWatchAd()
@@ -78,14 +82,7 @@ namespace Ad
             gemText.text = string.Format("{0:#,0}", Playerdata_DAO.Player_Gem());
             if (Playerdata_DAO.Player_Gem() < 5)
             {
-                /*
-                if (gem_mommy.interactable)
-                {
-                    gem_mommy.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().color =
-                        new Color(255f / 255f, 28f / 255f, 26f / 255f);
-                    gem_mommy.interactable = false;
-                }
-                */
+
                 gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                     new Color(255f / 255f, 28f / 255f, 26f / 255f);
                 gem_line.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
