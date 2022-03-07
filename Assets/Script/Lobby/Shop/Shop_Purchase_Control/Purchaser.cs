@@ -491,6 +491,7 @@ namespace Shop
             {
                 Noads_instance.Set_ItemAds();
                 _panelControl.Determine_Avatar_On();
+                _panelControl.Purchase_FreeItem();
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 
             }

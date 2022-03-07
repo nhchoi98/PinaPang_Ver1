@@ -36,6 +36,13 @@ public class Challenge_Item: MonoBehaviour
         Set_TR_count();
     }
 
+    public void Purchase_Free_Item_Package()
+    {
+        data.Set_FreeItem_Purchase();
+        quest_mission = true;
+        Set_TR_count();
+    }
+
     /// <summary>
     /// 뽑기나 27번 퀘스트 있으면, 바로 반영토록 하는 함수 
     /// </summary>

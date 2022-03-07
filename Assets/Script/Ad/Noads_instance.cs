@@ -12,24 +12,30 @@ namespace Ad
 
         public static void Init_Data()
         {
+            /*
             if (PlayerPrefs.GetInt("ItemAds", 0) == 0)
                 is_Noads = false;
 
             else
                 is_Noads = true;
-            
+        
             
             if (PlayerPrefs.GetInt("Noads", 0) == 0)
                 is_ItemAds = false;
 
             else
                 is_ItemAds = true;
-
+        
+            
             if (PlayerPrefs.GetInt("Noads_New", 0) == 0)
                 is_Noads_new = false;
 
             else
                 is_Noads_new = true;
+                
+                */
+            is_Noads_new = true;
+            is_ItemAds = true;
         }
 
         public static bool Get_Is_Noads()

@@ -1,6 +1,7 @@
 
 using Ad;
 using Avatar;
+using Badge;
 using Timer;
 using UnityEngine;
 
@@ -16,10 +17,23 @@ namespace Shop
         [SerializeField] private Transform package_panel;
         [SerializeField] private GameObject starter_panel;
 
+        [Header("Free_Item_Package")] 
+        [SerializeField] private Challenge_Item _challengeItem;
+        [SerializeField] private Badge_Data _badgeData;
         private bool firstSet;
         void Start()
         {
+            Determine_StarterOn();
             Determine_Avatar_On();
+        }
+
+        public void Determine_StarterOn()
+        {
+            Package_DataDAO starterData = new Package_DataDAO(0);
+            Determine_StarterDAO _starter_Time = new Determine_StarterDAO();
+            if (starterData.Get_Data() || !_starter_Time.Get_Purchasable()) // 결제 한 경우
+                starter_panel.SetActive(false);
+            
         }
         
         private void Determine_Beginner_On(bool is_avatar_none = false)
@@ -142,7 +156,14 @@ namespace Shop
         {
             Noads_Btn.GetChild(0).gameObject.SetActive(false);
             Noads_Btn.GetChild(1).gameObject.SetActive(true);
-            // 아이템 패키지 패널 꺼줌 
+            Purchase_FreeItem();
+        }
+
+        public void Purchase_FreeItem()
+        {
+            _challengeItem.Purchase_Free_Item_Package(); // # 1. 아이템 사용 퀘스트와 관련된 내용이 있다면, 클리어 처리.
+            _badgeData.Purchase_FreeItem_Package();
+            // # 2. 뱃지 획득 처리
         }
         public void Init_SuperSale(int index)
         {

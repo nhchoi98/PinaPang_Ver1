@@ -123,8 +123,7 @@ namespace Ingame
             switch (eventNum)
             {
                 case Event_num.USER_DIE:
-                    if(!Noads_instance.Get_Is_Noads() || !Noads_instance.Get_Is_Noads_New())
-                        ShowInterstitial();
+                    ShowInterstitial();
                     break;
                 
                 
@@ -132,7 +131,10 @@ namespace Ingame
                     Destroy_Banner();
                     break;
                 
-                default:
+                case Event_num.LINE_AD:
+                case Event_num.CROSS_AD:
+                case Event_num.SPEED_AD:
+                case Event_num.REVIVE_AD:
                     this._eventNum = eventNum;
                     if (MaxSdk.IsRewardedAdReady(RewardedAdUnitId))
                         MaxSdk.ShowRewardedAd(RewardedAdUnitId);
@@ -144,8 +146,6 @@ namespace Ingame
                         LoadRewardedAd();
                     }
                     break;
-                    
-                    
             }
            
         }

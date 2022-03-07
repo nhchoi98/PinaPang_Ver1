@@ -90,6 +90,11 @@ namespace Badge
             userstat.Set_User_Ball_Buy();
         }
 
+        public void Purchase_FreeItem_Package()
+        {
+            userstat.Set_FreeItem_Package();
+        }
+
         public void Set_First_Attendance()
         {
             object obj = new object();
