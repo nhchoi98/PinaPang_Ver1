@@ -75,6 +75,7 @@ namespace Tutorial
             candyBar.SetActive(false);
             exchangeTutorial.SetActive(false);
             exchangeTutorial_Panel.SetActive(true);
+            PlayerPrefs.SetInt("Tutorial_Basic_Reward", 1);
         }
         
 
