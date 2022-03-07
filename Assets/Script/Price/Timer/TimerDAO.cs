@@ -51,7 +51,6 @@ namespace Timer
                 Directory.CreateDirectory(Application.persistentDataPath + "/Shop/data/Timer");
                 TextAsset DATA_ASSET = Resources.Load(PRE_DATA_PATH) as TextAsset;
                 var _DATA = DATA_ASSET.ToString();
-                Debug.Log(_DATA);
                 File.WriteAllText(DATA_PATH, _DATA);
                 _data = JsonMapper.ToObject<TimerVO>(_DATA);
             }

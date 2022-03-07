@@ -34,31 +34,35 @@ namespace Item
          public void Start()
          {
 
-             if (Noads_instance.Get_Is_Noads())
+             if (Noads_instance.Get_ItemAds())
              {
                  ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
                  gem_btn.gameObject.SetActive(false);
+                 _launchManage.Set_BallSpeed_Const(true);// 볼 발사 상수 넣어줌 
+                 timer.gameObject.SetActive(false);
+                 // 활성화 됐다는 글씨 켜줌 
              }
 
              else
-                 ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
-
-             ad_btn.gameObject.SetActive(true);
-
-             if (Playerdata_DAO.Player_Gem() < 5)
              {
-                 gem_btn.interactable = false;
-                 gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
-                     new Color(255f / 255f, 28f / 255f, 26f / 255f);
+                 ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
+                 ad_btn.gameObject.SetActive(true);
+                 
+                 if (Playerdata_DAO.Player_Gem() < 5)
+                 {
+                     gem_btn.interactable = false;
+                     gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
+                         new Color(255f / 255f, 28f / 255f, 26f / 255f);
+                 }
+
+                 else
+                     gem_btn.interactable = true;
+
+
+                 timer.text = 300.ToString();
+                 timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
+                     "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
              }
-
-             else
-                 gem_btn.interactable = true;
-
-
-             timer.text = 300.ToString();
-             timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
-                 "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
          }
 
          private void UserEarnedReward()

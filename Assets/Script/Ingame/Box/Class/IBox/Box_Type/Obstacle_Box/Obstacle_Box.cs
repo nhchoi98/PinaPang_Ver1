@@ -172,23 +172,10 @@ namespace Block
 
         public void Destroy_Action()
         {
-            ParticleSystem.MinMaxGradient minMaxGradient;
             Explode_sound.Play();
             Set_Color();
             this.transform.SetParent(diePool);
             particle.transform.position = this.transform.position;
-
-            var ps = particle.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().main;
-            minMaxGradient = new ParticleSystem.MinMaxGradient(ourGradient);
-            minMaxGradient.mode = ParticleSystemGradientMode.RandomColor;
-            ps.startColor = minMaxGradient;
-
-
-            ps = particle.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>().main;
-            minMaxGradient = new ParticleSystem.MinMaxGradient(ourGradient);
-            minMaxGradient.mode = ParticleSystemGradientMode.RandomColor;
-            ps.startColor = minMaxGradient;
-            
             particle.SetActive(true);
             this.gameObject.SetActive(false);
         }

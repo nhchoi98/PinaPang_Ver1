@@ -38,6 +38,7 @@ namespace Shop
         
         [Header("Package_Item")]
         private static string Noads = "no_ads";
+        private static string ItemPackage = "item_package";
         private static string Astronaut = "astronaut";
         private static string Party = "party";
         private static string Bear = "bear";
@@ -163,6 +164,10 @@ namespace Shop
                 
                 case 5:
                     BuyProductID_NonConsumable(Science);
+                    break;
+                
+                case 6:
+                    BuyProductID_NonConsumable(ItemPackage);
                     break;
             }
             
@@ -462,6 +467,14 @@ namespace Shop
                 _panelControl.Purchase_Noads();
                 _panelControl.Determine_Avatar_On();
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+            }
+            
+            else if (String.Equals(args.purchasedProduct.definition.id, ItemPackage, StringComparison.Ordinal))
+            {
+                Noads_instance.Set_ItemAds();
+                _panelControl.Determine_Avatar_On();
+                Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+                
             }
             
             else if ((String.Equals(args.purchasedProduct.definition.id, Science, StringComparison.Ordinal))

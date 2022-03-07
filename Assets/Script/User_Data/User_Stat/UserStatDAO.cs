@@ -42,7 +42,6 @@ namespace Data
                 DATA.pinata_count = 0;
                 DATA.revive_count = 0;
                 DATA.score = 0;
-                Debug.Log("여기");
                 var DATA_STR = JsonUtility.ToJson(DATA);
                 File.WriteAllText(DATA_PATH,DATA_STR);   
             }

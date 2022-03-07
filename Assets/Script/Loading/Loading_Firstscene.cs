@@ -112,7 +112,7 @@ namespace Loading
             F_time2 = 2.5f;
             _initSetting = new Init_Setting();
             BatteryDAO batteryDao = new BatteryDAO();
-            Noads_instance.Init_isNoads();
+            Noads_instance.Init_Data();
             Ad_Init.Init_Ad();
             batteryDao.Loading_Charge(); // 차지 
             Package_Update();

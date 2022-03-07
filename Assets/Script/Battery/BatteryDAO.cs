@@ -39,7 +39,6 @@ namespace Battery
                 DATA.adCount = 5;
                 DATA.gemCount = 10;
                 var DATA_STR = JsonMapper.ToJson(DATA);
-                Debug.Log(DATA_STR);
                 File.WriteAllText(DATA_PATH,DATA_STR);   
             }
             

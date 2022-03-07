@@ -36,8 +36,15 @@ namespace Shop
 
             if (Noads_instance.Get_Is_Noads())
             {
-                ++available_count;
+                available_count+=2;
                 tr.GetChild(3).gameObject.SetActive(false);
+                tr.GetChild(4).gameObject.SetActive(false);
+            }
+
+            if (Noads_instance.Get_ItemAds())
+            {
+                ++available_count;
+                tr.GetChild(4).gameObject.SetActive(false);
             }
 
             if (available_count == 2)
@@ -65,25 +72,25 @@ namespace Shop
             
             if (!science.Get_Locked())
             {
-                tr.GetChild(5).gameObject.SetActive(false);
+                tr.GetChild(6).gameObject.SetActive(false);
                 ++available_Count;
             }
 
             if (!party.Get_Locked())
             {
-                tr.GetChild(6).gameObject.SetActive(false);
+                tr.GetChild(7).gameObject.SetActive(false);
                 ++available_Count;
             }
             
             if (!astro.Get_Locked())
             {
-                tr.GetChild(7).gameObject.SetActive(false);
+                tr.GetChild(8).gameObject.SetActive(false);
                 ++available_Count;
             }
             
             if (!teddy.Get_Locked())
             {
-                tr.GetChild(8).gameObject.SetActive(false);
+                tr.GetChild(9).gameObject.SetActive(false);
                 ++available_Count;
             }
 
@@ -91,22 +98,22 @@ namespace Shop
             {
                 if (science.Get_Locked())
                 {
-                    tr.GetChild(5).gameObject.SetActive(true);
+                    tr.GetChild(6).gameObject.SetActive(true);
                 }
 
                 if (party.Get_Locked())
                 {
-                    tr.GetChild(6).gameObject.SetActive(true);
+                    tr.GetChild(7).gameObject.SetActive(true);
                 }
             
                 if (astro.Get_Locked())
                 {
-                    tr.GetChild(7).gameObject.SetActive(true);
+                    tr.GetChild(8).gameObject.SetActive(true);
                 }
             
                 if (teddy.Get_Locked())
                 {
-                    tr.GetChild(8).gameObject.SetActive(true);
+                    tr.GetChild(9).gameObject.SetActive(true);
                 }
 
             }
@@ -120,7 +127,7 @@ namespace Shop
             // 4개 다 구매한 경우 
             if (available_Count == 4)
             {
-                tr.GetChild(4).gameObject.SetActive(false); // 띠를 없애줌 
+                tr.GetChild(5).gameObject.SetActive(false); // 띠를 없애줌 
                 tr.GetChild(0).gameObject.SetActive(false); // 슈퍼세일도 꺼줌 
                 Determine_Beginner_On(true);
             }
@@ -135,10 +142,8 @@ namespace Shop
         {
             Noads_Btn.GetChild(0).gameObject.SetActive(false);
             Noads_Btn.GetChild(1).gameObject.SetActive(true);
-            if(PlayerPrefs.GetInt("non_consume", 0) == 5)
-                emptyPanel.SetActive(true);
+            // 아이템 패키지 패널 꺼줌 
         }
-
         public void Init_SuperSale(int index)
         {
             superSale_tr.GetChild(0).gameObject.SetActive(false);

@@ -47,7 +47,6 @@ namespace Challenge
         public void Noads_Click()
         {
             UserEarnedReward();
-            FirebaseAnalytics.LogEvent("Reset_Ad");
             item.StartCoroutine(item.Ad_show());
         }
 
@@ -55,6 +54,7 @@ namespace Challenge
         public void UserChoseToWatchAd()
         {
             _mediator.Event_Receive(Event_num.QUEST_RESET);
+            FirebaseAnalytics.LogEvent("Quest_Reset_Ad");
             click.Play();
         }
         

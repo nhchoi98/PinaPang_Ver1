@@ -36,14 +36,15 @@ namespace Ad
 
         void Start()
         {
-            if (Noads_instance.Get_Is_Noads())
+            if (Noads_instance.Get_ItemAds())
             {
                 ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
                 gem_btn.gameObject.SetActive(false);
                 // 영구 활성화 글씨 띄워줌
                 // 기능 활성화 
                 Change_Item_To_CrossRazer();
-                _mediator.Event_Receive(Event_num.SET_ITEM);
+                _manage.Event_Receive(Event_num.CROSS_ITEM);
+                timer.gameObject.SetActive(false);
             }
 
             else
