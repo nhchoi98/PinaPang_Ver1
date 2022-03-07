@@ -149,7 +149,6 @@ namespace Ad
             Change_Item_To_CrossRazer();
             // Step 2. 기타 설정을 해줌 
             _settingManager.OnClick_Item_Exit();
-            _mediator.Event_Receive(Event_num.SET_ITEM);
             _questManager.Set_Item();
             _soundManager.item.Play(); // 사운드 
             timer.gameObject.transform.GetChild(0).gameObject.SetActive(false); // 옆에 보너스 표시 지워주기 

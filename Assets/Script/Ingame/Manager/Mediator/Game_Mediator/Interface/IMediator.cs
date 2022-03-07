@@ -45,7 +45,6 @@ namespace Ingame
         #endregion
 
         #region Quest
-        SET_ITEM,
         SET_BOX,
         SET_REVIVE,
         SET_TRIANGLE,
