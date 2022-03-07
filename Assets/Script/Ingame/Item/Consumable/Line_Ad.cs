@@ -40,31 +40,37 @@ using System.Collections;
          public void Start()
          {
              
-             if (Noads_instance.Get_Is_Noads())
+             if (Noads_instance.Get_ItemAds())
              {
-                 ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
-                 gem_btn.gameObject.SetActive(false);
+                 timer.gameObject.SetActive(false); // 타이머 꺼줌
+                 // 영구 활성화 글씨 띄워줌 
+                 // 기능 영구 활성화 
+                 _lineAnimation.Set_SecondLine(true);
+                 _launchManage.Set_Item();
              }
 
              else
+             {
                  ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
+                 ad_btn.gameObject.SetActive(true);
+                 
+                 if (Playerdata_DAO.Player_Gem() < 5)
+                 {
+                     gem_btn.interactable = false;
+                     gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
+                         new Color(255f / 255f, 28f / 255f, 26f / 255f);
+                 }
 
-             ad_btn.gameObject.SetActive(true);
-
-             if (Playerdata_DAO.Player_Gem() < 5)
-             {
-                 gem_btn.interactable = false;
-                 gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
-                     new Color(255f / 255f, 28f / 255f, 26f / 255f);
-             }
-
-             else
-                 gem_btn.interactable = true;
+                 else
+                     gem_btn.interactable = true;
              
                  
-             timer.text = 300.ToString();
-             timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
-                 "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
+                 timer.text = 300.ToString();
+                 timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
+                     "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
+             }
+
+            
          }
 
          public void Set_Tutorial()
