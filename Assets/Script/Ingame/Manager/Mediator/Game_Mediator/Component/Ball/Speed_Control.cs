@@ -11,11 +11,6 @@ namespace Ingame
         [Header("Game_Condition")]
         private IMediator _mediator;
         private IEnumerator double_speed;
-        private bool doubletap_pos;
-        private bool tap_start;
-        private int tap_time;
-        private int tap_count;
-
         [SerializeField] private Determine_BoxType stage_info;
         
         #region DoubleSpeed
@@ -44,54 +39,7 @@ namespace Ingame
 
         }
         #endregion
-
-        #region Double_Tap
-
-        /*
-        private void FixedUpdate()
-        {
-            if (!doubletap_pos)
-                return;
-
-            if (tap_start)
-            {
-                ++tap_time;
-                if (tap_time > 20)
-                {
-                    tap_start = false;
-                    return;
-                }
-
-                if (tap_count > 1)
-                {
-                    Debug.Log("발사중지");
-                    _mediator.Event_Receive(Event_num.Abort_Launch);
-                    doubletap_pos = false;
-                }
-            }
-        }
-        */
-
-
-        /*
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            if (!doubletap_pos)
-                return;
-
-            if (!tap_start)
-            {
-                tap_time = 0;
-                tap_count = 0;
-                tap_start = true;
-            }
-
-            tap_count++;
-        }
-        */
-        #endregion
-
-
+        
         public void Set_Mediator(IMediator mediator)
         {
             _mediator = mediator;
@@ -102,42 +50,43 @@ namespace Ingame
             switch (eventNum)
             {
                 case Event_num.Launch_MOTION:
-                    Init_Data();
                     double_speed = Determine_Double_Speed();
                     StartCoroutine(double_speed);
-                    doubletap_pos = true;
                     break;
                 
                 case Event_num.BOX_SPAWN:
-                    doubletap_pos = false;
-                    Init_Data();
+                    Time.timeScale = 1f;
                     if (double_speed != null)
                         StopCoroutine(double_speed);
 
-                    Time.timeScale = 1f;
+                    double_speed = null;
                     // 이뉴머레이터 전부 비활성화, 정보 초기화 
                     break;
                 
                 case Event_num.Abort_Launch:
-                    doubletap_pos = false;
-                    Init_Data();
+                    Time.timeScale = 1f;
                     if(double_speed!=null)
                         StopCoroutine(double_speed);
-                    Time.timeScale = 1f;
+                    double_speed = null;
                     break;
                 
                 case Event_num.BALL_DOWN:
                     Time.timeScale = 1f;
+                    if(double_speed!=null)
+                        StopCoroutine(double_speed);
+                    double_speed = null;
+                    break;
+                
+                case Event_num.PINATA_DIE:
+                    Time.timeScale = 1f;
+                    if(double_speed!=null)
+                        StopCoroutine(double_speed);
+                    
+                    double_speed = null;
                     break;
             }
         }
-
-        private void Init_Data()
-        {
-            tap_time = 0;
-            tap_count = 0;
-            tap_start = false;
-        }
+        
         
     }
 }
