@@ -1,5 +1,6 @@
 
 using System.Collections;
+using Ad;
 using UnityEngine.UI;
 using Challenge;
 using Data;
@@ -253,9 +254,16 @@ public class GameManage : MonoBehaviour, IMediator
             {
                 if (gameOver)
                 {
-                    gameOver_Panel.SetActive(true);
-                    IMediator _mediator = GameObject.FindWithTag("adcontrol").GetComponent<IMediator>();
-                    _mediator.Event_Receive(Event_num.USER_DIE);
+                    if (Noads_instance.Get_Is_Noads() || Noads_instance.Get_Is_Noads_New())
+                    {
+                        IMediator _mediator = GameObject.FindWithTag("adcontrol").GetComponent<IMediator>();
+                        _mediator.Event_Receive(Event_num.USER_DIE);
+                    }
+
+                    else 
+                    {
+                        gameOver_Panel.SetActive(true);
+                    }
                 }
                 else
                 {
@@ -434,6 +442,7 @@ public class GameManage : MonoBehaviour, IMediator
 
                 case Event_num.PINATA_DIE:
                     _questManager.Set_Pinata();
+                    speedControl.Event_Occur(eventNum);
                     determine_type.Event_Occur(eventNum);
                     _bonusCharater.Bonus_Extinguish();
                     warn.TurnOff_Warn();
