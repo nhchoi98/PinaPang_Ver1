@@ -437,7 +437,7 @@ namespace Shop
             {
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 gem_controller.Get_Gem(101);
-                _panelControl.Determine_Avatar_On();
+                _panelControl.Determine_StarterOn();
             }
             
             else if ((String.Equals(args.purchasedProduct.definition.id, Astronaut, StringComparison.Ordinal)) 

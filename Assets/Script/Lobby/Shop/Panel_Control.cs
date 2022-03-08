@@ -30,8 +30,7 @@ namespace Shop
         public void Determine_StarterOn()
         {
             Package_DataDAO starterData = new Package_DataDAO(0);
-            Determine_StarterDAO _starter_Time = new Determine_StarterDAO();
-            if (starterData.Get_Data() || !_starter_Time.Get_Purchasable()) // 결제 한 경우
+            if (starterData.Get_Data()) // 결제 한 경우{
                 starter_panel.SetActive(false);
             
         }

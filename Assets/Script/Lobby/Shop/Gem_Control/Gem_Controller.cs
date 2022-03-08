@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Data;
+using Timer;
 using UnityEngine;
 
 namespace Shop
@@ -22,6 +23,8 @@ namespace Shop
             {
                 StarterTimer starterTimer = GameObject.FindWithTag("Starter_Timer").GetComponent<StarterTimer>();
                 starterTimer.Purchase(); // 타이머를 꺼줌 
+                Package_DataDAO starterData = new Package_DataDAO(0);
+                starterData.Set_Data();
             }
             gemGoods.Get_Merchandise_Gem(index);
             

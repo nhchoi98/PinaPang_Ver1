@@ -43,6 +43,7 @@ namespace Block
         [Header("Animator")]
         private Tween hitTween;
         private Sequence hitSequence;
+        private bool isHit;
 
         [Header("Pos_Item")] 
         private int row;
@@ -57,8 +58,16 @@ namespace Block
             targetColor = new Color (hit.color.r/255f, hit.color.g/255f, hit.color.b/255f, 0f);
             hitSequence = DOTween.Sequence()
                 .SetAutoKill(false)
-                .Append(DOTween.ToAlpha(() => hit.color, alpha => hit.color = alpha, 0.8f, 0.1f))
-                .Append(DOTween.ToAlpha(() => hit.color, alpha => hit.color = alpha, 0f, 0.1f));
+                .OnStart(()=>
+                {
+                    isHit = true;
+                })
+                .Append(DOTween.ToAlpha(() => hit.color, alpha => hit.color = alpha, 0.8f, 0.15f))
+                .Append(DOTween.ToAlpha(() => hit.color, alpha => hit.color = alpha, 0f, 0.15f))
+                .OnComplete(()=>
+                {
+                    isHit = false;
+                });
         }
 
         public bool Get_Has_Candle()
@@ -99,7 +108,8 @@ namespace Block
 
         IEnumerator Attack_Animation()
         {
-            hitSequence.Restart();
+            if(!isHit)
+                hitSequence.Restart();
             yield return null;
         }
 
