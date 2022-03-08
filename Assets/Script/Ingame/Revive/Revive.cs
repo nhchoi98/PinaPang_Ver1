@@ -73,7 +73,16 @@ namespace Manager
             }
 
             yes_pushed = true;
-            GameOverPanel.SetActive(true);
+            if (!Noads_instance.Get_Is_Noads() && !Noads_instance.Get_Is_Noads_New())
+            {
+                IMediator _mediator = GameObject.FindWithTag("adcontrol").GetComponent<IMediator>();
+                _mediator.Event_Receive(Event_num.USER_DIE);
+            }
+
+            else
+            {
+                GameOverPanel.SetActive(true);
+            }
             gameObject.SetActive(false);
         }
 
@@ -116,9 +125,16 @@ namespace Manager
         {
             sm.Click.Play();
             yes_pushed = true;
-            IMediator _mediator = GameObject.FindWithTag("adcontrol").GetComponent<IMediator>();
-            _mediator.Event_Receive(Event_num.USER_DIE);
-            GameOverPanel.SetActive(true);
+            if (!Noads_instance.Get_Is_Noads() && !Noads_instance.Get_Is_Noads_New())
+            {
+                IMediator _mediator = GameObject.FindWithTag("adcontrol").GetComponent<IMediator>();
+                _mediator.Event_Receive(Event_num.USER_DIE);
+            }
+
+            else
+            {
+                GameOverPanel.SetActive(true);
+            }
             gameObject.SetActive(false);
         }
 

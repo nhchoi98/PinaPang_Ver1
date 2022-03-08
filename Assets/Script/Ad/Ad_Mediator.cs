@@ -171,7 +171,11 @@ namespace Ingame
             LoadInterstitial();
         }
 
-        
+        /// <summary>
+        /// 인터스티셜 광고가 보여지면 실행되는 함수 
+        /// </summary>
+        /// <param name="adUnitId"></param>
+        /// <param name="adInfo"></param>
         private void  OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
         {
             // Interstitial ad is hidden. Pre-load the next ad
@@ -180,7 +184,6 @@ namespace Ingame
             MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent -=  OnRewardedAdDisplayedEvent;
             Time.timeScale = 1f;
             gameover.SetActive(true);
-            LoadInterstitial();
         }
         
         void LoadInterstitial()
@@ -194,6 +197,7 @@ namespace Ingame
             {
                 MaxSdk.ShowInterstitial(InterstitialAdUnitId);
             }
+            
             else
             {
                 Instantiate(adNotshow);
@@ -223,7 +227,7 @@ namespace Ingame
         private void InitializeBannerAds()
         {
             // Attach Callbacks
-            if (!Noads_instance.Get_Is_Noads() || !Noads_instance.Get_Is_Noads_New())
+            if (!Noads_instance.Get_Is_Noads() && !Noads_instance.Get_Is_Noads_New())
             {
                 MaxSdkCallbacks.Banner.OnAdLoadedEvent += OnBannerAdLoadedEvent;
                 MaxSdkCallbacks.Banner.OnAdLoadFailedEvent += OnBannerAdFailedEvent;

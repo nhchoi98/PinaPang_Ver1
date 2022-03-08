@@ -265,6 +265,7 @@ public class GameManage : MonoBehaviour, IMediator
                         gameOver_Panel.SetActive(true);
                     }
                 }
+                
                 else
                 {
                     revive.SetActive(true);

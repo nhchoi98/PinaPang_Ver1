@@ -92,6 +92,7 @@ namespace Ad
             else
             {
                 Instantiate(adNotshow);
+                Debug.Log("광고 호출 안됨");
                 LoadRewardedAd();
             }
 
