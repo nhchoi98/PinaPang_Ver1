@@ -254,7 +254,7 @@ public class GameManage : MonoBehaviour, IMediator
             {
                 if (gameOver)
                 {
-                    if (Noads_instance.Get_Is_Noads() || Noads_instance.Get_Is_Noads_New())
+                    if (!Noads_instance.Get_Is_Noads() && !Noads_instance.Get_Is_Noads_New())
                     {
                         IMediator _mediator = GameObject.FindWithTag("adcontrol").GetComponent<IMediator>();
                         _mediator.Event_Receive(Event_num.USER_DIE);

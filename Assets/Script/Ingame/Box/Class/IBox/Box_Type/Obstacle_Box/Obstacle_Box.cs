@@ -31,6 +31,7 @@ namespace Block
             diePool = GameObject.FindWithTag("Die_Pool").gameObject.transform;
             transform.DOScale( new Vector2(1f, 1f) , 0.5f);
             Explode_sound = SM.Block_destroy;
+            Set_Color();
         }
 
         public bool Get_Candle()
@@ -173,7 +174,6 @@ namespace Block
         public void Destroy_Action()
         {
             Explode_sound.Play();
-            Set_Color();
             this.transform.SetParent(diePool);
             particle.transform.position = this.transform.position;
             particle.SetActive(true);
@@ -197,7 +197,8 @@ namespace Block
                 new GradientAlphaKey[]
                     {new GradientAlphaKey(1f, 1.0f), new GradientAlphaKey(1f, 0.5f), new GradientAlphaKey(1f, 0.0f)}
             );
-        
+
+            particle = particle_pool.GetChild(0).gameObject;
             var ps = particle.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().main;
             minMaxGradient = new ParticleSystem.MinMaxGradient (ourGradient);
             minMaxGradient.mode = ParticleSystemGradientMode.RandomColor;

@@ -29,7 +29,7 @@ namespace Ad
         private IMediator _mediator;
         public Transform buttonTR;
 
-        public GameObject crossObj;
+        public GameObject crossObj, permanent_Activate;
         public Transform itemTR;
         public Transform diePool;
         [SerializeField] private LocateBox _locateBox;
@@ -41,7 +41,7 @@ namespace Ad
                 ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
                 gem_btn.gameObject.SetActive(false);
                 // 영구 활성화 글씨 띄워줌
-                // 기능 활성화 
+                permanent_Activate.SetActive(true);// 기능 활성화 
                 Change_Item_To_CrossRazer();
                 _manage.Event_Receive(Event_num.CROSS_ITEM);
                 timer.gameObject.SetActive(false);

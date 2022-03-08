@@ -52,7 +52,7 @@ public class Challenge_Item: MonoBehaviour
         {
             for (int i = 0; i < Item_TR.childCount; i++)
             {
-                if(data.Get_Item_index(i) / 3 == 7 || data.Get_Item_index(i)/3 == 8 || data.Get_Item_index(i) == 27)
+                if(data.Get_Item_index(i) / 3 == 7 || data.Get_Item_index(i)/3 == 8 || data.Get_Item_index(i) == 27 || data.Get_Item_index(i)/3 == 5)
                 {
                     data = new ChallengeDAO(); // 데이터 다시 읽어들임 
                     var target_num = 0;

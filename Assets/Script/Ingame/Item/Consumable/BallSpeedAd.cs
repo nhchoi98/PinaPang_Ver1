@@ -23,7 +23,7 @@ namespace Item
          public Text timer, timer_lower;
          public Transform item_icon;
          public Text gemText;
-         public GameObject activation;
+         public GameObject activation, permanent_Activate;
          
          private IMediator _mediator;
 
@@ -38,6 +38,7 @@ namespace Item
              {
                  ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
                  gem_btn.gameObject.SetActive(false);
+                 permanent_Activate.SetActive(true);
                  _launchManage.Set_BallSpeed_Const(true);// 볼 발사 상수 넣어줌 
                  timer.gameObject.SetActive(false);
                  // 활성화 됐다는 글씨 켜줌 

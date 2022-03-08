@@ -133,7 +133,10 @@ namespace Challenge
             else
             {
                 for (int i = 0; i < typeNum.Count; i++)
+                {
                     data[typeNum[i]].achi = true;
+                    Set_Data(typeNum[i]);
+                }
             }
 
         }

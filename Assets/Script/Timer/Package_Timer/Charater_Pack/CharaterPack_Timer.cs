@@ -111,22 +111,22 @@ namespace Timer
             switch (which_charater) // 하단의 상품을 꺼줌 
             {
                 case 0: // 파티광일 경우 
-                    package_lower_TR.GetChild(7).gameObject.SetActive(false);
+                    package_lower_TR.GetChild(6).gameObject.SetActive(false);
                     package_TR.GetChild(0).gameObject.SetActive(true);
                     break;
 
                 case 1: // 우주비행사일 경우 
-                    package_lower_TR.GetChild(8).gameObject.SetActive(false);
+                    package_lower_TR.GetChild(7).gameObject.SetActive(false);
                     package_TR.GetChild(1).gameObject.SetActive(true);
                     break;
 
                 case 2: // 곰일 경우 
-                    package_lower_TR.GetChild(9).gameObject.SetActive(false);
+                    package_lower_TR.GetChild(8).gameObject.SetActive(false);
                     package_TR.GetChild(2).gameObject.SetActive(true);
                     break;
 
                 case 3: // 과학자일 경우 
-                    package_lower_TR.GetChild(6).gameObject.SetActive(false);
+                    package_lower_TR.GetChild(5).gameObject.SetActive(false);
                     package_TR.GetChild(3).gameObject.SetActive(true);
                     break;
             }
@@ -197,19 +197,19 @@ namespace Timer
                 switch (which_charater)
                 {
                     case 0: // 파티광일 경우 
-                        package_lower_TR.GetChild(7).gameObject.SetActive(false);
+                        package_lower_TR.GetChild(6).gameObject.SetActive(false);
                         break;
 
                     case 1: // 우주비행사일 경우 
-                        package_lower_TR.GetChild(8).gameObject.SetActive(false);
+                        package_lower_TR.GetChild(7).gameObject.SetActive(false);
                         break;
 
                     case 2: // 곰일 경우 
-                        package_lower_TR.GetChild(9).gameObject.SetActive(false);
+                        package_lower_TR.GetChild(8).gameObject.SetActive(false);
                         break;
 
                     case 3: // 과학자일 경우 
-                        package_lower_TR.GetChild(6).gameObject.SetActive(false);
+                        package_lower_TR.GetChild(5).gameObject.SetActive(false);
                         break;
                 }
 

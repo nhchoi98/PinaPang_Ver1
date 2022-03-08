@@ -12,7 +12,7 @@ namespace Ad
 
         public static void Init_Data()
         {
-            /*
+            
             if (PlayerPrefs.GetInt("ItemAds", 0) == 0)
                 is_Noads = false;
 
@@ -33,9 +33,10 @@ namespace Ad
             else
                 is_Noads_new = true;
                 
-                */
+                /*
             is_Noads_new = true;
             is_ItemAds = true;
+            */
         }
 
         public static bool Get_Is_Noads()

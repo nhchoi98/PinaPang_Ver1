@@ -24,7 +24,7 @@ using System.Collections;
          public Text timer, timer_lower;
          public Transform item_icon;
          public Text gemText;
-         public GameObject activation;
+         public GameObject activation, permanent_Activate;
          
          private IMediator _mediator;
          
@@ -43,7 +43,7 @@ using System.Collections;
              if (Noads_instance.Get_ItemAds())
              {
                  timer.gameObject.SetActive(false); // 타이머 꺼줌
-                 // 영구 활성화 글씨 띄워줌 
+                 permanent_Activate.SetActive(true);// 영구 활성화 글씨 띄워줌 
                  // 기능 영구 활성화 
                  _lineAnimation.Set_SecondLine(true);
                  _launchManage.Set_Item();
