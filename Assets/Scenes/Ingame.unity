@@ -82512,6 +82512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloud: {fileID: 1819186723909733754, guid: 3b6b6ece68bbb1141bd0e02dcecbcb00, type: 3}
+  itemPool: {fileID: 335078755}
 --- !u!1 &1819186724465753313
 GameObject:
   m_ObjectHideFlags: 0

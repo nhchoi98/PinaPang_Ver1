@@ -50,7 +50,7 @@ public static class Get_Price
                 return "starter_pack";
             
             case 7:
-                return "no_ads";
+                return "no_ads_new";
             
             case 8:
                 return "astronaut";

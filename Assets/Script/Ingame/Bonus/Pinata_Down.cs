@@ -1,10 +1,8 @@
-using System;
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Manager;
-using Block;
+using DG.Tweening;
 using Ingame;
 
 namespace Pinata
@@ -26,7 +24,8 @@ namespace Pinata
         public pinata_down pd;
 
         private bool Ishit;
-    
+        private Sequence hitSequence;
+        private bool particle_on;
 
         void Start()
         {
@@ -34,6 +33,13 @@ namespace Pinata
             Hp_text.text = HP.ToString();
             Manager.SoundManager SM = GameObject.FindWithTag("SM").GetComponent<Manager.SoundManager>();
             Hit_Sound = SM.Pinata_hit;
+            hitSequence = DOTween.Sequence()
+                .SetAutoKill(false)
+                .OnStart(() => { particle_on = true; })
+                .OnComplete(()=>
+                {
+                    particle_on  = false;
+                });
         }
         private IEnumerator OnCollisionEnter2D(Collision2D collision)
         {
@@ -49,7 +55,14 @@ namespace Pinata
                     break;
             }
 
-            Instantiate(Particle_hit, collision.contacts[0].point, Quaternion.identity);
+            if (!particle_on)
+            {
+                hitSequence.AppendInterval(0.5f);
+                Instantiate(Particle_hit, collision.contacts[0].point, Quaternion.identity);
+                Instantiate(Damage_Obj, transform.position, Quaternion.identity);
+                hitSequence.Restart();
+            }
+            
             Hit();
             // 사운드 재생
             yield return null;
@@ -63,7 +76,6 @@ namespace Pinata
         
         private void Hit()
         {
-            Instantiate(Damage_Obj, transform.position, Quaternion.identity);
             if (HP - attack > 0)
             {
                 Hit_Sound.Play();

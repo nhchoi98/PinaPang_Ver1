@@ -29,7 +29,7 @@ namespace Ingame
                 obj.transform.gameObject.GetComponent<Pinata.Pinata_Down>().for_revive();
             }
 
-            else if (obj.layer == 15 || obj.layer == 16 || obj.layer == 17)
+            else if (obj.layer == 13)
                 obj.GetComponent<Determine_Destroy>().Set_Animation();
 
             yield return null;

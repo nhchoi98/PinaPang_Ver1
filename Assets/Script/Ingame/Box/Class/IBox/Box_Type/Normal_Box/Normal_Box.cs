@@ -79,7 +79,6 @@ namespace Block
         // 박스 피격시의 액션을 결정지어주는 함수 
         public void Attack(Vector2 pos, bool is_item = false)
         {
-            if (this.transform == null) return;
             switch (HP - 1)
             {
                 default:
