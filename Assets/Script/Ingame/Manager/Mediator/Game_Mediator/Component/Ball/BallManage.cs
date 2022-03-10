@@ -60,7 +60,7 @@ namespace Ingame
             progetile_Pos = new Vector2(0, Ground_Y );
             // 새로운공을 생성해냄 
             if(progetileGroup.childCount== 0)
-                Make_new_Ball(1); 
+                Make_new_Ball(1); // 1 
         }
         
         #endregion

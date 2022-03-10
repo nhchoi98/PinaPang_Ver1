@@ -1,6 +1,7 @@
 
 using Ad;
 using Avatar;
+using Badge;
 using Timer;
 using UnityEngine;
 
@@ -16,25 +17,45 @@ namespace Shop
         [SerializeField] private Transform package_panel;
         [SerializeField] private GameObject starter_panel;
 
+        [Header("Free_Item_Package")] 
+        [SerializeField] private Challenge_Item _challengeItem;
+        [SerializeField] private Badge_Data _badgeData;
         private bool firstSet;
         void Start()
         {
+            Determine_StarterOn();
             Determine_Avatar_On();
+        }
+
+        public void Determine_StarterOn()
+        {
+            Package_DataDAO starterData = new Package_DataDAO(0);
+            Determine_StarterDAO _starter_Time = new Determine_StarterDAO();
+            if (starterData.Get_Data() || !_starter_Time.Get_Purchasable()) // 결제 한 경우
+                starter_panel.SetActive(false);
+            
         }
         
         private void Determine_Beginner_On(bool is_avatar_none = false)
         {
-            Package_DataDAO starterData = new Package_DataDAO(0);
-            Determine_StarterDAO _starter_Time = new Determine_StarterDAO();
             int available_count = 0;
-            if (starterData.Get_Data() || !_starter_Time.Get_Purchasable()) // 결제 한 경우
+
+            // 구버전 Noads 구매시
+            if (Noads_instance.Get_Is_Noads())
             {
-                ++available_count;
-                starter_panel.SetActive(false);
-                tr.GetChild(2).gameObject.SetActive(false); // 상품에서 제외시켜줌 
+                available_count+=2;
+                tr.GetChild(2).gameObject.SetActive(false);
+                tr.GetChild(3).gameObject.SetActive(false);
             }
 
-            if (Noads_instance.Get_Is_Noads())
+            // 신버전 Noads 구매시 
+            if (Noads_instance.Get_Is_Noads_New())
+            {
+                ++available_count;
+                tr.GetChild(2).gameObject.SetActive(false);
+            }
+
+            if (Noads_instance.Get_ItemAds())
             {
                 ++available_count;
                 tr.GetChild(3).gameObject.SetActive(false);
@@ -42,7 +63,7 @@ namespace Shop
 
             if (available_count == 2)
             {
-                tr.GetChild(1).gameObject.SetActive(false);
+                tr.GetChild(1).gameObject.SetActive(false); // 구분선을 꺼줌
                 if(is_avatar_none)
                     emptyPanel.SetActive(true);
             }
@@ -135,10 +156,15 @@ namespace Shop
         {
             Noads_Btn.GetChild(0).gameObject.SetActive(false);
             Noads_Btn.GetChild(1).gameObject.SetActive(true);
-            if(PlayerPrefs.GetInt("non_consume", 0) == 5)
-                emptyPanel.SetActive(true);
+            Purchase_FreeItem();
         }
 
+        public void Purchase_FreeItem()
+        {
+            _challengeItem.Purchase_Free_Item_Package(); // # 1. 아이템 사용 퀘스트와 관련된 내용이 있다면, 클리어 처리.
+            _badgeData.Purchase_FreeItem_Package();
+            // # 2. 뱃지 획득 처리
+        }
         public void Init_SuperSale(int index)
         {
             superSale_tr.GetChild(0).gameObject.SetActive(false);

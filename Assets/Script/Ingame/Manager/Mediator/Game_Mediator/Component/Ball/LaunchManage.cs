@@ -28,6 +28,7 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
         [Header("Item")] 
         private bool _Item;
         public Button item_inactive_btn;
+        private float speedconst = 1f;
     
         [SerializeField] private Transform Charater;
         public Transform _Launch_Preview_Ball, plusActive;
@@ -54,7 +55,7 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
         
         void Awake()
         {
-            POWER =  (1f+((AbilityDAO.Get_Ball_Speed())/100f))*3600f ; // Ball speed 초기화 
+            POWER =  (1f+((AbilityDAO.Get_Ball_Speed())/100f))*(3600f) ; // Ball speed 초기화 
 
             if (eventSystem == null)
             {
@@ -72,7 +73,16 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
                 eventSystem.pixelDragThreshold = (int)(dragThresholdCM * Screen.dpi / inchToCm);
             }
         }
-        
+
+        public void Set_BallSpeed_Const(bool is_Activating)
+        {
+            if (is_Activating)
+                speedconst = 1.5f;
+
+            else
+                speedconst = 1f;
+
+        }
         #region Mediate_Action
         public void Set_Mediator(IMediator mediator)
         {
@@ -223,7 +233,7 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
                 int sum = ball_num;
                 Transform TR;
                 is_launching = true;
-                Vector3 pos = (Vector3) dir * POWER * (1+ ((float)launchCount/400f));
+                Vector3 pos = (Vector3) dir * POWER * speedconst*(1+ ((float)launchCount/400f));
                 tap_Btn.SetActive(true);
                 if(launchCount < 150)
                     launchCount++;
@@ -346,7 +356,6 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
         IEnumerator Down_Ball_Single(Transform TR)
         {
             int speed = 4000;
-            Vector2 target_pos = new Vector2(TR.position.x, Ground_Y);
             TR.DOMove(progetilePos, 0.3f)
                 .SetEase(Ease.InQuart)
                 .OnComplete(()=>

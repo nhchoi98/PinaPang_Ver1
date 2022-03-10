@@ -45,7 +45,6 @@ namespace Ingame
         #endregion
 
         #region Quest
-        SET_ITEM,
         SET_BOX,
         SET_REVIVE,
         SET_TRIANGLE,
@@ -73,7 +72,7 @@ namespace Ingame
 
         #region Ad_Ingame
         BANNER,
-        SCORE_AD,
+        SPEED_AD,
         LINE_AD,
         CROSS_AD,
         MOMMY_AD,

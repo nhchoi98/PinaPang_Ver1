@@ -49,7 +49,6 @@ namespace Pinata
 
         public void active_Destroy()
         {
-            Time.timeScale = 1f;
             destroy_start();
             Collider2D.enabled = false;
             StartCoroutine(Scale_Down());
@@ -97,7 +96,6 @@ namespace Pinata
         public void destroy_start()
         {
             Init_info();
-            Time.timeScale = 1f;
             Killed_Sound.Play();
             whatrunning = CS.Shake_Cam(15f, 1.8f, true, true);
             CS.StartCoroutine(whatrunning);

@@ -51,23 +51,17 @@ namespace Shop
                     break;
 
                 case 0:
-                    gem  = Playerdata_DAO.Player_Gem();
                     gemconst = 1;
-                    Playerdata_DAO.Set_Player_Gem(5);
                     gem = 5;
                     break;
 
                 case 1:
-                    gem  = Playerdata_DAO.Player_Gem();
                     gemconst = 1;
-                    Playerdata_DAO.Set_Player_Gem(10);
                     gem = 10;
                     break;
 
                 case 2:
-                    gem  = Playerdata_DAO.Player_Gem();
                     gemconst = 1;
-                    Playerdata_DAO.Set_Player_Gem(15);
                     gem = 15;
                     break;
                 

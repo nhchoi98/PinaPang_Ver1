@@ -3,6 +3,7 @@ using LitJson;
 using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
+using Ad;
 
 namespace Challenge
 {
@@ -113,6 +114,34 @@ namespace Challenge
         #endregion
 
         #region Reset
+        
+        /// <summary>
+        /// 프리 아이템 패키지를 결제하면 호출되는 함수. 아이템 사용시 달성가능한 퀘스트를 전부 달성 처리 해준다. 
+        /// </summary>
+        public void Set_FreeItem_Purchase()
+        {
+            List<int> typeNum = new List<int>();
+            for (int i = 0; i < 5; i++)
+            {
+                if(data[i].item/3 == 5)
+                    typeNum.Add(i);
+            }
+
+            if (typeNum.Count == 0)
+                return;
+
+            else
+            {
+                for (int i = 0; i < typeNum.Count; i++)
+                {
+                    data[typeNum[i]].achi = true;
+                    Set_Data(typeNum[i]);
+                }
+            }
+
+        }
+        
+        
         /// <summary>
         /// 기준시가 지나면, 데이터가 초기화될 때 호출되는 함수 
         /// </summary>
@@ -126,6 +155,12 @@ namespace Challenge
 
             for (int i = 0; i < 9; i++)
             {
+                if (i == 5)
+                {
+                    if(Noads_instance.Get_ItemAds())
+                        continue;
+                }
+                
                 bronze_list.Add(i*3);
                 silver_list.Add((i*3) +1);
                 gold_list.Add((i*3)+2);

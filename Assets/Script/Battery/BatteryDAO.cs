@@ -39,7 +39,6 @@ namespace Battery
                 DATA.adCount = 5;
                 DATA.gemCount = 10;
                 var DATA_STR = JsonMapper.ToJson(DATA);
-                Debug.Log(DATA_STR);
                 File.WriteAllText(DATA_PATH,DATA_STR);   
             }
             
@@ -126,12 +125,13 @@ namespace Battery
         public void Loading_Charge()
         {
             TimeSpan delta = DateTime.UtcNow - data.accessTime;
+            
+            if (delta < TimeSpan.FromMinutes(6))
+                return;
+            
             //  기본 차지 할 필요 없다면 
             if (data.count > 29)
             {
-                if (delta < TimeSpan.FromMinutes(6))
-                    return;
-                
                 while (true)
                 {
                     data.accessTime += TimeSpan.FromMinutes(6);
@@ -145,7 +145,7 @@ namespace Battery
                     if (data.gemCount < 10)
                         data.gemCount += 1;
                     
-                    if (data.adCount == 5 && data.gemCount == 10)
+                    if (data.adCount == 5 && data.gemCount == 10 )
                         break;
                 }
                 Write_Data();
@@ -153,9 +153,6 @@ namespace Battery
 
             else // 충전 해야 한다면 
             {
-                if (delta < TimeSpan.FromMinutes(6))
-                    return;
-                
                 while (true)
                 {
                     data.accessTime += TimeSpan.FromMinutes(6);
@@ -163,7 +160,6 @@ namespace Battery
                     if (delta < TimeSpan.FromMinutes(6))
                         break;
                     
-
                     if (data.count < 30)
                         data.count += 1;
 
@@ -173,8 +169,11 @@ namespace Battery
                     if (data.gemCount < 10)
                         data.gemCount += 1;
 
-                    if (data.adCount == 5 && data.gemCount == 10)
+                    if (data.adCount == 5 && data.gemCount == 10 && data.count > 29)
+                    {
+                        data.accessTime = DateTime.UtcNow;
                         break;
+                    }
                 }
                 // 시간 차이에 따른 충전량 계산 
                 // 가장 마지막 충전량을 기준으로 access time 재작성 

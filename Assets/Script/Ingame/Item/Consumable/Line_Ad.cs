@@ -19,20 +19,20 @@ using System.Collections;
          [SerializeField] private SettingManager _settingManager;
          [SerializeField] private Line_Animation _lineAnimation;
          
-         public Button gem_btn, ad_btn, gem_score, gem_both; //gem_mommy
+         public Button gem_btn, ad_btn, gem_speed, gem_both; 
          public Transform buttonTR;
          public Text timer, timer_lower;
          public Transform item_icon;
          public Text gemText;
-         public GameObject activation;
+         public GameObject activation, permanent_Activate;
          
          private IMediator _mediator;
-
+         
          [Header("Tutorial")] 
          public GameObject tutorial_part;
          public GameObject exitBtn;
          public Button pauseBtn;
-         public GameObject crossButton;
+         public GameObject crossButton,speedButton;
          /// <summary>
          /// 1. Ad 버튼 활성 유무
          /// 2. 시간 체크 
@@ -40,31 +40,38 @@ using System.Collections;
          public void Start()
          {
              
-             if (Noads_instance.Get_Is_Noads())
+             if (Noads_instance.Get_ItemAds())
              {
-                 ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
+                 timer.gameObject.SetActive(false); // 타이머 꺼줌
+                 permanent_Activate.SetActive(true);// 영구 활성화 글씨 띄워줌 
+                 // 기능 영구 활성화 
+                 _lineAnimation.Set_SecondLine(true);
+                 _launchManage.Set_Item();
                  gem_btn.gameObject.SetActive(false);
              }
 
              else
-                 ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
-
-             ad_btn.gameObject.SetActive(true);
-
-             if (Playerdata_DAO.Player_Gem() < 5)
              {
-                 gem_btn.interactable = false;
-                 gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
-                     new Color(255f / 255f, 28f / 255f, 26f / 255f);
-             }
+                 ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
+                 ad_btn.gameObject.SetActive(true);
+                 
+                 if (Playerdata_DAO.Player_Gem() < 5)
+                 {
+                     gem_btn.interactable = false;
+                     gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
+                         new Color(255f / 255f, 28f / 255f, 26f / 255f);
+                 }
 
-             else
-                 gem_btn.interactable = true;
+                 else
+                     gem_btn.interactable = true;
              
                  
-             timer.text = 300.ToString();
-             timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
-                 "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
+                 timer.text = 300.ToString();
+                 timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
+                     "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
+             }
+
+            
          }
 
          public void Set_Tutorial()
@@ -81,6 +88,7 @@ using System.Collections;
              {
                  PlayerPrefs.SetInt("Tutorial_Item_End", 1);
                  crossButton.SetActive(true);
+                 speedButton.SetActive(true);
              }
 
              tutorial_part.SetActive(false);
@@ -113,6 +121,7 @@ using System.Collections;
 
              gem_btn.interactable = false;
              StartCoroutine(Timer());
+             
          }
          
          
@@ -140,7 +149,12 @@ using System.Collections;
          {
              _mediator.Event_Receive(Event_num.LINE_AD);
          }
-         
+
+         public void Set_BallSpeed_Const(bool is_Activating)
+         {
+             
+             
+         }
 
          public void OnClick_Gem()
          {
@@ -155,13 +169,13 @@ using System.Collections;
              {
                  gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                      new Color(255f / 255f, 28f / 255f, 26f / 255f);
-                 gem_score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
+                 gem_speed.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                      new Color(255f / 255f, 28f / 255f, 26f / 255f);
 
                  gem_both.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                      new Color(255f / 255f, 28f / 255f, 26f / 255f);
 
-                 gem_score.interactable = false;
+                 gem_speed.interactable = false;
                  gem_both.interactable = false;
              }
              

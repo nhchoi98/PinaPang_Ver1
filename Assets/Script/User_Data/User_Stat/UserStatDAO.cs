@@ -42,7 +42,6 @@ namespace Data
                 DATA.pinata_count = 0;
                 DATA.revive_count = 0;
                 DATA.score = 0;
-                Debug.Log("여기");
                 var DATA_STR = JsonUtility.ToJson(DATA);
                 File.WriteAllText(DATA_PATH,DATA_STR);   
             }
@@ -88,6 +87,26 @@ namespace Data
             if(Data.item_use<int.MaxValue)
                 Data.item_use++;
             _badgeUnlocked.Determine_Unlocked(Set_Badge_Unlocked.Set_Type.ITEM, Data.item_use);
+            Set_Data();
+        }
+
+        public void Set_FreeItem_Package()
+        {
+            BadgeDAO _badgeDao = new BadgeDAO(8);
+            if (!_badgeDao.Get_Achi_Data(8,true))
+            {
+                _badgeDao.Set_Achi_Data(8);
+                _badgeUnlocked.Set_FreeItem_Purchase(1);
+            }
+            
+            _badgeDao = new BadgeDAO(4);
+            if (!_badgeDao.Get_Achi_Data(4,true))
+            {
+                _badgeDao.Set_Achi_Data(4);
+                _badgeUnlocked.Set_FreeItem_Purchase(0);
+            }
+            
+            Data.item_use = 20;
             Set_Data();
         }
         
@@ -183,6 +202,22 @@ namespace Data
         {
             _eventHandler = eventHandler;
         }
+
+        public void Set_FreeItem_Purchase(int num)
+        {
+            object obj = new object();
+            if (num == 0)
+            {
+                Badge_Get_Args args = new Badge_Get_Args(4);
+                _eventHandler.Invoke(obj, args);
+            }
+            else
+            {
+                Badge_Get_Args args = new Badge_Get_Args(8);
+                _eventHandler.Invoke(obj, args);
+            }
+        }
+        
         public bool Determine_Unlocked(Set_Type setType, int quantity)
         {
             bool event_pos = false;

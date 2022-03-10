@@ -20,7 +20,7 @@ namespace Ad
         [SerializeField] private SettingManager _settingManager;
         [SerializeField] private GameManage _manage;
         [SerializeField] private QuestManager _questManager;
-        public Button gem_btn, ad_btn, gem_line, gem_score; //gem_mommy
+        public Button gem_btn, ad_btn, gem_line, gem_speed; 
         public Text timer, timer_lower;
         public Transform item_icon;
 
@@ -29,39 +29,44 @@ namespace Ad
         private IMediator _mediator;
         public Transform buttonTR;
 
-        public GameObject crossObj;
+        public GameObject crossObj, permanent_Activate;
         public Transform itemTR;
         public Transform diePool;
         [SerializeField] private LocateBox _locateBox;
 
         void Start()
         {
-            EXP_DAO level_data = new EXP_DAO();
-            if (Noads_instance.Get_Is_Noads())
+            if (Noads_instance.Get_ItemAds())
             {
                 ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
                 gem_btn.gameObject.SetActive(false);
-            }
-             
-            else
-                ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
-             
-            ad_btn.gameObject.SetActive(true);
-            
-            if (Playerdata_DAO.Player_Gem() < 5)
-            {
-                gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
-                    new Color(255f / 255f, 28f / 255f, 26f / 255f);
-                gem_btn.interactable = false;
+                // 영구 활성화 글씨 띄워줌
+                permanent_Activate.SetActive(true);// 기능 활성화 
+                Change_Item_To_CrossRazer();
+                _manage.Event_Receive(Event_num.CROSS_ITEM);
+                timer.gameObject.SetActive(false);
             }
 
             else
-                gem_btn.interactable = true;
-            
+            {
+                ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
+                ad_btn.gameObject.SetActive(true);
+                if (Playerdata_DAO.Player_Gem() < 5)
+                {
+                    gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
+                        new Color(255f / 255f, 28f / 255f, 26f / 255f);
+                    gem_btn.interactable = false;
+                }
+
+                else
+                    gem_btn.interactable = true;
+
                 timer.text = 300.ToString();
                 timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
                     "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
-                
+
+            }
+
         }
 
         public void UserChoseToWatchAd()
@@ -78,22 +83,15 @@ namespace Ad
             gemText.text = string.Format("{0:#,0}", Playerdata_DAO.Player_Gem());
             if (Playerdata_DAO.Player_Gem() < 5)
             {
-                /*
-                if (gem_mommy.interactable)
-                {
-                    gem_mommy.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().color =
-                        new Color(255f / 255f, 28f / 255f, 26f / 255f);
-                    gem_mommy.interactable = false;
-                }
-                */
+
                 gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                     new Color(255f / 255f, 28f / 255f, 26f / 255f);
                 gem_line.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                     new Color(255f / 255f, 28f / 255f, 26f / 255f);
-                gem_score.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
+                gem_speed.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                     new Color(255f / 255f, 28f / 255f, 26f / 255f);
                 gem_line.interactable = false;
-                gem_score.interactable = false;
+                gem_speed.interactable = false;
             }
             gem_btn.interactable = false;
             ad_btn.interactable = false;
@@ -151,7 +149,6 @@ namespace Ad
             Change_Item_To_CrossRazer();
             // Step 2. 기타 설정을 해줌 
             _settingManager.OnClick_Item_Exit();
-            _mediator.Event_Receive(Event_num.SET_ITEM);
             _questManager.Set_Item();
             _soundManager.item.Play(); // 사운드 
             timer.gameObject.transform.GetChild(0).gameObject.SetActive(false); // 옆에 보너스 표시 지워주기 

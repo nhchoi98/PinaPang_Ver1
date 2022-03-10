@@ -10,10 +10,9 @@ namespace Ingame
     public class Ad_Mediator : MonoBehaviour, IMediator
     {
         [Header("Component")] 
-        private IComponent scoreAd;
+        private IComponent speedAd;
         private IComponent crossAd;
         private IComponent lineAd;
-        private IComponent mommyAd;
         private IComponent reviveAd;
         [SerializeField] private Transform adTR;
         private Event_num _eventNum;
@@ -49,13 +48,13 @@ namespace Ingame
             InitializeBannerAds(); // 배너 광고 초기화 
             InitializeRewardedAds();
             MaxSdk.ShowBanner(BannerAdUnitId);
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 switch (i)
                 {
                     case 0:
-                        scoreAd = adTR.GetChild(0).GetComponent<IComponent>();
-                        scoreAd.Set_Mediator(this);
+                        speedAd = adTR.GetChild(0).GetComponent<IComponent>();
+                        speedAd.Set_Mediator(this);
                         break;
                     
                     case 1:
@@ -67,14 +66,9 @@ namespace Ingame
                         crossAd = adTR.GetChild(2).GetComponent<IComponent>();
                         crossAd.Set_Mediator(this);
                         break;
-                    
+
                     case 3:
-                        mommyAd = adTR.GetChild(3).GetComponent<IComponent>();
-                        mommyAd.Set_Mediator(this);
-                        break;
-                    
-                    case 4:
-                        reviveAd = adTR.GetChild(4).GetComponent<IComponent>();
+                        reviveAd = adTR.GetChild(3).GetComponent<IComponent>();
                         reviveAd.Set_Mediator(this);
                         break;
                 }
@@ -97,8 +91,8 @@ namespace Ingame
             // ARGS에 따라서 판단하기 
             switch (_eventNum)
             {
-                case Event_num.SCORE_AD:
-                    scoreAd.Event_Occur(_eventNum);
+                case Event_num.SPEED_AD:
+                    speedAd.Event_Occur(_eventNum);
                     break;
                 
                 case Event_num.LINE_AD:
@@ -108,11 +102,7 @@ namespace Ingame
                 case Event_num.CROSS_AD:
                     crossAd.Event_Occur(_eventNum);
                     break;
-                
-                case Event_num.MOMMY_AD:
-                    mommyAd.Event_Occur(_eventNum);
-                    break;
-                
+
                 case Event_num.REVIVE_AD:
                     reviveAd.Event_Occur(_eventNum);
                     break;
@@ -129,19 +119,22 @@ namespace Ingame
         /// <param name="eventNum"></param>
         public void Event_Receive(Event_num eventNum)
         {
-            if(eventNum == Event_num.USER_DIE)
-            {
-                if(!Noads_instance.Get_Is_Noads())
-                    ShowInterstitial();
-            }
-            
-            else if (eventNum == Event_num.BANNER)
-                Destroy_Banner();
 
-            else
+            switch (eventNum)
             {
-                if (eventNum != Event_num.SET_ITEM)
-                {
+                case Event_num.USER_DIE:
+                    ShowInterstitial();
+                    break;
+                
+                
+                case Event_num.BANNER :
+                    Destroy_Banner();
+                    break;
+                
+                case Event_num.LINE_AD:
+                case Event_num.CROSS_AD:
+                case Event_num.SPEED_AD:
+                case Event_num.REVIVE_AD:
                     this._eventNum = eventNum;
                     if (MaxSdk.IsRewardedAdReady(RewardedAdUnitId))
                         MaxSdk.ShowRewardedAd(RewardedAdUnitId);
@@ -152,8 +145,9 @@ namespace Ingame
                         Instantiate(adNotshow);
                         LoadRewardedAd();
                     }
-                }
+                    break;
             }
+           
         }
         
         
@@ -229,7 +223,7 @@ namespace Ingame
         private void InitializeBannerAds()
         {
             // Attach Callbacks
-            if (!Noads_instance.Get_Is_Noads())
+            if (!Noads_instance.Get_Is_Noads() || !Noads_instance.Get_Is_Noads_New())
             {
                 MaxSdkCallbacks.Banner.OnAdLoadedEvent += OnBannerAdLoadedEvent;
                 MaxSdkCallbacks.Banner.OnAdLoadFailedEvent += OnBannerAdFailedEvent;
