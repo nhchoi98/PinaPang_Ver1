@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Alarm;
 using Avatar;
 using Badge;
@@ -36,7 +35,7 @@ namespace Attendance
         public Text reward_text;
         public AudioSource gemSound;
         
-        private const int ITEM_NUM = 21;
+        private const int ITEM_NUM = 8;
         private int which_item;
         private int gem;
 
@@ -49,6 +48,9 @@ namespace Attendance
 
         [Header("SuperSale_Panel")] [SerializeField]
         private CharaterPack_Timer _charaterPackTimer;
+
+        [Header("Gem_Panel")] public GameObject gemReward_Panel;
+        [SerializeField] private Attendance_DoubleAd adScript;
         
         public Button exitBack_Btn;
         private bool reward_panel = false;
@@ -112,6 +114,7 @@ namespace Attendance
             attendanceGem.text = String.Format("{0:#,0}", gem);
             panel.SetActive(true);
         }
+        
         public void OnClick_Collect()
         {
             // 아이템 구매 처리 
@@ -163,7 +166,11 @@ namespace Attendance
             }
 
         }
-
+        
+        /// <summary>
+        /// 2배 보상 버튼 -> isGem = true
+        /// </summary>
+        /// <param name="isGem"></param>
         private void Get_Reward()
         {
             BallPurDAO ballDao;
@@ -174,23 +181,18 @@ namespace Attendance
                 questManager.Set_First_Attendance();
                 badgeData.Set_First_Attendance();
             }
-
+            // 보상 패널 띄워줘야함 
+            // # 1. 그냥 받는 아이템이냐, 젬이냐에 따라서 먼저 구분지어줌. 
+            // # 2. 젬일 경우, ad의 index을 set 해줌.
             switch (which_item)
             {
+                
                 default:
-                    Playerdata_DAO.Set_Player_Gem(10);
-                    StartCoroutine(Get_Gem());
-                    gemSound.Play();
+                    adScript.Set_Index(which_item);
+                    Set_GemReward_Panel(which_item);
                     break;
                 
-                case 6:
-                case 13:
-                    Playerdata_DAO.Set_Player_Gem(40);
-                    StartCoroutine(Get_Gem(40));
-                    gemSound.Play();
-                    break;
-
-                case 2: // 햄버거공 획득 
+                case 1: // 햄버거공 획득 
                     ballDao = new BallPurDAO(3005);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
@@ -198,47 +200,15 @@ namespace Attendance
                     Set_Special_Panel(3005);
                     break;
                 
-                case 5: // 감튀공 획득 
-                    ballDao = new BallPurDAO(3006);
-                    ballDao.Purchase();
-                    _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3006);
-                    Set_Special_Panel(3006);
+                case 3: // 드라큘라 셋 획득 . Set_Special Panel 매개변수 변경해야함
+                    Set_Special_Panel(3005);
                     break;
 
-                case 8: // 쿠키공 획득 
-                    ballDao = new BallPurDAO(3007);
-                    ballDao.Purchase();
-                    _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3007);
-                    Set_Special_Panel(3007);
+                case 5: // 벛꽃공 획득 
+                    Set_Special_Panel(3005);
                     break;
                 
-                case 11: // 무당벌레공 획득 
-                    ballDao = new BallPurDAO(3008);
-                    ballDao.Purchase();
-                    _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3008);
-                    Set_Special_Panel(3008);
-                    break;
-                
-                case 14: // 해골공 획득 
-                    ballDao = new BallPurDAO(3009);
-                    ballDao.Purchase();
-                    _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3009);
-                    Set_Special_Panel(3009);
-                    break;
-                
-                case 17: // 벛꽃공 획득 
-                    ballDao = new BallPurDAO(3010);
-                    ballDao.Purchase();
-                    _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3010);
-                    Set_Special_Panel(3010);
-                    break;
-                
-                case 20: // 아바타 획득 
+                case 7: // 아바타 획득 + 베이비 드라이버 세트공 연결해야함. 
                     avatarDao = new IsLockedDAO(1000);
                     avatarDao.Set_Locked_Condition();
                     _badgeData.Set_Ball_Buy();
@@ -248,6 +218,43 @@ namespace Attendance
             }
         }
 
+        private void Set_GemReward_Panel(int index)
+        {
+            int gem;
+            switch (index)
+            {
+                default:
+                    gem = 10;
+                    break;
+                
+                case 2:
+                    gem = 15;
+                    break;
+                
+                case 4:
+                    gem = 20;
+                    break;
+                
+                case 6:
+                    gem = 30;
+                    break;
+            }
+            
+            // # 2. 패널의 텍스트를 반영해줘야함. 
+            gemReward_Panel.transform.GetChild(0).gameObject.GetComponent<Text>().text = gem.ToString();
+            gemReward_Panel.transform.GetChild(1).gameObject.GetComponent<Text>().text = (gem * 2).ToString();
+            gemReward_Panel.SetActive(true);
+        }
+
+        /// <summary>
+        /// 2배 버튼 안누르고 그냥 젬 얻는 경우 
+        /// </summary>
+        public void Get_Gem(bool is_Doubled = false)
+        {
+            
+        }
+        
+        
         private void Set_Special_Panel(int type)
         {
             ballPanel.SetActive(true);
