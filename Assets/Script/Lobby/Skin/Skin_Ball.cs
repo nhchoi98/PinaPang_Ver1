@@ -177,7 +177,8 @@ namespace Skin
                             challenge_btn.transform.GetChild(1).gameObject.GetComponent<Text>().text =
                                 "LV. " + Ball_Price.Price(index).ToString();
                         }
-                        else
+                        
+                        else // 출석부로 얻는 공일 경우 
                         {
                             challenge_btn.transform.GetChild(0).gameObject.SetActive(false);
                             challenge_btn.transform.GetChild(1).gameObject.SetActive(false);

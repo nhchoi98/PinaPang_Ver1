@@ -89,20 +89,20 @@ SpriteAtlas:
   - Attendance_List_Bg
   - Attendance_List_Collected_Bg
   - NewBlock_Title
-  - 3009
+  - 1024
   - Item_Close_Btn
-  - 3010
-  - 3007
+  - 3006
+  - 1023
   - Attendance_Collect_Btn
   - Attendance_Reward_Check
   - Shop_Gem_1
   - Attendance_Collect_Inactivated_Btn
   - Attendance_Bg
   - Attendance_List_Collectable_Bg
-  - 3008
+  - 1025
   - 3005
   - Shop_Gem_3_a
-  - 3006
+  - 1022
   m_RenderDataMap: {}
   m_Tag: Attendance
   m_IsVariant: 0

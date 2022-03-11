@@ -11,8 +11,8 @@ public static class Calc_Index
 
     [Header("Ball_Const")] 
     private const int DEFAULT_BALL = 1;
-    private const int _NORMAL_MAX = 23; // 그냥 살 수 있는 공 
-    private const int _LEVELUP_MAX = 11;  // 레벨업 or 패키지 사야 얻을 수 있는 공 
+    private const int _NORMAL_MAX = 26; // 그냥 살 수 있는 공 
+    private const int _LEVELUP_MAX = 9;  // 레벨업 or 패키지 사야 얻을 수 있는 공 
     private const int PACKAGE = 4;
     
     #region  Avatar
