@@ -17,6 +17,7 @@ namespace Ad
         private IComponent dailyPurchase;
         private IComponent linePurchase;
         private IComponent batteryCharge;
+        private IComponent attendance;
         private Event_num _eventNum;
         
         [Header("Ad_data")]
@@ -31,7 +32,7 @@ namespace Ad
                 RewardedAdUnit_Id= "4feba1083bfe243f";
             #endif
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 switch (i)
                 {
@@ -53,6 +54,11 @@ namespace Ad
                     case 3 :
                         batteryCharge = transform.GetChild(i).GetComponent<IComponent>();
                         batteryCharge.Set_Mediator(this);
+                        break;
+                    
+                    case 4:
+                        attendance = transform.GetChild(i).GetComponent<IComponent>();
+                        attendance.Set_Mediator(this);
                         break;
                 }
             }
@@ -77,6 +83,7 @@ namespace Ad
                 case Event_num.SHOP_DAILY:
                 case Event_num.LINE_PURCHASE:
                 case Event_num.BATTERY:
+                case Event_num.ATTENDANCE:
                     MaxSdk.LoadRewardedAd(RewardedAdUnit_Id);
                     break;
             }
@@ -151,6 +158,10 @@ namespace Ad
                 
                 case Event_num.BATTERY:
                     batteryCharge.Event_Occur(_eventNum);
+                    break;
+                
+                case Event_num.ATTENDANCE:
+                    attendance.Event_Occur(_eventNum);
                     break;
             }
             LoadRewardedAd();

@@ -83,7 +83,8 @@ namespace Ingame
         QUEST_RESET,
         SHOP_DAILY,
         LINE_PURCHASE,
-        BATTERY
+        BATTERY,
+        ATTENDANCE
         #endregion
         
     }
