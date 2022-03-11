@@ -8,6 +8,7 @@ namespace Attendance
     public class Attendance_DoubleAd : MonoBehaviour, IComponent
     {
         private int index;
+        [Serial]
         private IMediator _mediator;
         public void Set_Mediator(IMediator mediator)
         {

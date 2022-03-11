@@ -189,7 +189,7 @@ namespace Attendance
                 
                 default:
                     adScript.Set_Index(which_item);
-                    Set_GemReward_Panel(which_item);
+                    Set_GemReward_Panel();
                     break;
                 
                 case 1: // 햄버거공 획득 
@@ -218,10 +218,10 @@ namespace Attendance
             }
         }
 
-        private void Set_GemReward_Panel(int index)
+        private void Set_GemReward_Panel()
         {
             int gem;
-            switch (index)
+            switch (which_item)
             {
                 default:
                     gem = 10;
@@ -251,7 +251,36 @@ namespace Attendance
         /// </summary>
         public void Get_Gem(bool is_Doubled = false)
         {
-            
+            switch (which_item)
+            {
+                default:
+                    gem = 10;
+                    break;
+                
+                case 2:
+                    gem = 15;
+                    break;
+                
+                case 4:
+                    gem = 20;
+                    break;
+                
+                case 6:
+                    gem = 30;
+                    break;
+            }
+
+            if (!is_Doubled)
+            {
+                Playerdata_DAO.Set_Player_Gem(gem);
+                StartCoroutine(Get_Gem(gem));
+            }
+
+            else
+            {
+                Playerdata_DAO.Set_Player_Gem(gem*2);
+                StartCoroutine(Get_Gem(gem*2));
+            }
         }
         
         
@@ -346,7 +375,7 @@ namespace Attendance
             for (int i = 0; i < gem; i++)
             {
                 Gem_Flying script;
-                Vector2 start_pos = Gem_Start_pos(index);
+                Vector2 start_pos = Gem_Start_pos();
                 GameObject obj = Instantiate(gemObj, start_pos,Quaternion.identity); // 잼 획득 연출 넣기 
                 script = obj.GetComponent<Gem_Flying>();
                 script.gem_animator = this.gemAnimator;
@@ -363,67 +392,10 @@ namespace Attendance
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        private Vector2 Gem_Start_pos(int index)
+        private Vector2 Gem_Start_pos()
         {
-            Vector2 target_pos;
-            switch (index)
-            {
-                default:
-                    target_pos = new Vector2(-361f, 338f);
-                    break;
-
-                case 1:
-                    target_pos = new Vector2(-184f, 338f);
-                    break;
-                
-                case 3:
-                    target_pos = new Vector2(170f, 338f);
-                    break;
-                
-                case 4:
-                    target_pos = new Vector2(334f, 338f);
-                    break;
-
-                case 6:
-                    target_pos = new Vector2(-188f, 111f);
-                    break;
-                
-                case 7:
-                    target_pos = new Vector2(-8f, 111f);
-                    break;
-                
-                case 9:
-                    target_pos = new Vector2(328f, 111f);
-                    break;
-                
-                case 10:
-                    target_pos = new Vector2(-350f, -97f);
-                    break;
-                
-                case 12:
-                    target_pos = new Vector2(8f, -97f);
-                    break;
-                
-                case 13:
-                    target_pos = new Vector2(173f, -97f);
-                    break;
-                
-                case 15:
-                    target_pos = new Vector2(-356f, -321f);
-                    break;
-                
-                case 16:
-                    target_pos = new Vector2(-176f, -321f);
-                    break;
-                
-                case 18:
-                    target_pos = new Vector2(169f, -321f);
-                    break;
-                
-                case 19:
-                    target_pos = new Vector2(349f, -321f);
-                    break;
-            }
+            Vector2 target_pos = Vector2.zero;
+            // 화면상 가운데 지점 
             return target_pos;
         }
         
