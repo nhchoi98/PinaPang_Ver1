@@ -1,4 +1,5 @@
 
+using Attendance;
 using Daily_Reward;
 using Data;
 using Setting;
@@ -20,6 +21,8 @@ namespace  Loading
         {
             DailyDAO timedata = new DailyDAO();
             timedata.Get_reward_time();
+            AttendanceDAO attendanceData = new AttendanceDAO();
+            attendanceData.Next_Day_Set();
             Playerdata_DAO.Init_Data();
         }
         

@@ -7,6 +7,7 @@ using Challenge;
 using Collection;
 using Data;
 using DG.Tweening;
+using Lobby;
 using Progetile;
 using Skin;
 using Timer;
@@ -62,6 +63,9 @@ namespace Attendance
         public GameObject leftBtn, rightBtn;
         public Scrollbar scrollbar;
         public GameObject secondPage;
+
+        [Header("Avatar_gET")] [SerializeField]
+        private Avatar_Lobby_Info _avatarLobbyInfo;
         void OnEnable()
         {
             bool flag = false;
@@ -176,7 +180,7 @@ namespace Attendance
             // 아이템 구매 처리 
             gem = Playerdata_DAO.Player_Gem();
             Get_Reward(which_item);
-            if (which_item < 3)
+            if (which_item < 4)
             {
                 itemTR.GetChild(which_item).GetChild(0).gameObject.SetActive(false);
                 itemTR.GetChild(which_item).GetChild(2).gameObject.SetActive(true);
@@ -295,9 +299,9 @@ namespace Attendance
                 case 3: // 드라큘라 셋 획득 . Set_Special Panel 매개변수 변경해야함
                     avatarDao = new IsLockedDAO(9);
                     avatarDao.Set_Locked_Condition();
-                    _badgeData.Set_Ball_Buy();
                     Skin_Log.Buy_Avatar(9);
-
+                    _avatarLobbyInfo.Buy_Avatar(9);
+                    
                     ballDao = new BallPurDAO(3011);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
@@ -317,9 +321,9 @@ namespace Attendance
                 case 7: // 아바타 획득 + 베이비 드라이버 세트공 연결해야함. 
                     avatarDao = new IsLockedDAO(1000);
                     avatarDao.Set_Locked_Condition();
-                    _badgeData.Set_Ball_Buy();
                     Skin_Log.Buy_Avatar(1000);
-
+                    _avatarLobbyInfo.Buy_Avatar(Calc_Index.Get_Avatar_index(1000));
+                    
                     ballDao = new BallPurDAO(1008);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
@@ -527,13 +531,13 @@ namespace Attendance
 
             IAlarmMediator mediator = GameObject.FindWithTag("alarmcontrol").GetComponent<IAlarmMediator>();
             // 아바타 잠금 해제
-            if (type == 1000)
+            if (type / 1000 == 1)
             {
                 PlayerPrefs.SetInt("AVATAR_" +type.ToString(), 1);
                 mediator.Event_Receieve(Event_Alarm.AVATAR_ALARM_ON,type);
             }
 
-            else
+            else if (type/1000 == 3)
             {
                 PlayerPrefs.SetInt("BALL_" +type.ToString(), 1);
                 mediator.Event_Receieve(Event_Alarm.BALL_ALARM_ON,type);

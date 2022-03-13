@@ -42,6 +42,9 @@ namespace Alarm
                 tap_alarm.SetActive(true);
                 // Step 3. 그리드에 반영 
                 
+                if (PlayerPrefs.GetInt("AVATAR_9", 0) == 1)
+                    avatarTR.GetChild(Calc_Index.Get_Avatar_index(9)).GetChild(8).gameObject.SetActive(true);
+                
                 if (PlayerPrefs.GetInt("AVATAR_13", 0) == 1)
                     avatarTR.GetChild(Calc_Index.Get_Avatar_index(13)).GetChild(8).gameObject.SetActive(true);
                 
@@ -91,6 +94,10 @@ namespace Alarm
 
         private bool is_alarm_on()
         {
+            
+            if (PlayerPrefs.GetInt("AVATAR_9", 0) == 1)
+                return true;
+            
             if (PlayerPrefs.GetInt("AVATAR_13", 0) == 1)
                 return true;
             

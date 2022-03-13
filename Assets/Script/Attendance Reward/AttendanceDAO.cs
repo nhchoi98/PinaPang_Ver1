@@ -87,13 +87,13 @@ namespace Attendance
         {
             int day = PlayerPrefs.GetInt("Which_Day", 0);
 
-            if (PlayerPrefs.GetInt("Attendance_All_Clear", 0) == 1) // 출석부 다 깼을 때 
+            if (PlayerPrefs.GetInt("Attendance_All_Clear_2", 0) == 1) // 출석부 다 깼을 때 
             {
                 Debug.Log("다깸");
                 return;
             }
 
-            if (day > 20)
+            if (day > 7)
             {
                 Debug.Log("day 다 됨");
                 return;
@@ -105,7 +105,7 @@ namespace Attendance
             PlayerPrefs.SetInt("Show_Up", 1);
             
             if(day >DATA_SUM)
-                PlayerPrefs.SetInt("Attandance_All_Clear",1);
+                PlayerPrefs.SetInt("Attandance_All_Clear_2",1);
         }
         
     }
