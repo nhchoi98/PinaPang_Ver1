@@ -201,11 +201,19 @@ namespace Attendance
                     break;
                 
                 case 3: // 드라큘라 셋 획득 . Set_Special Panel 매개변수 변경해야함
-                    Set_Special_Panel(3005);
+                    ballDao = new BallPurDAO(3007);
+                    ballDao.Purchase();
+                    _badgeData.Set_Ball_Buy();
+                    Skin_Log.Buy_Ball_Log(3007);
+                    Set_Special_Panel(3007);
                     break;
 
                 case 5: // 벛꽃공 획득 
-                    Set_Special_Panel(3005);
+                    ballDao = new BallPurDAO(3006);
+                    ballDao.Purchase();
+                    _badgeData.Set_Ball_Buy();
+                    Set_Special_Panel(3006);
+                    Skin_Log.Buy_Ball_Log(3006);
                     break;
                 
                 case 7: // 아바타 획득 + 베이비 드라이버 세트공 연결해야함. 
@@ -214,6 +222,12 @@ namespace Attendance
                     _badgeData.Set_Ball_Buy();
                     Skin_Log.Buy_Avatar(1000);
                     Set_Special_Panel(1000);
+                    
+                    ballDao = new BallPurDAO(3008);
+                    ballDao.Purchase();
+                    _badgeData.Set_Ball_Buy();
+                    Set_Special_Panel(3008);
+                    Skin_Log.Buy_Ball_Log(3008);
                     break;
             }
         }

@@ -241,7 +241,6 @@ namespace Skin
                 if(index != target_index)
                     char_tr.GetChild(index).GetChild(6).GetChild(0).gameObject.SetActive(true);
                 _badgeInfo.OnClick_Avatar(index,false);
-                // 퍼센트 표현해줄 때 따로 계산함 
                 buyBtn.gameObject.SetActive(false);
                 conditionBtn.gameObject.SetActive(false);
                 package_Get.gameObject.SetActive(false);
@@ -386,9 +385,6 @@ namespace Skin
                     // 살 수 있는지 없는지 조건 판단
                     break;
                 
-                
-                
-                
                 // 퀘스트로 획득하는 친구들 
                 case 19:
                     attendance.SetActive(false);
@@ -399,6 +395,7 @@ namespace Skin
                         = "LV.10";
                     break;
                 
+                case 9:
                 case 20:
                     attendance.SetActive(true);
                     buyBtn.gameObject.SetActive(false);
@@ -538,7 +535,6 @@ namespace Skin
                 
                 case 7:
                 case 8:
-                case 9:
                     return 95;
                 
                 case 10:

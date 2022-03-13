@@ -53,7 +53,6 @@ namespace Skin
                 
                 case 7:
                 case 8:
-                case 9:
                     return 95;
                 
                 case 10:

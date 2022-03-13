@@ -8,6 +8,7 @@ namespace Attendance
     {
         private int index;
         private IMediator _mediator;
+        [SerializeField] private Attendance_UI _attendanceUI;
         public void Set_Mediator(IMediator mediator)
         {
             _mediator = mediator;
@@ -30,6 +31,7 @@ namespace Attendance
 
         private void Get_Reward()
         {
+            _attendanceUI.Get_Gem(true);
             // 젬이 날아가는 연출 코드가 들어가면됨.
         }
     }
