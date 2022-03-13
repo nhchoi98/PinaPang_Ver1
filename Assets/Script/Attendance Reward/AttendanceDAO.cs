@@ -6,7 +6,7 @@ namespace Attendance
 {
     public class AttendanceDAO
     {
-        private const int DATA_SUM = 21;
+        private const int DATA_SUM = 8;
         private AttendanceVO[] data;
         public AttendanceDAO()
         {
@@ -19,7 +19,7 @@ namespace Attendance
             data = new AttendanceVO[DATA_SUM];
             for (int i = 0; i < DATA_SUM; i++)
             {
-                var DATA_PATH = Application.persistentDataPath + "/Attendance/" +i.ToString() + ".json";
+                var DATA_PATH = Application.persistentDataPath + "/Attendance_2/" +i.ToString() + ".json";
                 AttendanceVO DATA = null;
                 if (File.Exists(DATA_PATH))
                 {
@@ -29,7 +29,7 @@ namespace Attendance
 
                 else
                 {
-                    Directory.CreateDirectory(Application.persistentDataPath + "/Attendance");
+                    Directory.CreateDirectory(Application.persistentDataPath + "/Attendance_2");
                     DATA  = new  AttendanceVO();
                     DATA.can_get = false;
                     DATA.is_get = false;
@@ -51,7 +51,7 @@ namespace Attendance
         private void Write_Data(int index)
         {
             var DATA = JsonMapper.ToJson(data[index]);
-            var DATA_PATH = Application.persistentDataPath + "/Attendance/" +index.ToString() + ".json";
+            var DATA_PATH = Application.persistentDataPath + "/Attendance_2/" +index.ToString() + ".json";
             File.WriteAllText(DATA_PATH,DATA);   
             
         }

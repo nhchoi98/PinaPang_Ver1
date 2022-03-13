@@ -17,7 +17,7 @@ namespace Attendance
 {
     public class Attendance_UI : MonoBehaviour
     {
-        private AttendanceDAO data;
+        public AttendanceDAO data { get; private set; }
         
         [Header("UI")]
         [SerializeField] private Transform itemTR ,itemTR_SecondPage;
@@ -34,12 +34,12 @@ namespace Attendance
         [Header("Reward_Panel")] 
         public Image reward_img_Ball;
         public Image reward_img_charater;
+        private int which_item_world;
         
         public Text reward_text;
         public AudioSource gemSound;
         
         private const int ITEM_NUM = 8;
-        private int which_item;
         private int gem;
 
         [Header("Alarm")] public GameObject alarmObj;
@@ -62,7 +62,7 @@ namespace Attendance
         public GameObject leftBtn, rightBtn;
         public Scrollbar scrollbar;
         public GameObject secondPage;
-        void Start()
+        void OnEnable()
         {
             bool flag = false;
             data = new AttendanceDAO();
@@ -76,9 +76,7 @@ namespace Attendance
                 {
                     if (!data.Get_is_get(i))
                     {
-                        if(!flag)
-                            which_item = i;
-                        
+
                         // 보상 받기 버튼 활성화 
                         exitBtn.interactable = false;
                         tr.GetChild(0).gameObject.SetActive(true);
@@ -88,9 +86,8 @@ namespace Attendance
                     }
 
                     else
-                    {
                         tr.GetChild(2).gameObject.SetActive(true);
-                    }
+                    
                 }
             }
 
@@ -101,15 +98,13 @@ namespace Attendance
                 {
                     if (!data.Get_is_get(i))
                     {
-                        if(!flag)
-                            which_item = i;
-                        
                         // 보상 받기 버튼 활성화 
                         exitBtn.interactable = false;
                         tr.GetChild(0).gameObject.SetActive(true);
                         flag = true;
                         exitBack_Btn.interactable = false;
                         alarmObj.SetActive(true);
+
                     }
 
                     else
@@ -123,11 +118,6 @@ namespace Attendance
             if (!flag)
             {
                 exitBtn.interactable = true;
-                if (which_item > 3) // 1주차 보상을 받아야 하는 경우 
-                {
-                    leftBtn.SetActive(true);
-                    scrollbar.value = 1f;
-                }
                 // 보상 받기 버튼 활성화 
             }
 
@@ -135,11 +125,6 @@ namespace Attendance
             {
                 if (PlayerPrefs.GetInt("Tutorial_Attendance", 0) != 0)
                 {
-                    if (which_item > 3) // 1주차 보상을 받아야 하는 경우 
-                    {
-                        leftBtn.SetActive(true);
-                        scrollbar.value = 1f;
-                    }
                     panel.SetActive(true);
                 }
             }
@@ -150,7 +135,7 @@ namespace Attendance
         public void OnClick_LeftBtn()
         {
             leftBtn.SetActive(false);
-            DOTween.To(()=> scrollbar.value, x=> scrollbar.value = x, 1f, 0.7f)
+            DOTween.To(()=> scrollbar.value, x=> scrollbar.value = x, 0f, 0.7f)
                 .OnComplete(() =>
                 {
                     rightBtn.SetActive(true);
@@ -186,13 +171,23 @@ namespace Attendance
             panel.SetActive(true);
         }
         
-        public void OnClick_Collect()
+        public void OnClick_Collect(int which_item)
         {
             // 아이템 구매 처리 
             gem = Playerdata_DAO.Player_Gem();
-            Get_Reward();
-            itemTR.GetChild(which_item).GetChild(0).gameObject.SetActive(false);
-            itemTR.GetChild(which_item).GetChild(2).gameObject.SetActive(true);
+            Get_Reward(which_item);
+            if (which_item < 3)
+            {
+                itemTR.GetChild(which_item).GetChild(0).gameObject.SetActive(false);
+                itemTR.GetChild(which_item).GetChild(2).gameObject.SetActive(true);
+            }
+
+            else
+            {
+                itemTR_SecondPage.GetChild(which_item-4).GetChild(0).gameObject.SetActive(false);
+                itemTR_SecondPage.GetChild(which_item-4).GetChild(2).gameObject.SetActive(true);
+            }
+
             data.Set_is_get(which_item);
             bool flag = false;
             
@@ -225,9 +220,7 @@ namespace Attendance
                         }
 
                         else
-                        {
                             tr.GetChild(2).gameObject.SetActive(true);
-                        }
                     }
                 }
 
@@ -271,7 +264,7 @@ namespace Attendance
         /// 2배 보상 버튼 -> isGem = true
         /// </summary>
         /// <param name="isGem"></param>
-        private void Get_Reward()
+        private void Get_Reward(int which_item)
         {
             BallPurDAO ballDao;
             IsLockedDAO avatarDao;
@@ -283,11 +276,12 @@ namespace Attendance
             // 보상 패널 띄워줘야함 
             // # 1. 그냥 받는 아이템이냐, 젬이냐에 따라서 먼저 구분지어줌. 
             // # 2. 젬일 경우, ad의 index을 set 해줌.
+            which_item_world = which_item;
             switch (which_item)
             {
                 default:
                     adScript.Set_Index(which_item);
-                    Set_GemReward_Panel();
+                    Set_GemReward_Panel(which_item);
                     break;
                 
                 case 1: // 벛꽃공 획득 
@@ -335,14 +329,14 @@ namespace Attendance
             }
         }
 
-        private void Set_GemReward_Panel()
+        private void Set_GemReward_Panel(int which_item)
         {
             int gem;
-            Sprite firstimg = gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(0).gameObject
-                .GetComponent<Image>().sprite;
+            Image firstimg = gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(0).gameObject
+                .GetComponent<Image>();
             
-            Sprite secondImg = gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(1).GetChild(0).gameObject
-                .GetComponent<Image>().sprite;
+            Image secondImg = gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(1).GetChild(1).gameObject
+                .GetComponent<Image>();
             switch (which_item)
             {
                 default:
@@ -369,20 +363,20 @@ namespace Attendance
             // # 3. 젬의 이미지를 바꾸어줌 
             if (gem < 15)
             {
-                firstimg = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_1");
-                secondImg = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_2");
+                firstimg.sprite = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_1");
+                secondImg.sprite  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_2");
             }
             
             else if (gem >= 15 && gem < 30)
             {
-                firstimg  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_2");
-                secondImg  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_3");
+                firstimg.sprite   = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_2");
+                secondImg.sprite   = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_3");
 
             }
             else if (gem >= 30 && gem < 60)
             {
-                firstimg  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_3");
-                secondImg  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_4");
+                firstimg.sprite   = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_3");
+                secondImg .sprite  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_4");
             }
 
             gemReward_Panel.SetActive(true);
@@ -391,10 +385,10 @@ namespace Attendance
         /// <summary>
         /// 2배 버튼 안누르고 그냥 젬 얻는 경우 
         /// </summary>
-        public void Get_Gem(bool is_Doubled = false)
+        public void Get_Gem(bool is_Doubled)
         {
             int gem;
-            switch (which_item)
+            switch (which_item_world)
             {
                 default:
                     gem = 10;
@@ -421,18 +415,18 @@ namespace Attendance
             if (!is_Doubled)
             {
                 Playerdata_DAO.Set_Player_Gem(gem);
-                Set_Gem_ResultPanel(false,gem);
+                Set_Gem_ResultPanel(false,gem, which_item_world);
             }
 
             else
             {
                 Playerdata_DAO.Set_Player_Gem(gem*2);
-                Set_Gem_ResultPanel(true,gem);
+                Set_Gem_ResultPanel(true,gem, which_item_world);
             }
             
         }
 
-        private void Set_Gem_ResultPanel(bool isDoubled, int rewardType)
+        private void Set_Gem_ResultPanel(bool isDoubled, int rewardType, int which_item)
         {
             reward_img_charater.gameObject.SetActive(false);
             gemReward_Panel.SetActive(false);
@@ -456,10 +450,10 @@ namespace Attendance
             reward_img_Ball.gameObject.transform.position = new Vector3(0f, 50f, 0f);
 
             if (!isDoubled)
-                StartCoroutine(Get_Gem(rewardType));
+                StartCoroutine(Get_Gem(rewardType, which_item));
 
             else
-                StartCoroutine(Get_Gem(rewardType * 2));
+                StartCoroutine(Get_Gem(rewardType * 2, which_item));
         }
         
         private void Set_Special_Panel(int type)
@@ -482,9 +476,10 @@ namespace Attendance
                     // Step 2. ball 이미지의 지정 및 크기 지정해주기. 
                     reward_img_Ball.rectTransform.rect.Set(0,20,48f,48f);
                     reward_img_Ball.gameObject.transform.position = new Vector3(121f, -20f, 0f);
-                    reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/" + type.ToString());
+                    reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/1008");
                     reward_img_Ball.SetNativeSize();
                     reward_img_Ball.transform.localScale = new Vector3(1f, 1f, 1f);
+                    reward_text.text =("BABY DRIVER Set"); // 보상 타이틀명 지정 
                     
                 }
 
@@ -497,13 +492,12 @@ namespace Attendance
                     // Step 2. ball 이미지의 지정 및 크기 지정해주기. 
                     reward_img_Ball.rectTransform.rect.Set(0,20,48f,48f);
                     reward_img_Ball.gameObject.transform.position = new Vector3(121f, -20f, 0f);
-                    reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/" + type.ToString());
+                    reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/3011");
                     reward_img_Ball.SetNativeSize();
                     reward_img_Ball.transform.localScale = new Vector3(1f, 1f, 1f);
+                    reward_text.text =("DRACULA Set"); // 보상 타이틀명 지정 
+                    
                 }
-                
-                reward_text.text =( name_data.Set_Charater_Name(type,false)+ " Set"); // 보상 타이틀명 지정 
-                
             }
             
             else if(type/ 1000 == 3) // 볼만 받는 경우 
@@ -550,9 +544,9 @@ namespace Attendance
 
         public void OnClick_Special_Panel_Close()
         {
-            data.Set_is_get(which_item);
+            data.Set_is_get(which_item_world);
             ballPanel.SetActive(false);
-            if (which_item == 3) // 드라큘라 공을 획득할 경우, 연출을 보여줌 
+            if (which_item_world == 3) // 드라큘라 공을 획득할 경우, 연출을 보여줌 
             {
                 secondPage.transform.localScale = Vector3.zero;
                 DOTween.To(() => scrollbar.value, x => scrollbar.value = x, 1f, 0.7f)
@@ -566,7 +560,7 @@ namespace Attendance
         }
         
         #region  Commodity_Flight
-        public IEnumerator Get_Gem(int gem = 10)
+        public IEnumerator Get_Gem(int gem , int which_item)
         {
             int index = which_item;
             for (int i = 0; i < gem; i++)

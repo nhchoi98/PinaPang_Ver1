@@ -40,6 +40,9 @@ namespace Alarm
             {
                 _mediator.Event_Receieve(Event_Alarm.SKIN_ALARM_ON); // Step 2. 있으면 알림 ON
                 tap_alarm.SetActive(true);
+                
+                if (PlayerPrefs.GetInt("BALL_1008", 0) == 1)
+                    ballTR.GetChild(Calc_Index.Get_Ball_index(1008)).GetChild(8).gameObject.SetActive(true);
                 // Step 3. 그리드에 반영 
                 if (PlayerPrefs.GetInt("BALL_3000", 0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(3000)).GetChild(8).gameObject.SetActive(true);
@@ -73,6 +76,12 @@ namespace Alarm
                 
                 if(PlayerPrefs.GetInt("BALL_3010",0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(3010)).GetChild(8).gameObject.SetActive(true);
+                
+                if(PlayerPrefs.GetInt("BALL_3011",0) == 1)
+                    ballTR.GetChild(Calc_Index.Get_Ball_index(3011)).GetChild(8).gameObject.SetActive(true);
+                    
+                if(PlayerPrefs.GetInt("BALL_3012",0) == 1)
+                    ballTR.GetChild(Calc_Index.Get_Ball_index(3012)).GetChild(8).gameObject.SetActive(true);
                 
                 if(PlayerPrefs.GetInt("BALL_4000",0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(4000)).GetChild(8).gameObject.SetActive(true);
@@ -109,6 +118,10 @@ namespace Alarm
 
         private bool is_alarm_on()
         {
+            
+            if (PlayerPrefs.GetInt("BALL_1008", 0) == 1)
+                return true;
+            
             if (PlayerPrefs.GetInt("BALL_3000", 0) == 1)
                 return true;
 
@@ -134,6 +147,18 @@ namespace Alarm
                 return true;
             
             if (PlayerPrefs.GetInt("BALL_3008", 0) == 1)
+                return true;
+            
+            if (PlayerPrefs.GetInt("BALL_3009", 0) == 1)
+                return true;
+            
+            if (PlayerPrefs.GetInt("BALL_3010", 0) == 1)
+                return true;
+            
+            if (PlayerPrefs.GetInt("BALL_3011", 0) == 1)
+                return true;
+            
+            if (PlayerPrefs.GetInt("BALL_3012", 0) == 1)
                 return true;
             
             if (PlayerPrefs.GetInt("BALL_4000", 0) == 1)
