@@ -123,7 +123,7 @@ public static class Calc_Index
             return  DEFAULT_BALL + _NORMAL_MAX + _LEVELUP_MAX +(value % 4000);
 
         else
-            return 0;
+            return DEFAULT_BALL + (value%1000);
         
     }
 

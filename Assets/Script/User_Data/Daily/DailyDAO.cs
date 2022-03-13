@@ -69,11 +69,9 @@ namespace Daily_Reward
                 challengeDao.Init_data(true);
                 DailyShopDAO shopdata = new DailyShopDAO();
                 shopdata.Reset();
-                // 출석부 초기화 
-                /*
                 AttendanceDAO attendanceData = new AttendanceDAO();
                 attendanceData.Next_Day_Set();
-                */
+                
             }
             Write_DATA();
         }

@@ -63,9 +63,7 @@ namespace Attendance
         public GameObject leftBtn, rightBtn;
         public Scrollbar scrollbar;
         public GameObject secondPage;
-
-        [Header("Avatar_gET")] [SerializeField]
-        private Avatar_Lobby_Info _avatarLobbyInfo;
+        
         void OnEnable()
         {
             bool flag = false;
@@ -300,8 +298,7 @@ namespace Attendance
                     avatarDao = new IsLockedDAO(9);
                     avatarDao.Set_Locked_Condition();
                     Skin_Log.Buy_Avatar(9);
-                    _avatarLobbyInfo.Buy_Avatar(9);
-                    
+
                     ballDao = new BallPurDAO(3011);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
@@ -322,8 +319,7 @@ namespace Attendance
                     avatarDao = new IsLockedDAO(1000);
                     avatarDao.Set_Locked_Condition();
                     Skin_Log.Buy_Avatar(1000);
-                    _avatarLobbyInfo.Buy_Avatar(Calc_Index.Get_Avatar_index(1000));
-                    
+
                     ballDao = new BallPurDAO(1008);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
@@ -533,8 +529,24 @@ namespace Attendance
             // 아바타 잠금 해제
             if (type / 1000 == 1)
             {
-                PlayerPrefs.SetInt("AVATAR_" +type.ToString(), 1);
-                mediator.Event_Receieve(Event_Alarm.AVATAR_ALARM_ON,type);
+                if (type == 1000) // 베이비드라이버 인 경우 
+                {
+                    PlayerPrefs.SetInt("AVATAR_" + type.ToString(), 1);
+                    mediator.Event_Receieve(Event_Alarm.AVATAR_ALARM_ON, type);
+
+                    PlayerPrefs.SetInt("BALL_1008", 1);
+                    mediator.Event_Receieve(Event_Alarm.BALL_ALARM_ON,1008);
+                }
+
+                else // 드라큘라 인 경우
+                {
+                    PlayerPrefs.SetInt("AVATAR_9",1);
+                    mediator.Event_Receieve(Event_Alarm.AVATAR_ALARM_ON, 9);
+
+                    PlayerPrefs.SetInt("BALL_3011", 1);
+                    mediator.Event_Receieve(Event_Alarm.BALL_ALARM_ON,3011);
+                    
+                }
             }
 
             else if (type/1000 == 3)
