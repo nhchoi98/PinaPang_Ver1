@@ -31,6 +31,11 @@ public class StarterTimer : MonoBehaviour, ITimer
             StartCoroutine(Timer());
             lobbyBox.gameObject.SetActive(true);
         }
+
+        else
+        {
+            shopTR.GetChild(0).gameObject.SetActive(false); // 상점에서 꺼줌 
+        }
     }
 
     /// <summary>
@@ -41,6 +46,7 @@ public class StarterTimer : MonoBehaviour, ITimer
         if (_starterDao.Get_is_first())
         {
             _starterDao.Set_is_first(); // 이제 처음 접근이 아님을 선언 
+            shopTR.GetChild(0).gameObject.SetActive(true); // 상점에서 꺼줌 
             PlayerPrefs.SetInt("First_Skin", 1);
             if (is_Skin)
                 starterPanel.SetActive(true);

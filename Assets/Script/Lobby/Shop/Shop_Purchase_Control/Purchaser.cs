@@ -309,8 +309,13 @@ namespace Shop
                 Debug.Log("BuyProductID FAIL. Not initialized.");
             }
         }
-        
-        
+
+        public void Temp_Purchase_ItemPackage()
+        {
+            Noads_instance.Set_ItemAds();
+            _panelControl.Determine_Avatar_On();
+            _panelControl.Purchase_FreeItem();
+        }
         
         // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google. 
         // Apple currently requires explicit purchase restoration for IAP, conditionally displaying a password prompt.

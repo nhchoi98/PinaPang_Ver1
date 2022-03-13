@@ -6,6 +6,7 @@ using Badge;
 using Challenge;
 using Collection;
 using Data;
+using DG.Tweening;
 using Progetile;
 using Skin;
 using Timer;
@@ -19,9 +20,8 @@ namespace Attendance
         private AttendanceDAO data;
         
         [Header("UI")]
-        [SerializeField] private Transform itemTR;
-        [SerializeField] private Button getBtn;
-        [SerializeField] private GameObject exitBtn;
+        [SerializeField] private Transform itemTR ,itemTR_SecondPage;
+        [SerializeField] private Button exitBtn;
         [SerializeField] private GameObject panel;
         [SerializeField] private GameObject ballPanel;
         
@@ -57,6 +57,11 @@ namespace Attendance
         
         public Button exitBack_Btn;
         private bool reward_panel = false;
+
+        [Header("Move_Btn")] 
+        public GameObject leftBtn, rightBtn;
+        public Scrollbar scrollbar;
+        public GameObject secondPage;
         void Start()
         {
             bool flag = false;
@@ -64,7 +69,7 @@ namespace Attendance
             if (PlayerPrefs.GetInt("Tutorial_Attendance", 0) == 0)
                 exitBack_Btn.interactable = false;
             
-            for (int i = 0; i < ITEM_NUM; i++)
+            for (int i = 0; i < ITEM_NUM-4; i++)
             {
                 Transform tr = itemTR.GetChild(i);
                 if (data.Get_can_get(i))
@@ -73,8 +78,9 @@ namespace Attendance
                     {
                         if(!flag)
                             which_item = i;
-                        getBtn.gameObject.SetActive(true);
-                        exitBtn.SetActive(false);
+                        
+                        // 보상 받기 버튼 활성화 
+                        exitBtn.interactable = false;
                         tr.GetChild(0).gameObject.SetActive(true);
                         flag = true;
                         exitBack_Btn.interactable = false;
@@ -88,18 +94,80 @@ namespace Attendance
                 }
             }
 
+            for (int i = ITEM_NUM-4 ; i<ITEM_NUM; i++)
+            {
+                Transform tr = itemTR_SecondPage.GetChild(i-4);
+                if (data.Get_can_get(i))
+                {
+                    if (!data.Get_is_get(i))
+                    {
+                        if(!flag)
+                            which_item = i;
+                        
+                        // 보상 받기 버튼 활성화 
+                        exitBtn.interactable = false;
+                        tr.GetChild(0).gameObject.SetActive(true);
+                        flag = true;
+                        exitBack_Btn.interactable = false;
+                        alarmObj.SetActive(true);
+                    }
+
+                    else
+                    {
+                        tr.GetChild(2).gameObject.SetActive(true);
+                    }
+                }
+                
+            }
+
             if (!flag)
             {
-                getBtn.gameObject.SetActive(false);
-                exitBtn.SetActive(true);
+                exitBtn.interactable = true;
+                if (which_item > 3) // 1주차 보상을 받아야 하는 경우 
+                {
+                    leftBtn.SetActive(true);
+                    scrollbar.value = 1f;
+                }
+                // 보상 받기 버튼 활성화 
             }
 
             else
             {
                 if (PlayerPrefs.GetInt("Tutorial_Attendance", 0) != 0)
+                {
+                    if (which_item > 3) // 1주차 보상을 받아야 하는 경우 
+                    {
+                        leftBtn.SetActive(true);
+                        scrollbar.value = 1f;
+                    }
                     panel.SetActive(true);
+                }
             }
         }
+
+        #region Move_Page
+
+        public void OnClick_LeftBtn()
+        {
+            leftBtn.SetActive(false);
+            DOTween.To(()=> scrollbar.value, x=> scrollbar.value = x, 1f, 0.7f)
+                .OnComplete(() =>
+                {
+                    rightBtn.SetActive(true);
+                });
+        }
+
+
+        public void OnClick_RightBtn()
+        {
+            rightBtn.SetActive(false);
+            DOTween.To(() => scrollbar.value, x => scrollbar.value = x, 1f, 0.7f)
+                .OnComplete(() =>
+                {
+                    leftBtn.SetActive(true);
+                });
+        }
+        #endregion
 
         public void onClick_Exit()
         {
@@ -138,32 +206,61 @@ namespace Attendance
             reward_panel = true;
 
                 // 또 있나 찾아보기~
-            for (int i = 0; i < ITEM_NUM; i++)
-            {
-                Transform tr = itemTR.GetChild(i);
-                if (data.Get_can_get(i))
+                for (int i = 0; i < ITEM_NUM-4; i++)
                 {
-                    if (!data.Get_is_get(i))
+                    Transform tr = itemTR.GetChild(i);
+                    if (data.Get_can_get(i))
                     {
-                        flag = true;
-                        which_item = i;
-                        getBtn.gameObject.SetActive(true);
-                        exitBtn.SetActive(false);
-                        tr.GetChild(0).gameObject.SetActive(true);
-                        break;
-                    }
+                        if (!data.Get_is_get(i))
+                        {
+                            if(!flag)
+                                which_item = i;
+                        
+                            // 보상 받기 버튼 활성화 
+                            exitBtn.interactable = false;
+                            tr.GetChild(0).gameObject.SetActive(true);
+                            flag = true;
+                            exitBack_Btn.interactable = false;
+                            alarmObj.SetActive(true);
+                        }
 
-                    else
-                    {
-                        tr.GetChild(2).gameObject.SetActive(true);
+                        else
+                        {
+                            tr.GetChild(2).gameObject.SetActive(true);
+                        }
                     }
                 }
-            }
+
+                for (int i = ITEM_NUM-4 ; i<ITEM_NUM; i++)
+                {
+                    Transform tr = itemTR_SecondPage.GetChild(i-4);
+                    if (data.Get_can_get(i))
+                    {
+                        if (!data.Get_is_get(i))
+                        {
+                            if(!flag)
+                                which_item = i;
+                        
+                            // 보상 받기 버튼 활성화 
+                            exitBtn.interactable = false;
+                            tr.GetChild(0).gameObject.SetActive(true);
+                            flag = true;
+                            exitBack_Btn.interactable = false;
+                            alarmObj.SetActive(true);
+                        }
+
+                        else
+                        {
+                            tr.GetChild(2).gameObject.SetActive(true);
+                        }
+                    }
+                
+                }
 
             if (!flag)
             {
-                getBtn.gameObject.SetActive(false);
-                exitBtn.SetActive(true);
+                // 보상 받기 버튼 활성화 
+                exitBtn.interactable = true;
                 alarmObj.SetActive(false);
                 exitBack_Btn.interactable = true;
             }
@@ -267,7 +364,7 @@ namespace Attendance
             
             // # 2. 패널의 텍스트를 반영해줘야함. 
             gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(1).gameObject.GetComponent<Text>().text = gem.ToString();
-            gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = (gem * 2).ToString();
+            gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(1).GetChild(2).gameObject.GetComponent<Text>().text = (gem * 2).ToString();
             
             // # 3. 젬의 이미지를 바꾸어줌 
             if (gem < 15)
@@ -296,6 +393,7 @@ namespace Attendance
         /// </summary>
         public void Get_Gem(bool is_Doubled = false)
         {
+            int gem;
             switch (which_item)
             {
                 default:
@@ -358,10 +456,10 @@ namespace Attendance
             reward_img_Ball.gameObject.transform.position = new Vector3(0f, 50f, 0f);
 
             if (!isDoubled)
-                StartCoroutine(Get_Gem(gem));
+                StartCoroutine(Get_Gem(rewardType));
 
             else
-                StartCoroutine(Get_Gem(gem * 2));
+                StartCoroutine(Get_Gem(rewardType * 2));
         }
         
         private void Set_Special_Panel(int type)
@@ -454,6 +552,17 @@ namespace Attendance
         {
             data.Set_is_get(which_item);
             ballPanel.SetActive(false);
+            if (which_item == 3) // 드라큘라 공을 획득할 경우, 연출을 보여줌 
+            {
+                secondPage.transform.localScale = Vector3.zero;
+                DOTween.To(() => scrollbar.value, x => scrollbar.value = x, 1f, 0.7f)
+                    .OnComplete(() =>
+                    {
+                        leftBtn.SetActive(true);
+                    });
+                secondPage.transform.DOScale(new Vector3(1f, 1f, 1f), 1f)
+                    .SetEase(Ease.OutCubic);
+            }
         }
         
         #region  Commodity_Flight

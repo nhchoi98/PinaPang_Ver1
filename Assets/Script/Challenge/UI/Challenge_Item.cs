@@ -1,5 +1,6 @@
 
 using System.Collections;
+using Ad;
 using Alarm;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,19 +36,13 @@ public class Challenge_Item: MonoBehaviour
     {
         Set_TR_count();
     }
-
-    public void Purchase_Free_Item_Package()
-    {
-        quest_mission = true;
-        Set_TR_count();
-    }
-
+    
     /// <summary>
     /// 뽑기나 27번 퀘스트 있으면, 바로 반영토록 하는 함수 
     /// </summary>
     private void Set_TR_count()
     {
-         if (quest_mission)
+         if (quest_mission || Noads_instance.Get_ItemAds_Purchase())
         {
             for (int i = 0; i < Item_TR.childCount; i++)
             {

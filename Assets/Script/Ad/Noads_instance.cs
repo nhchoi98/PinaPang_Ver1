@@ -9,6 +9,7 @@ namespace Ad
         private static bool is_ItemAds;
         private static bool is_Noads;
         private static bool is_Noads_new;
+        private static bool is_ItemAds_Purchase;
 
         public static void Init_Data()
         {
@@ -70,7 +71,17 @@ namespace Ad
         public static void Set_ItemAds()
         {
             PlayerPrefs.SetInt("ItemAds",1);
+            is_ItemAds_Purchase = true;
             is_ItemAds = true;
+        }
+
+        public static bool Get_ItemAds_Purchase()
+        {
+            bool value = is_ItemAds_Purchase;
+            if (is_ItemAds_Purchase)
+                is_ItemAds_Purchase = false;
+            
+            return value;
         }
     }
 }
