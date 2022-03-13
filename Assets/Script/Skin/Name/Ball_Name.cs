@@ -74,78 +74,67 @@ namespace Skin
                 case 7:
                     name = "Planet";
                     break;
-
+                
                 case 8:
+                    name = "Steering Wheel";
+                    break;
+                
+                case 9:
                     name = "Ball 8";
                     break;
                 
-                case 9 :
+                case 10 :
                     name = "Hallabong";
                     break;
                 
-                case 10:
+                case 11:
                     name = "Pizza";
                     break;
                 
-                case 11:
+                case 12:
                     name = "Banana";
                     break;
 
-                case 12:
+                case 13:
                     name = "Golden Ball";
                     break;
                 
-                case 13:
+                case 14:
                     name = "Jack O Lantern";
                     break;
                 
-                case 14:
+                case 15:
                     name = "Ship's Wheel";
                     break;
                 
-                case 15:
+                case 16:
                     name = "Shuriken";
                     break;
                 
-                case 16:
+                case 17:
                     name = "Water Bubble";
                     break;
                 
-                case 17:
+                case 18:
                     name = "Moon";
                     break;
                 
-                case 18 :
+                case 19 :
                     name = "Apple";
                     break;
                 
-                case 19 :
+                case 20 :
                     name = "Heart";
                     break;
                 
-                case 20 :
+                case 21 :
                     name = "Candy";
                     break;
                 
-                case 21 :
+                case 22 :
                     name = "Red Onion";
                     break;
-                
-                case 22 :
-                    name = "French Fries";
-                    break;
-                
-                case 23 :
-                    name = "Skull";
-                    break;
-                
-                case 24 :
-                    name = "Cookie";
-                    break;
-                
-                case 25 :
-                    name = "Ladybug";
-                    break;
+
             }
 
             return name;
@@ -172,15 +161,28 @@ namespace Skin
                 
                 case 5:
                     return "Hamburger";
-
+                
                 case 6:
-                    return "Cherry Blossom";
+                    return "French Fries";
                 
                 case 7:
-                    return "Wine";
+                    return "Cookie";
                 
                 case 8:
-                    return "Steering Wheel";
+                    return "LadyBug";
+                
+                case 9:
+                    return "Skull";               
+                
+                case 10:
+                    return "Cherry blossom";     
+                
+                case 11:
+                    return "Wine";
+                
+                case 12:
+                    return "Note";
+                
             }
             
         }
