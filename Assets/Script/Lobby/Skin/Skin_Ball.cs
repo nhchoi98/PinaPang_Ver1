@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Ad;
 using Alarm;
 using UnityEngine;
 using UnityEngine.UI;

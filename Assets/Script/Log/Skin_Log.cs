@@ -701,6 +701,31 @@ namespace Skin
                         
                     }
                     break;
+                
+                
+                case 3011:
+                    try
+                    {
+                        FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","Wine"));
+                    }
+
+                    catch
+                    {
+                        
+                    }
+                    break;
+                
+                case 3012:
+                    try
+                    {
+                        FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","Note"));
+                    }
+
+                    catch
+                    {
+                        
+                    }
+                    break;
             }
 
         }

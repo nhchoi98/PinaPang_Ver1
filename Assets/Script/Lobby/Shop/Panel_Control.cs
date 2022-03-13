@@ -2,6 +2,7 @@
 using Ad;
 using Avatar;
 using Badge;
+using Challenge;
 using Timer;
 using UnityEngine;
 
@@ -160,7 +161,13 @@ namespace Shop
 
         public void Purchase_FreeItem()
         {
-            _challengeItem.Purchase_Free_Item_Package(); // # 1. 아이템 사용 퀘스트와 관련된 내용이 있다면, 클리어 처리.
+            ChallengeDAO data = new ChallengeDAO();
+            data.Set_FreeItem_Purchase();
+            if (_challengeItem != null)
+            {
+                _challengeItem.Purchase_Free_Item_Package(); // # 1. 아이템 사용 퀘스트와 관련된 내용이 있다면, 클리어 처리.
+            }
+
             _badgeData.Purchase_FreeItem_Package();
             // # 2. 뱃지 획득 처리
         }

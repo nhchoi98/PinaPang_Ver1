@@ -187,6 +187,7 @@ namespace Ad
                 case Event_num.SHOP_DAILY:
                 case Event_num.BATTERY:
                 case Event_num.LINE_PURCHASE:
+                case Event_num.ATTENDANCE:
                     return RewardedAdUnit_Id;
             }
 

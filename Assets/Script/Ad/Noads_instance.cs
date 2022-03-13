@@ -14,17 +14,17 @@ namespace Ad
         {
             
             if (PlayerPrefs.GetInt("ItemAds", 0) == 0)
-                is_Noads = false;
-
-            else
-                is_Noads = true;
-        
-            
-            if (PlayerPrefs.GetInt("Noads", 0) == 0)
                 is_ItemAds = false;
 
             else
                 is_ItemAds = true;
+        
+            
+            if (PlayerPrefs.GetInt("Noads", 0) == 0)
+                is_Noads = false;
+
+            else
+                is_Noads = true;
         
             
             if (PlayerPrefs.GetInt("Noads_New", 0) == 0)

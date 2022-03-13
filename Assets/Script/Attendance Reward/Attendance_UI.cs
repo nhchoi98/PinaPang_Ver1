@@ -31,7 +31,10 @@ namespace Attendance
         [SerializeField] private Animator gemAnimator;
         public GameObject gemObj;
 
-        [Header("Reward_Panel")] public Image reward_img;
+        [Header("Reward_Panel")] 
+        public Image reward_img_Ball;
+        public Image reward_img_charater;
+        
         public Text reward_text;
         public AudioSource gemSound;
         
@@ -175,7 +178,6 @@ namespace Attendance
         {
             BallPurDAO ballDao;
             IsLockedDAO avatarDao;
-            data.Set_is_get(which_item);
             if (which_item == 0)
             {
                 questManager.Set_First_Attendance();
@@ -186,34 +188,39 @@ namespace Attendance
             // # 2. 젬일 경우, ad의 index을 set 해줌.
             switch (which_item)
             {
-                
                 default:
                     adScript.Set_Index(which_item);
                     Set_GemReward_Panel();
                     break;
                 
-                case 1: // 햄버거공 획득 
-                    ballDao = new BallPurDAO(3005);
+                case 1: // 벛꽃공 획득 
+                    ballDao = new BallPurDAO(3010);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3005);
-                    Set_Special_Panel(3005);
+                    Skin_Log.Buy_Ball_Log(3010);
+                    Set_Special_Panel(3010);
                     break;
                 
                 case 3: // 드라큘라 셋 획득 . Set_Special Panel 매개변수 변경해야함
-                    ballDao = new BallPurDAO(3007);
+                    avatarDao = new IsLockedDAO(9);
+                    avatarDao.Set_Locked_Condition();
+                    _badgeData.Set_Ball_Buy();
+                    Skin_Log.Buy_Avatar(9);
+
+                    ballDao = new BallPurDAO(3011);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3007);
-                    Set_Special_Panel(3007);
+                    Skin_Log.Buy_Ball_Log(3011);
+                    Set_Special_Panel(1011);// 보상 패널 Set
+
                     break;
 
-                case 5: // 벛꽃공 획득 
-                    ballDao = new BallPurDAO(3006);
+                case 5: // 음표공 획득 
+                    ballDao = new BallPurDAO(3011);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
-                    Set_Special_Panel(3006);
-                    Skin_Log.Buy_Ball_Log(3006);
+                    Set_Special_Panel(3011);
+                    Skin_Log.Buy_Ball_Log(3011);
                     break;
                 
                 case 7: // 아바타 획득 + 베이비 드라이버 세트공 연결해야함. 
@@ -221,13 +228,12 @@ namespace Attendance
                     avatarDao.Set_Locked_Condition();
                     _badgeData.Set_Ball_Buy();
                     Skin_Log.Buy_Avatar(1000);
-                    Set_Special_Panel(1000);
-                    
-                    ballDao = new BallPurDAO(3008);
+
+                    ballDao = new BallPurDAO(1008);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
-                    Set_Special_Panel(3008);
-                    Skin_Log.Buy_Ball_Log(3008);
+                    Skin_Log.Buy_Ball_Log(1008);
+                    Set_Special_Panel(1000);
                     break;
             }
         }
@@ -235,6 +241,11 @@ namespace Attendance
         private void Set_GemReward_Panel()
         {
             int gem;
+            Sprite firstimg = gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(0).gameObject
+                .GetComponent<Image>().sprite;
+            
+            Sprite secondImg = gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(1).GetChild(0).gameObject
+                .GetComponent<Image>().sprite;
             switch (which_item)
             {
                 default:
@@ -255,8 +266,28 @@ namespace Attendance
             }
             
             // # 2. 패널의 텍스트를 반영해줘야함. 
-            gemReward_Panel.transform.GetChild(0).gameObject.GetComponent<Text>().text = gem.ToString();
-            gemReward_Panel.transform.GetChild(1).gameObject.GetComponent<Text>().text = (gem * 2).ToString();
+            gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(1).gameObject.GetComponent<Text>().text = gem.ToString();
+            gemReward_Panel.transform.GetChild(0).GetChild(1).GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = (gem * 2).ToString();
+            
+            // # 3. 젬의 이미지를 바꾸어줌 
+            if (gem < 15)
+            {
+                firstimg = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_1");
+                secondImg = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_2");
+            }
+            
+            else if (gem >= 15 && gem < 30)
+            {
+                firstimg  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_2");
+                secondImg  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_3");
+
+            }
+            else if (gem >= 30 && gem < 60)
+            {
+                firstimg  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_3");
+                secondImg  = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_4");
+            }
+
             gemReward_Panel.SetActive(true);
         }
 
@@ -284,79 +315,121 @@ namespace Attendance
                     break;
             }
 
+            if(is_Doubled) reward_text.text = (gem*2).ToString();
+            
+            else
+                reward_text.text = gem.ToString();
+            
             if (!is_Doubled)
             {
                 Playerdata_DAO.Set_Player_Gem(gem);
-                StartCoroutine(Get_Gem(gem));
+                Set_Gem_ResultPanel(false,gem);
             }
 
             else
             {
                 Playerdata_DAO.Set_Player_Gem(gem*2);
-                StartCoroutine(Get_Gem(gem*2));
+                Set_Gem_ResultPanel(true,gem);
             }
+            
         }
-        
+
+        private void Set_Gem_ResultPanel(bool isDoubled, int rewardType)
+        {
+            reward_img_charater.gameObject.SetActive(false);
+            gemReward_Panel.SetActive(false);
+            
+            if(rewardType<15)
+                reward_img_Ball.sprite = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_1");
+            
+            else if (rewardType >= 15 && rewardType <30)
+                reward_img_Ball.sprite = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_2");
+            
+            else if (rewardType>=30 && rewardType <60)
+                reward_img_Ball.sprite = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_3");
+            
+            else 
+                reward_img_Ball.sprite = Resources.Load<Sprite>("Lobby/Shop/Goods/gem_img/Shop_Gem_4");
+            
+            ballPanel.SetActive(true);   
+            reward_img_Ball.SetNativeSize();
+            reward_img_Ball.transform.localScale = new Vector3(1f, 1f, 1f);
+            reward_img_Ball.rectTransform.rect.Set(0,50,144f,144f);
+            reward_img_Ball.gameObject.transform.position = new Vector3(0f, 50f, 0f);
+
+            if (!isDoubled)
+                StartCoroutine(Get_Gem(gem));
+
+            else
+                StartCoroutine(Get_Gem(gem * 2));
+        }
         
         private void Set_Special_Panel(int type)
         {
             ballPanel.SetActive(true);
             Avatar_Name name_data = new Avatar_Name();
-            reward_img.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+            reward_img_Ball.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+            reward_img_charater.gameObject.SetActive(false);
+            reward_text.color = Color.white;
             // Step 1. 이미지 바꾸어주기 
-            if (type == 1000)
+            if (type / 1000 == 1) // 아바타 + ball 세트인 경우 
             {
-                reward_img.sprite = Set_Avatar_UI.Set_Avatar_Img(Calc_Index.Get_Avatar_index(type));
-                reward_img.rectTransform.rect.Set(0,28,120f,120f);
-                reward_img.SetNativeSize();
+                reward_img_charater.gameObject.SetActive(true);
+                if (type == 1000) // 베이비 드라이버 인 경우 
+                {
+                    reward_img_charater.sprite = Set_Avatar_UI.Set_Avatar_Img(Calc_Index.Get_Avatar_index(type));
+                    reward_img_charater.SetNativeSize();
+                    reward_img_charater.gameObject.SetActive(true);
+                    
+                    // Step 2. ball 이미지의 지정 및 크기 지정해주기. 
+                    reward_img_Ball.rectTransform.rect.Set(0,20,48f,48f);
+                    reward_img_Ball.gameObject.transform.position = new Vector3(121f, -20f, 0f);
+                    reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/" + type.ToString());
+                    reward_img_Ball.SetNativeSize();
+                    reward_img_Ball.transform.localScale = new Vector3(1f, 1f, 1f);
+                    
+                }
+
+                else // 드라큘라 Set인 경우 
+                {
+                    reward_img_charater.sprite = Set_Avatar_UI.Set_Avatar_Img(9);
+                    reward_img_charater.SetNativeSize();
+                    reward_img_charater.gameObject.SetActive(true);
+                    
+                    // Step 2. ball 이미지의 지정 및 크기 지정해주기. 
+                    reward_img_Ball.rectTransform.rect.Set(0,20,48f,48f);
+                    reward_img_Ball.gameObject.transform.position = new Vector3(121f, -20f, 0f);
+                    reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/" + type.ToString());
+                    reward_img_Ball.SetNativeSize();
+                    reward_img_Ball.transform.localScale = new Vector3(1f, 1f, 1f);
+                }
+                
+                reward_text.text =( name_data.Set_Charater_Name(type,false)+ " Set"); // 보상 타이틀명 지정 
+                
             }
             
-            else
+            else if(type/ 1000 == 3) // 볼만 받는 경우 
             {
-                reward_img.rectTransform.rect.Set(0,28,144f,144f);
-                reward_img.sprite = Resources.Load<Sprite>("Ball/" + type.ToString());
-                reward_img.SetNativeSize();
-                reward_img.transform.localScale = new Vector3(3f, 3f, 1f);
-            }
-            
-            // Step 2. 이름 적용하기 
-            if (type ==1000)
-            {
-                reward_text.text = name_data.Set_Charater_Name(type,false);
-            }
-            
-            else
-            {
+                reward_img_charater.gameObject.SetActive(false);
+                reward_img_Ball.rectTransform.rect.Set(0,28,144f,144f);
+                reward_img_Ball.gameObject.transform.position = new Vector3(0f, 40f, 0f);
+                reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/" + type.ToString());
+                reward_img_Ball.SetNativeSize();
+                reward_img_Ball.transform.localScale = new Vector3(3f, 3f, 1f);
                 switch (type)
                 {
-                    default:
-                        break;
-                    
-                    case 3005:
-                        reward_text.text = "Hamburger";
-                        break;
-                    
-                    case 3006:
-                        reward_text.text = "French fries";
-                        break;
-                         
-                    case 3007:
-                        reward_text.text = "Cookie";
-                        break;
-                    
-                    case 3008:
-                        reward_text.text = "LadyBug";
-                        break;
-                    
-                    case 3009:
-                        reward_text.text = "Skull";
-                        break;
-                    
                     case 3010:
                         reward_text.text = "Cherry blossom";
                         break;
+                    
+                    case 3011:
+                        reward_text.text = "Note";
+                        break;
                 }
+ 
+                // 볼명 지정 
             }
+            
             
             // Step 3. 실질적으로 잠금해제 해주기 
 
@@ -379,6 +452,7 @@ namespace Attendance
 
         public void OnClick_Special_Panel_Close()
         {
+            data.Set_is_get(which_item);
             ballPanel.SetActive(false);
         }
         

@@ -38,7 +38,6 @@ public class Challenge_Item: MonoBehaviour
 
     public void Purchase_Free_Item_Package()
     {
-        data.Set_FreeItem_Purchase();
         quest_mission = true;
         Set_TR_count();
     }

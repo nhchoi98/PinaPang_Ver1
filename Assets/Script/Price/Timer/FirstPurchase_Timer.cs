@@ -34,7 +34,6 @@ namespace Timer
                 PlayerPrefs.SetInt("First_Purchase", 1);
                 int second = timerData.Get_Second();
                 FirebaseAnalytics.LogEvent("First_Purchase", new Parameter("First_Buy_Time", second),new Parameter("First_Buy_Item",which_item));
-                Debug.Log(second + "+" + which_item);
                 // 시간 데이터 로그로 보내기 
                 // 시간 데이터 저장 
                 is_recording = false;

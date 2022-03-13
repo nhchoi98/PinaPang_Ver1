@@ -80,7 +80,7 @@ public class StarterTimer : MonoBehaviour, ITimer
     public void Action()
     {
         lobbyBox.SetActive(false);
-        shopTR.GetChild(2).gameObject.SetActive(false); // 상점에서 꺼줌 
+        shopTR.GetChild(0).gameObject.SetActive(false); // 상점에서 꺼줌 
         _starterDao.Set_Purchasable(); 
     }
 
