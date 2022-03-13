@@ -39,12 +39,7 @@ namespace Ball
 
         private static int Level_Ball(int index)
         {
-            if(index<4)
-                return (5+ (10*index));
-
-            else
-                return 40;
-            
+            return 40;
         }
     }
 }
