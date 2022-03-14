@@ -44,44 +44,29 @@ namespace Alarm
                 if (PlayerPrefs.GetInt("BALL_1008", 0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(1008)).GetChild(8).gameObject.SetActive(true);
                 // Step 3. 그리드에 반영 
-                if (PlayerPrefs.GetInt("BALL_3000", 0) == 1)
+                if (PlayerPrefs.GetInt("BALL_2005", 0) == 1)
+                    ballTR.GetChild(Calc_Index.Get_Ball_index(2005)).GetChild(8).gameObject.SetActive(true);
+                
+                if(PlayerPrefs.GetInt("BALL_2006", 0) == 1)
+                    ballTR.GetChild(Calc_Index.Get_Ball_index(2006)).GetChild(8).gameObject.SetActive(true);
+                
+                if(PlayerPrefs.GetInt("BALL_2007", 0) == 1)
+                    ballTR.GetChild(Calc_Index.Get_Ball_index(2007)).GetChild(8).gameObject.SetActive(true);
+                
+                if(PlayerPrefs.GetInt("BALL_3000",0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(3000)).GetChild(8).gameObject.SetActive(true);
                 
-                if(PlayerPrefs.GetInt("BALL_3001", 0) == 1)
+                if(PlayerPrefs.GetInt("BALL_3001",0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(3001)).GetChild(8).gameObject.SetActive(true);
                 
-                if(PlayerPrefs.GetInt("BALL_3002", 0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3002)).GetChild(8).gameObject.SetActive(true);
+                if(PlayerPrefs.GetInt("BALL_3002",0) == 1)
+                    ballTR.GetChild(Calc_Index.Get_Ball_index(3005)).GetChild(8).gameObject.SetActive(true);
                 
                 if(PlayerPrefs.GetInt("BALL_3003",0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(3003)).GetChild(8).gameObject.SetActive(true);
                 
                 if(PlayerPrefs.GetInt("BALL_3004",0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(3004)).GetChild(8).gameObject.SetActive(true);
-                
-                if(PlayerPrefs.GetInt("BALL_3005",0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3005)).GetChild(8).gameObject.SetActive(true);
-                
-                if(PlayerPrefs.GetInt("BALL_3006",0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3006)).GetChild(8).gameObject.SetActive(true);
-                
-                if(PlayerPrefs.GetInt("BALL_3007",0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3007)).GetChild(8).gameObject.SetActive(true);
-                
-                if(PlayerPrefs.GetInt("BALL_3008",0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3008)).GetChild(8).gameObject.SetActive(true);
-                
-                if(PlayerPrefs.GetInt("BALL_3009",0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3009)).GetChild(8).gameObject.SetActive(true);
-                
-                if(PlayerPrefs.GetInt("BALL_3010",0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3010)).GetChild(8).gameObject.SetActive(true);
-                
-                if(PlayerPrefs.GetInt("BALL_3011",0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3011)).GetChild(8).gameObject.SetActive(true);
-                    
-                if(PlayerPrefs.GetInt("BALL_3012",0) == 1)
-                    ballTR.GetChild(Calc_Index.Get_Ball_index(3012)).GetChild(8).gameObject.SetActive(true);
                 
                 if(PlayerPrefs.GetInt("BALL_4000",0) == 1)
                     ballTR.GetChild(Calc_Index.Get_Ball_index(4000)).GetChild(8).gameObject.SetActive(true);
@@ -122,12 +107,24 @@ namespace Alarm
             if (PlayerPrefs.GetInt("BALL_1008", 0) == 1)
                 return true;
             
+            if (PlayerPrefs.GetInt("BALL_2005", 0) == 1)
+                return true;
+
+            if (PlayerPrefs.GetInt("BALL_2006", 0) == 1)
+                return true;
+
+            if (PlayerPrefs.GetInt("BALL_2007", 0) == 1)
+                return true;
+            
+            if (PlayerPrefs.GetInt("BALL_2008", 0) == 1)
+                return true;
+            
             if (PlayerPrefs.GetInt("BALL_3000", 0) == 1)
                 return true;
-
+            
             if (PlayerPrefs.GetInt("BALL_3001", 0) == 1)
                 return true;
-
+            
             if (PlayerPrefs.GetInt("BALL_3002", 0) == 1)
                 return true;
             
@@ -136,31 +133,7 @@ namespace Alarm
             
             if (PlayerPrefs.GetInt("BALL_3004", 0) == 1)
                 return true;
-            
-            if (PlayerPrefs.GetInt("BALL_3005", 0) == 1)
-                return true;
-            
-            if (PlayerPrefs.GetInt("BALL_3006", 0) == 1)
-                return true;
-            
-            if (PlayerPrefs.GetInt("BALL_3007", 0) == 1)
-                return true;
-            
-            if (PlayerPrefs.GetInt("BALL_3008", 0) == 1)
-                return true;
-            
-            if (PlayerPrefs.GetInt("BALL_3009", 0) == 1)
-                return true;
-            
-            if (PlayerPrefs.GetInt("BALL_3010", 0) == 1)
-                return true;
-            
-            if (PlayerPrefs.GetInt("BALL_3011", 0) == 1)
-                return true;
-            
-            if (PlayerPrefs.GetInt("BALL_3012", 0) == 1)
-                return true;
-            
+
             if (PlayerPrefs.GetInt("BALL_4000", 0) == 1)
                 return true;
             

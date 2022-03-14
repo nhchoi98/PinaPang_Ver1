@@ -167,20 +167,13 @@ namespace Skin
                     BuyBtn.SetActive(false);
                     if (index < Calc_Index.Get_Ball_index(4000))
                     {
-                        if (index < Calc_Index.Get_Ball_index(3005))
+                        if (index >= Calc_Index.Get_Ball_index(3000))
                         {
                             challenge_btn.transform.GetChild(0).gameObject.SetActive(true);
                             challenge_btn.transform.GetChild(1).gameObject.SetActive(true);
                             challenge_btn.transform.GetChild(2).gameObject.SetActive(false);
                             challenge_btn.transform.GetChild(1).gameObject.GetComponent<Text>().text =
                                 "LV. " + Ball_Price.Price(index).ToString();
-                        }
-                        
-                        else // 출석부로 얻는 공일 경우 
-                        {
-                            challenge_btn.transform.GetChild(0).gameObject.SetActive(false);
-                            challenge_btn.transform.GetChild(1).gameObject.SetActive(false);
-                            challenge_btn.transform.GetChild(2).gameObject.SetActive(true);
                         }
 
                         packageBtn.SetActive(false);

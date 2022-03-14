@@ -642,7 +642,7 @@ namespace Skin
                     }
                     break;
                 
-                case 3006:
+                case 2001:
                     try
                     {
                         FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","French Fries"));
@@ -654,7 +654,7 @@ namespace Skin
                     }
                     break;
                 
-                case 3007:
+                case 2004:
                     try
                     {
                         FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","Cookie"));
@@ -666,7 +666,7 @@ namespace Skin
                     }
                     break;
                 
-                case 3008:
+                case 2005:
                     try
                     {
                         FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","Ladybug"));
@@ -678,7 +678,7 @@ namespace Skin
                     }
                     break;
                 
-                case 3009:
+                case 2003:
                     try
                     {
                         FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","Skull"));
@@ -690,7 +690,7 @@ namespace Skin
                     }
                     break;
                 
-                case 3010:
+                case 2002:
                     try
                     {
                         FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","Cherry Blossom"));
@@ -703,7 +703,7 @@ namespace Skin
                     break;
                 
                 
-                case 3011:
+                case 2006:
                     try
                     {
                         FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","Wine"));
@@ -715,7 +715,7 @@ namespace Skin
                     }
                     break;
                 
-                case 3012:
+                case 2007:
                     try
                     {
                         FirebaseAnalytics.LogEvent("Ball_buy",new Parameter("Ball_Name","Note"));

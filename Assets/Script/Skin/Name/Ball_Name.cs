@@ -15,6 +15,9 @@ namespace Skin
                 case 1:// 그냥 구매해서 사는 공 
                     return Normal_Ball(ball_num % 1000);
                 
+                case 2:
+                    return Attendance_Ball(ball_num % 1000);
+                
                 case 3:
                     return Level_Ball(ball_num % 1000);
                 
@@ -140,6 +143,39 @@ namespace Skin
             return name;
         }
 
+        private string Attendance_Ball(int ball_num)
+        {
+
+            switch (ball_num)
+            {
+                default:
+                    return "Hamburger";
+                
+                case 0:
+                    return "French Fries";
+                
+                case 1:
+                    return "Cookie";
+                
+                case 2:
+                    return "LadyBug";
+                
+                case 3:
+                    return "Skull";               
+                
+                case 5:
+                    return "Cherry blossom";     
+                
+                case 6:
+                    return "Sparkling Wine";
+                
+                case 7:
+                    return "Note";
+
+                
+            }
+        }
+
         private string Level_Ball(int ball_num)
         {
             switch (ball_num)
@@ -158,30 +194,6 @@ namespace Skin
                 
                 case 4:
                     return "Rose";
-                
-                case 5:
-                    return "Hamburger";
-                
-                case 6:
-                    return "French Fries";
-                
-                case 7:
-                    return "Cookie";
-                
-                case 8:
-                    return "LadyBug";
-                
-                case 9:
-                    return "Skull";               
-                
-                case 10:
-                    return "Cherry blossom";     
-                
-                case 11:
-                    return "Wine";
-                
-                case 12:
-                    return "Note";
                 
             }
             

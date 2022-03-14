@@ -287,11 +287,11 @@ namespace Attendance
                     break;
                 
                 case 1: // 벛꽃공 획득 
-                    ballDao = new BallPurDAO(3010);
+                    ballDao = new BallPurDAO(2005);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3010);
-                    Set_Special_Panel(3010);
+                    Skin_Log.Buy_Ball_Log(2005);
+                    Set_Special_Panel(2005);
                     break;
                 
                 case 3: // 드라큘라 셋 획득 . Set_Special Panel 매개변수 변경해야함
@@ -299,20 +299,20 @@ namespace Attendance
                     avatarDao.Set_Locked_Condition();
                     Skin_Log.Buy_Avatar(9);
 
-                    ballDao = new BallPurDAO(3011);
+                    ballDao = new BallPurDAO(2006);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
-                    Skin_Log.Buy_Ball_Log(3011);
-                    Set_Special_Panel(1011);// 보상 패널 Set
+                    Skin_Log.Buy_Ball_Log(2006);
+                    Set_Special_Panel(2006);// 보상 패널 Set
 
                     break;
 
                 case 5: // 음표공 획득 
-                    ballDao = new BallPurDAO(3011);
+                    ballDao = new BallPurDAO(2007);
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
-                    Set_Special_Panel(3011);
-                    Skin_Log.Buy_Ball_Log(3011);
+                    Set_Special_Panel(2007);
+                    Skin_Log.Buy_Ball_Log(2007);
                     break;
                 
                 case 7: // 아바타 획득 + 베이비 드라이버 세트공 연결해야함. 
@@ -500,7 +500,7 @@ namespace Attendance
                 }
             }
             
-            else if(type/ 1000 == 3) // 볼만 받는 경우 
+            else if(type/ 1000 == 2) // 볼만 받는 경우 
             {
                 reward_img_charater.gameObject.SetActive(false);
                 reward_img_Ball.rectTransform.rect.Set(0,28,84f,84f);
@@ -510,11 +510,11 @@ namespace Attendance
                 reward_img_Ball.transform.localScale = new Vector3(3f, 3f, 1f);
                 switch (type)
                 {
-                    case 3010:
+                    case 2002:
                         reward_text.text = "Cherry blossom";
                         break;
                     
-                    case 3011:
+                    case 2007:
                         reward_text.text = "Note";
                         break;
                 }

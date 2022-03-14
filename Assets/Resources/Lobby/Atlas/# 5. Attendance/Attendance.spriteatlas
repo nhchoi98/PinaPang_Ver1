@@ -45,9 +45,6 @@ SpriteAtlas:
     packables:
     - {fileID: 21300000, guid: fe9a5c2cb7f12284fba1bd3b4149bf76, type: 3}
     - {fileID: 21300000, guid: dba41ccd9453ff4428cbafc2085ab1b0, type: 3}
-    - {fileID: 21300000, guid: 5e777ea55755c2f4a88ea43efc2da1a6, type: 3}
-    - {fileID: 21300000, guid: 760bbcdb02d58624b865eb43bb20a098, type: 3}
-    - {fileID: 21300000, guid: 738f8764e8facef4591bd5c668fb58e4, type: 3}
     - {fileID: 21300000, guid: 4c103085e69855f4bb90550f31398a84, type: 3}
     - {fileID: 21300000, guid: 98632218fc3ca074588fd88dc75cec74, type: 3}
     - {fileID: 21300000, guid: 059fc75c9c6128f4c8c25a2b98fd816b, type: 3}
@@ -60,28 +57,22 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 3c1a5f44b0349ab459fe29ca70333f8e, type: 3}
-  - {fileID: 21300000, guid: 738f8764e8facef4591bd5c668fb58e4, type: 3}
   - {fileID: 21300000, guid: 98578284c76383d4eb49fb2af9fecdc0, type: 3}
   - {fileID: 21300000, guid: 4c103085e69855f4bb90550f31398a84, type: 3}
-  - {fileID: 21300000, guid: 5e777ea55755c2f4a88ea43efc2da1a6, type: 3}
   - {fileID: 21300000, guid: 415695c783ad9a34b86d84cd75224d9c, type: 3}
   - {fileID: 21300000, guid: 98632218fc3ca074588fd88dc75cec74, type: 3}
-  - {fileID: 21300000, guid: 760bbcdb02d58624b865eb43bb20a098, type: 3}
   - {fileID: 21300000, guid: fe9a5c2cb7f12284fba1bd3b4149bf76, type: 3}
   - {fileID: 21300000, guid: 059fc75c9c6128f4c8c25a2b98fd816b, type: 3}
   - {fileID: 21300000, guid: dba41ccd9453ff4428cbafc2085ab1b0, type: 3}
   m_PackedSpriteNamesToIndex:
   - NewBlock_Title
-  - 1024
   - Item_Close_Btn
-  - 3010
-  - 1023
+  - 2005
   - Attendance_Reward_Check
   - Shop_Gem_1
-  - 1025
-  - 3005
+  - 2004
   - Shop_Gem_3_a
-  - 3006
+  - 2000
   m_RenderDataMap: {}
   m_Tag: Attendance
   m_IsVariant: 0

@@ -17,8 +17,11 @@ namespace Ball
                 case 1:// 그냥 구매해서 사는 공 
                     return Normal_Ball(ball_num % 1000);
                 
+                case 2:
+                    return ad_ball();
+                
                 case 3:
-                    return Level_Ball((ball_num % 1000));
+                    return Level_Ball((ball_num % 3000));
                     
             }
         }
@@ -39,7 +42,19 @@ namespace Ball
 
         private static int Level_Ball(int index)
         {
-            return 40;
+            switch (index)
+            {
+                default:
+                    return 6;
+                case 1:
+                    return 16;
+                case 2:
+                    return 26;
+                case 3:
+                    return 36;
+                case 4:
+                    return 41;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Skin
             for (int i = 0; i < char_tr.childCount; i++)
             {
                 var price = Ball_Price.Price(i);
-                if (Calc_Index.Get_Ball_Num(i) /1000 == 1 ||Calc_Index.Get_Ball_Num(i) /1000 == 0 || Calc_Index.Get_Ball_Num(i)/1000  == 3) 
+                if (Calc_Index.Get_Ball_Num(i) /1000 == 1 ||Calc_Index.Get_Ball_Num(i) /1000 == 0 || Calc_Index.Get_Ball_Num(i)/1000  == 2) 
                 {
                     if (Playerdata_DAO.Player_Gem() < price)
                         char_tr.GetChild(i).GetChild(7).GetChild(1).gameObject.GetComponent<Text>().color = Color.red;

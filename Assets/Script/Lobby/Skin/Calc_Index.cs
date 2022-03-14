@@ -11,8 +11,9 @@ public static class Calc_Index
 
     [Header("Ball_Const")] 
     private const int DEFAULT_BALL = 1;
-    private const int _NORMAL_MAX = 26; // 그냥 살 수 있는 공 
-    private const int _LEVELUP_MAX = 13;  // 레벨업 or 패키지 사야 얻을 수 있는 공 
+    private const int _NORMAL_MAX = 23; // 그냥 살 수 있는 공 
+    private const int _ATTENDANCE = 8; // 출석부 보상으로도 얻을 수 있는 공. 
+    private const int _LEVELUP_MAX = 5;  // 퀘스트로 얻을 수 있는 공 
     private const int PACKAGE = 4;
     
     #region  Avatar
@@ -95,7 +96,7 @@ public static class Calc_Index
     /// <returns></returns>
     public static int Get_Ball_Max_Index()
     {
-        return ( DEFAULT_BALL+_NORMAL_MAX + _LEVELUP_MAX+PACKAGE );
+        return ( DEFAULT_BALL+_NORMAL_MAX + _LEVELUP_MAX+PACKAGE + _ATTENDANCE );
     }
 
     public static int Get_Ball_Num(int index)
@@ -106,21 +107,29 @@ public static class Calc_Index
         else if (index < (_NORMAL_MAX+DEFAULT_BALL))
             return (1000 + index - DEFAULT_BALL);
 
-        else if (index >= _NORMAL_MAX+ DEFAULT_BALL && index < _NORMAL_MAX + _LEVELUP_MAX+ DEFAULT_BALL)
-            return (3000 + index - _NORMAL_MAX - DEFAULT_BALL);
-
+        else if (index >= _NORMAL_MAX + DEFAULT_BALL && index < _NORMAL_MAX + _ATTENDANCE + DEFAULT_BALL)
+        
+            return (2000 + index - _NORMAL_MAX - DEFAULT_BALL);
+        
+        else if (index >= _NORMAL_MAX + DEFAULT_BALL + _ATTENDANCE &&
+                     index < _NORMAL_MAX + _ATTENDANCE + DEFAULT_BALL + _LEVELUP_MAX)
+            return (3000 + index - _NORMAL_MAX - DEFAULT_BALL-_ATTENDANCE);
+        
         else
-            return (4000 + index - _NORMAL_MAX - _LEVELUP_MAX - DEFAULT_BALL);
+            return (4000 + index - _NORMAL_MAX - _LEVELUP_MAX - DEFAULT_BALL-_ATTENDANCE);
 
     }
 
     public static int Get_Ball_index(int value)
     {
         if(value>=3000 && value <4000)
-            return  DEFAULT_BALL + _NORMAL_MAX + (value % 3000);
+            return  DEFAULT_BALL + _NORMAL_MAX + _ATTENDANCE+ (value % 3000);
+        
+        else if (value >= 2000 && value < 3000)
+            return DEFAULT_BALL + _NORMAL_MAX + (value % 2000);
         
         else if (value >= 4000)
-            return  DEFAULT_BALL + _NORMAL_MAX + _LEVELUP_MAX +(value % 4000);
+            return  DEFAULT_BALL + _NORMAL_MAX + _LEVELUP_MAX + _ATTENDANCE+ (value % 4000);
 
         else
             return DEFAULT_BALL + (value%1000);
@@ -129,7 +138,7 @@ public static class Calc_Index
 
     public static int Get_Normal_index()
     {
-        return _NORMAL_MAX + DEFAULT_BALL;
+        return _NORMAL_MAX + DEFAULT_BALL + _ATTENDANCE;
 
     }
     #endregion
