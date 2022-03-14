@@ -503,7 +503,7 @@ namespace Attendance
             else if(type/ 1000 == 3) // 볼만 받는 경우 
             {
                 reward_img_charater.gameObject.SetActive(false);
-                reward_img_Ball.rectTransform.rect.Set(0,28,144f,144f);
+                reward_img_Ball.rectTransform.rect.Set(0,28,84f,84f);
                 reward_img_Ball.gameObject.transform.position = new Vector3(0f, 40f, 0f);
                 reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/" + type.ToString());
                 reward_img_Ball.SetNativeSize();
@@ -570,7 +570,7 @@ namespace Attendance
                     {
                         leftBtn.SetActive(true);
                     });
-                secondPage.transform.DOScale(new Vector3(1f, 1f, 1f), 1f)
+                secondPage.transform.DOScale(new Vector3(1f, 1f, 1f), 0.7f)
                     .SetEase(Ease.OutCubic);
             }
         }

@@ -129,7 +129,7 @@ public static class Calc_Index
 
     public static int Get_Normal_index()
     {
-        return _NORMAL_MAX+DEFAULT_BALL+_LEVELUP_MAX;
+        return _NORMAL_MAX + DEFAULT_BALL;
 
     }
     #endregion
