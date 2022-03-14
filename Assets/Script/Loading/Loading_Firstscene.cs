@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using Ad;
+using Attendance;
 using Badge;
 using Battery;
 using Daily_Reward;
@@ -123,12 +124,99 @@ namespace Loading
             ATTrackingStatusBinding.RequestAuthorizationTracking(AuthorizationTrackingReceived);
             sentTrackingAuthorizationRequest?.Invoke();
             #endif
-            
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             Ingame_Log.LogIn();
+            Set_OldEquipped_Num();
             FirstPurchase_Timer.Init_Data();
+            
         }
 
+        #region  sET_OLDNUM
+        /// <summary>
+        /// 옛날 볼 번호체계를 쓰고있는 경우, 이걸 바꿔주기 위해서 쓰는 함수. 
+        /// </summary>
+        private void Set_OldEquipped_Num()
+        {
+            
+            if (PlayerPrefs.GetInt("Set_OldNum", 0) == 1)
+                return;
+            
+            int equipNum = Get_Old_BallNum(PlayerPrefs.GetInt("cbmm",0));
+            
+            for (int i = 3000; i < 3011; i++)
+            {
+                if (equipNum == i)
+                {
+                    equipNum = Calc_Index.Get_Ball_index(Calc_Old_Num(i));
+                    PlayerPrefs.SetInt("cbmm",equipNum);
+                    return;
+                }
+            }
+
+            PlayerPrefs.SetInt("Set_OldNum", 1);
+        }
+
+        private int Get_Old_BallNum(int index)
+        {
+            
+            int DEFAULT_BALL = 1;
+            int _NORMAL_MAX = 23; // 그냥 살 수 있는 공 
+            int _LEVELUP_MAX = 11;  // 레벨업 or 패키지 사야 얻을 수 있는 공 
+            int PACKAGE = 4;
+            
+            if (index == 0)
+                return 0;
+
+            else if (index < (_NORMAL_MAX+DEFAULT_BALL))
+                return (1000 + index - DEFAULT_BALL);
+
+            else if (index >= _NORMAL_MAX+ DEFAULT_BALL && index < _NORMAL_MAX + _LEVELUP_MAX+ DEFAULT_BALL)
+                return (3000 + index - _NORMAL_MAX - DEFAULT_BALL);
+
+            else
+                return (4000 + index - _NORMAL_MAX - _LEVELUP_MAX - DEFAULT_BALL);
+
+        }
+        
+        private int Calc_Old_Num(int index)
+        {
+            switch (index)
+            {
+                default:
+                    return 0;
+                
+                case 3001: 
+                    return 2000;
+                case 3004: // 3004->2001
+                    return 2001;
+                case 3005:
+                    return 2002;
+                case 3003:
+                    return 2003;
+                case 3000:
+                    return 2004;
+                
+                case 3002:
+                    return 2005;
+                case 3006:
+                    return 3000;
+
+                case 3007:
+                    return 3001;
+            
+                case 3008:
+                    return 3002;
+                
+                case 3009:
+                    return 3003;
+                
+                case 3010:
+                    return 3004;
+            }
+            
+        }
+        
+        #endregion
         private void AuthorizationTrackingReceived(int status) {
             Debug.LogFormat("Tracking status received: {0}", status);
 

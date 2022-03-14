@@ -75,7 +75,6 @@ namespace Skin
             for (int i = 0; i < MAXINDEX; i++) // 그리드를 생성하고, 거기에 맞는 패널과 아바타 이미지를 넣어줌 
             {
                 int index = i;
-                int ball_num = Calc_Index.Get_Ball_Num(i);
                 // Step 1. 기본 그리드 오브젝트 생성 
                 grid_obj = Instantiate(Grid_obj).transform;
                 grid_obj.SetParent(char_tr); // grid에 속하게 만들어줌 

@@ -303,7 +303,7 @@ namespace Attendance
                     ballDao.Purchase();
                     _badgeData.Set_Ball_Buy();
                     Skin_Log.Buy_Ball_Log(2006);
-                    Set_Special_Panel(2006);// 보상 패널 Set
+                    Set_Special_Panel(1009);// 보상 패널 Set
 
                     break;
 
@@ -492,7 +492,7 @@ namespace Attendance
                     // Step 2. ball 이미지의 지정 및 크기 지정해주기. 
                     reward_img_Ball.rectTransform.rect.Set(0,20,48f,48f);
                     reward_img_Ball.gameObject.transform.position = new Vector3(121f, -20f, 0f);
-                    reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/3011");
+                    reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/2006");
                     reward_img_Ball.SetNativeSize();
                     reward_img_Ball.transform.localScale = new Vector3(1f, 1f, 1f);
                     reward_text.text =("DRACULA Set"); // 보상 타이틀명 지정 
@@ -507,10 +507,10 @@ namespace Attendance
                 reward_img_Ball.gameObject.transform.position = new Vector3(0f, 40f, 0f);
                 reward_img_Ball.sprite = Resources.Load<Sprite>("Ball/" + type.ToString());
                 reward_img_Ball.SetNativeSize();
-                reward_img_Ball.transform.localScale = new Vector3(3f, 3f, 1f);
+                reward_img_Ball.transform.localScale = new Vector3(2f, 2f, 1f);
                 switch (type)
                 {
-                    case 2002:
+                    case 2005:
                         reward_text.text = "Cherry blossom";
                         break;
                     
@@ -543,13 +543,13 @@ namespace Attendance
                     PlayerPrefs.SetInt("AVATAR_9",1);
                     mediator.Event_Receieve(Event_Alarm.AVATAR_ALARM_ON, 9);
 
-                    PlayerPrefs.SetInt("BALL_3011", 1);
-                    mediator.Event_Receieve(Event_Alarm.BALL_ALARM_ON,3011);
+                    PlayerPrefs.SetInt("BALL_2006", 1);
+                    mediator.Event_Receieve(Event_Alarm.BALL_ALARM_ON,2006);
                     
                 }
             }
 
-            else if (type/1000 == 3)
+            else if (type/1000 == 2)
             {
                 PlayerPrefs.SetInt("BALL_" +type.ToString(), 1);
                 mediator.Event_Receieve(Event_Alarm.BALL_ALARM_ON,type);

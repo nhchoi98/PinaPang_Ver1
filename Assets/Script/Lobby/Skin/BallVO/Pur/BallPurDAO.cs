@@ -38,8 +38,6 @@ namespace Progetile
                     Directory.CreateDirectory(Application.persistentDataPath + "/Ball/Pur_2");
                     File.WriteAllText(DATA_PATH, DATA_STR);
                     Debug.Log("호출됨" + index.ToString());
-                    if(PlayerPrefs.GetInt("cbmm",index) == oldNum)
-                        PlayerPrefs.SetInt("cbmm",index); // 장착한 공이 옛날공일 경우, 정보를 바꾸어줌. 
                     try
                     {
                         System.IO.File.Delete(OLD_DATA_PATH); // 옛날 파일 삭제 
