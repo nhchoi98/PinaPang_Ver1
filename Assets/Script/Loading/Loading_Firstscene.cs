@@ -1,8 +1,6 @@
 
-using System;
 using System.Collections;
 using Ad;
-using Attendance;
 using Badge;
 using Battery;
 using Daily_Reward;
@@ -11,9 +9,12 @@ using Timer;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.RemoteConfig;
+
 #if UNITY_IOS
 using Unity.Advertisement.IosSupport;     
 #endif
+
 
 namespace Loading
 {
@@ -41,8 +42,12 @@ namespace Loading
         [SerializeField] private Button acceptBtn;
         
         [SerializeField] private AudioSource clickSound;
+        
+        
+        #if UNITY_IOS
         public event Action sentTrackingAuthorizationRequest;
-
+        #endif
+        
         #region Term
 
         public void OnClick_Privacy_View()
@@ -237,7 +242,7 @@ namespace Loading
                 
                 op = SceneManager.LoadSceneAsync(nextScene);
                 op.allowSceneActivation = false;
-                StartCoroutine(LoadScene());
+                StartCoroutine(Determine_Update());
             }
 
             StartCoroutine(MainSplash());
@@ -325,6 +330,7 @@ namespace Loading
         {
 
             Color color = BackGroundImg.color;
+
             while(time3<F_time2)
             {
                 time3 += Time.deltaTime;
@@ -347,8 +353,6 @@ namespace Loading
         }
         
         #region Package_Determine
-        
-
         /// <summary>
         /// 구매 가능 여부 + 할인 가능 여부를 업데이트 해줌 
         /// </summary>
@@ -365,6 +369,55 @@ namespace Loading
         }
         #endregion
 
+        #region  UPDATE_DETERMINE
+
+        public struct userAttributes {
+            // Optionally declare variables for any custom user attributes; if none keep an empty struct:
+        }
+
+        public struct appAttributes {
+            // Optionally declare variables for any custom app attributes; if none keep an empty struct:
+            public string appVersion;
+        }
+        
+        /// <summary>
+        /// 업데이트 해야할 지 말지를 결정해주는 함수. 
+        /// </summary>
+        IEnumerator Determine_Update()
+        {
+            ConfigManager.SetEnvironmentID("appupdate_check");
+            ConfigManager.FetchCompleted += Update_Action;
+            ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
+            yield return null;
+        }
+
+        private void Update_Action(ConfigResponse response)
+        {
+            string versionNum;
+            switch (response.requestOrigin)
+            {
+                case ConfigOrigin.Default: // 세팅이 로드되지 않았을 때 
+                case ConfigOrigin.Cached: // 세팅 로드 안됨. 전 세션의 캐시를 가져옴. 
+                    StartCoroutine(LoadScene());
+                    break;
+                    
+                case ConfigOrigin.Remote:
+                    versionNum = ConfigManager.appConfig.GetString("APP_VERSION");
+                    if (versionNum == Application.version)
+                        StartCoroutine(LoadScene());
+                        
+                    else
+                        Debug.Log("팝업띄움");
+                    break;
+            }
+        }
+
+        private void OnDisable()
+        {
+            ConfigManager.FetchCompleted -= Update_Action;
+        }
+        
+        #endregion
         private void OnApplicationQuit()
         {
             FirstPurchase_Timer.Save_Data();

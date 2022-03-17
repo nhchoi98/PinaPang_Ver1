@@ -85,11 +85,16 @@ namespace Attendance
 
         public void Next_Day_Set()
         {
-            int day = PlayerPrefs.GetInt("Which_Day", 0);
+            int day = PlayerPrefs.GetInt("Which_Day_2", 0);
+
+            if (PlayerPrefs.GetInt("Which_Day", 0) > DATA_SUM)
+            {
+                PlayerPrefs.SetInt("Attendance_All_Clear_2", 0);
+                PlayerPrefs.SetInt("Which_Day",0);
+            }
 
             if (PlayerPrefs.GetInt("Attendance_All_Clear_2", 0) == 1) // 출석부 다 깼을 때 
             {
-                Debug.Log("다깸");
                 return;
             }
 
@@ -101,7 +106,7 @@ namespace Attendance
             
             data[day].can_get = true;
             Write_Data(day);
-            PlayerPrefs.SetInt("Which_Day", ++day);
+            PlayerPrefs.SetInt("Which_Day_2", ++day);
             PlayerPrefs.SetInt("Show_Up", 1);
             
             if(day >DATA_SUM)

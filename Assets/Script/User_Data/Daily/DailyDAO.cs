@@ -71,6 +71,8 @@ namespace Daily_Reward
                 shopdata.Reset();
                 AttendanceDAO attendanceData = new AttendanceDAO();
                 attendanceData.Next_Day_Set();
+                
+                
             }
             Write_DATA();
         }
