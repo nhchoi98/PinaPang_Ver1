@@ -10,6 +10,10 @@ using UnityEngine.UI;
 
 namespace Item
 {
+    
+    /// <summary>
+    /// 1.5배속 아이템의 스크립트. 광고 혹은 USE버튼을 눌렀을 때의 이벤트를 관리해준다. 
+    /// </summary>
     public class BallSpeedAd : MonoBehaviour, IComponent
     {
         [SerializeField] private DataManager _dataManager;
@@ -34,7 +38,7 @@ namespace Item
          public void Start()
          {
 
-             if (Noads_instance.Get_ItemAds())
+             if (Noads_instance.Get_ItemAds()) // 사용자가 아이템 패키지를 샀다면, 자동 적용 시켜주고 UI에 반영시켜줌. 
              {
                  ad_btn = buttonTR.GetChild(1).gameObject.GetComponent<Button>();
                  gem_btn.gameObject.SetActive(false);
@@ -49,23 +53,26 @@ namespace Item
                  ad_btn = buttonTR.GetChild(0).gameObject.GetComponent<Button>();
                  ad_btn.gameObject.SetActive(true);
                  
-                 if (Playerdata_DAO.Player_Gem() < 5)
+                 if (Playerdata_DAO.Player_Gem() < 5) // 사용자가 젬이 부족한 경우
                  {
-                     gem_btn.interactable = false;
+                     gem_btn.interactable = false; // 버튼 비활성화 
                      gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                          new Color(255f / 255f, 28f / 255f, 26f / 255f);
                  }
 
                  else
-                     gem_btn.interactable = true;
+                     gem_btn.interactable = true; 
 
 
-                 timer.text = 300.ToString();
+                 timer.text = 300.ToString(); // 타이머 초기화 
                  timer.gameObject.transform.GetChild(0).GetComponent<Text>().text =
                      "(+" + ((_dataManager.item_duration_const - 1000f)) + ")";
              }
          }
 
+         /// <summary>
+         /// 사용자가 광고를 다 보면 호출되는 함수. 
+         /// </summary>
          private void UserEarnedReward()
          {
              item_icon.SetAsLastSibling();
@@ -76,6 +83,9 @@ namespace Item
              StartCoroutine(Timer());
          }
 
+         /// <summary>
+         /// No_ads 아이템을 사용하는 사용자는 use버튼을 누르면 이 함수가 호출됨. 
+         /// </summary>
          public void Noads_Show()
          {
              item_icon.SetAsLastSibling();
@@ -85,12 +95,17 @@ namespace Item
              StartCoroutine(Timer());
          }
 
+         /// <summary>
+         /// 광고 보기 버튼을 누르면 호출되는 함수. 광고를 화면에 띄워준다.
+         /// </summary>
          public void UserChoseToWatchAd()
          {
              _mediator.Event_Receive(Event_num.SPEED_AD);
          }
          
-
+        /// <summary>
+        /// 사용자가 젬을 이용해 아이템을 쓰기로 하면 호출되는 함수 
+        /// </summary>
          public void OnClick_Gem()
          {
              // 점수 관련 상수를 변경시켜주는 함수 
@@ -100,7 +115,7 @@ namespace Item
              StartCoroutine(Timer());
              Playerdata_DAO.Set_Player_Gem(-5);
              gemText.text = string.Format("{0:#,0}", Playerdata_DAO.Player_Gem());
-             if (Playerdata_DAO.Player_Gem() < 5)
+             if (Playerdata_DAO.Player_Gem() < 5) // 젬이 5젬 미만일 경우, 다른 아이템의 버튼을도 못누르게 막음. 
              {
                  gem_btn.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().color =
                      new Color(255f / 255f, 28f / 255f, 26f / 255f);
@@ -115,7 +130,7 @@ namespace Item
              }
              
              
-             gem_btn.interactable = false;
+             gem_btn.interactable = false; // 아이템이 사용중이므로, 중복으로 누르지 못하도록 GEM 버튼과 AD 버튼을 못누르게 막음. 
              ad_btn.interactable = false;
          }
 
