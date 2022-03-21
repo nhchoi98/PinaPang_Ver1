@@ -11,6 +11,11 @@ using Setting;
 
 namespace Block
 {
+    /// <summary>
+    /// 노말 타입의 박스들은 이 스크립트를 가지고 있음
+    /// 1. IBox: 박스의 아이템 공격 당할 시, 공에게 공격당할 시, 박스 파괴시 파티클 및 파티클 색상 지정, 캔들 박스 여부를 IBox 를 통해 설정하고 값을 리턴해줌.
+    /// 2. IDestroy_Action: 박스 파괴시의 액션을 구체화 할 수 있는 Interface. 
+    /// </summary>
     public class Normal_Box : MonoBehaviour, IBox, IDestroy_Action
     {
         [Header("Text")]
@@ -22,7 +27,7 @@ namespace Block
         private Manager.SoundManager SM;
         
         [Header("Box_Info")]
-        public bool destroy_hit, candle;
+        public bool destroy_hit, candle; // destroy hit: 박스가 부셔지는 함수가 호출 되면 또 호출되지 못하도록 막는 함수. 
         private int HP;
         private int Original_Hp, candle_type;
         private blocktype type;
@@ -32,8 +37,8 @@ namespace Block
         
         [Header("Particle_Gradient")]
         Gradient ourGradient;
-        private GameObject particle;
-        private GameObject[] ball_particle;
+        private GameObject particle; // 박스 파괴시 파티클을 담고있는 var
+        private GameObject[] ball_particle; // 박스 피격시 볼이 파티클 있는 공이라면, 볼 파티클을 저장해두는 var;
         private bool is_effective;
         private Transform particle_pool;
         public Image hit;
@@ -41,8 +46,8 @@ namespace Block
         private Color targetColor;
         
         [Header("Animator")]
-        private Tween hitTween;
-        private Sequence hitSequence;
+        private Tween hitTween; 
+        private Sequence hitSequence; // 박스 피격시 애니메이션 과정을 담고있는 Sequence.
         private bool isHit;
 
         [Header("Pos_Item")] 
@@ -60,16 +65,20 @@ namespace Block
                 .SetAutoKill(false)
                 .OnStart(()=>
                 {
-                    isHit = true;
+                    isHit = true; // 애니메이션이 시작되면, 다른 공이 날아와서 박스를 피격하더라도 애니메이션을 실행하지 않음.
                 })
-                .Append(DOTween.ToAlpha(() => hit.color, alpha => hit.color = alpha, 0.8f, 0.15f))
-                .Append(DOTween.ToAlpha(() => hit.color, alpha => hit.color = alpha, 0f, 0.15f))
+                .Append(DOTween.ToAlpha(() => hit.color, alpha => hit.color = alpha, 0.8f, 0.15f)) 
+                .Append(DOTween.ToAlpha(() => hit.color, alpha => hit.color = alpha, 0f, 0.15f)) // 피격 시 나타나는 빨간색 이미지의 alpha값을 바꿔줌. 
                 .OnComplete(()=>
                 {
-                    isHit = false;
+                    isHit = false;// 애니메이션이 끝나면, 다시 애니메션을 시작할 수 있음을 flag를 통해 설정해줌.
                 });
         }
 
+        /// <summary>
+        /// 캔들박스인지 아닌지 여부를 리턴해주는 함수 
+        /// </summary>
+        /// <returns></returns>
         public bool Get_Has_Candle()
         {
             return candle;
@@ -114,6 +123,9 @@ namespace Block
 
         #endregion
 
+        /// <summary>
+        /// 필드 아이템이 박스를 공격시 호출되는 함수  
+        /// </summary>
         public void Item_Attack()
         {
             if (destroy_hit)
@@ -135,6 +147,10 @@ namespace Block
             hpText.text = String.Format("{0:#,0}", HP);
         }
         
+        /// <summary>
+        /// 이 박스가 삼각형인지, 사각형인지, 원인지를 설정해주는 함수. Respawn_Box에서 호출됨.
+        /// </summary>
+        /// <param name="type"></param>
         public void Set_Type(blocktype type)
         {
             this.type = type;
@@ -144,6 +160,7 @@ namespace Block
         {
             this.candle = true; // 양초 박스인지 아닌지를 결정
             this.candle_type = candle_type;
+            //캔들박스 처럼 보이기 위해 UI를 바꾸어주는 함수 
             transform.GetChild(2).gameObject.SetActive(false);
             transform.GetChild(3).gameObject.SetActive(true);
         }
@@ -154,6 +171,11 @@ namespace Block
             this.particle = particle.gameObject;
         }
 
+        /// <summary>
+        /// 볼 피격시 파티클을 가지고 있는 공이라면 공파티클을 뿌리게 만들어주는 함수. 
+        /// </summary>
+        /// <param name="_event"></param>
+        /// <param name="script"></param>
         public void Set_Event(IBox.event_delegate _event, ref Progetile_Particle script)
         {
             is_effective = script.Get_Is_Effective();
@@ -207,6 +229,9 @@ namespace Block
         #endregion
 
         #region Destroy_Action
+        /// <summary>
+        /// 박스 파괴시 호출되는 함수. 파괴 시 액션을 정의한다. 
+        /// </summary>
         public void Destroy_Action()
         {
             Vibration.Vibrate(100);
@@ -277,6 +302,9 @@ namespace Block
             return this.transform.position;
         }
 
+        /// <summary>
+        /// 파티클의 색상을 지정해주는 함수. 
+        /// </summary>
         private void Set_Color()
         {
             Color[] color = new Color[2];

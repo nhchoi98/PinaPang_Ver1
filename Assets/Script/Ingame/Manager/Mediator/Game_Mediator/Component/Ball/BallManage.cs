@@ -9,16 +9,19 @@ using DG.Tweening;
 
 namespace Ingame
 {
+    /// <summary>
+    /// 볼의 생성, 플러스볼의 생성, 발사 위치를 관리하는 스크립트.
+    /// </summary>
     public class BallManage : MonoBehaviour, IComponent
     {
         private IMediator _mediator;
 
         [Header("Ball_Sprite")]
-        public Sprite ballImg;
-        public Image preview_Img;
-        
-        private Vector2 progetile_Pos;
-        [SerializeField] private GameObject progetile;
+        public Sprite ballImg; // 생성할 볼의 이미지를 저장. 
+        public Image preview_Img; // 발사선을 생성할 때 생기는 미리보기 볼 이미지./ 
+         
+        private Vector2 progetile_Pos; // 발사 위치 
+        [SerializeField] private GameObject progetile; // 발사할 볼의 prefab
 
         [Header("PlusBall")] 
         [SerializeField] private Transform plusPool;
@@ -29,14 +32,14 @@ namespace Ingame
         [SerializeField] private Transform progetileGroup;
         [SerializeField] private Transform flightGroup;
 
-        [Header("Ballnum_info")] private int targetNum;
-        private int count_num = 0;
+        [Header("Ballnum_info")] private int targetNum; // 볼이 몇 개 돌아와야하는지를 저장하는 var. 
+        private int count_num = 0; // 현재 볼이 몇 개 돌아왔는지를 저장하는 var 
 
         public GameObject tap_btn;
 
-        [SerializeField] private Transform charater;
+        [SerializeField] private Transform charater; 
         
-        private const float Ground_Y = -701.02f;
+        private const float Ground_Y = -701.02f; // 공의 절대적인 Y좌표. 
         private void Awake()
         {
             BallDAO data = new BallDAO();
@@ -66,6 +69,10 @@ namespace Ingame
         #endregion
 
         #region Projetile_Pooling
+        /// <summary>
+        /// 발사할 공을 이미지를 맞추어 생성함. 
+        /// </summary>
+        /// <returns></returns>
         private GameObject pooling_progetile()
         {
             GameObject Obj;
@@ -90,22 +97,29 @@ namespace Ingame
 
         #region PlusBall_MOve
         
+        /// <summary>
+        /// 플러스볼이 낙하하면 실행되는 Coroutine
+        /// </summary>
+        /// <param name="TR"></param>
+        /// <returns></returns>
         private IEnumerator PlusMove(Transform TR)
         {
-            while (true)
+            /*
+            while (true) 
             {
                 TR.position = Vector2.MoveTowards(TR.position, progetile_Pos, 3000f * Time.deltaTime);
                 if (progetile_Pos == (Vector2)TR.position)
                     break;
                 yield return null;
             }
-
-            TR.DOMove(progetile_Pos,0.4f).SetEase(Ease.InExpo);
+            */
+            TR.DOMove(progetile_Pos,0.4f).SetEase(Ease.InExpo);// 플러스볼을 땅바닥으로 내림. 
             TR.DOKill();
             TR.gameObject.SetActive(false);
             TR.gameObject.GetComponent<Animator>().enabled = true;
             TR.gameObject.GetComponent<CircleCollider2D>().enabled = true;
             TR.GetChild(0).gameObject.SetActive(true);
+            yield return null;
         }
         
         private IEnumerator plusball_move()
@@ -114,7 +128,7 @@ namespace Ingame
             Transform tr;
             for (int i = 0; i < target_num; i++)
             {
-                tr = plusActive.GetChild(0);
+                tr = plusActive.GetChild(0); // 먹은 플러스볼 만큼을 발사 위치로 옮겨줌. 이 친구들은 도착하면 plusball pool로 들어감,  
                 tr.SetParent(plusPool);
                 tr.SetAsLastSibling();
                 StartCoroutine(PlusMove(tr));
@@ -162,6 +176,7 @@ namespace Ingame
                     Init_Data();
                     break;
                 
+                // 발사 시 돌아와야하는 볼 개수를 초기화 해주고, 센 공의 개수를 0으로 초기화해줌. 
                 case Event_num.SET_LAUNCH_INFO:
                     targetNum = progetileGroup.childCount;
                     count_num = 0;
@@ -176,23 +191,30 @@ namespace Ingame
             
         }
 
+        /// <summary>
+        /// Ground Component에서 호출되는 함수. 공이 땅바닥에 떨어지면, 돌아온 개수를 카운트 해줌. 
+        /// </summary>
         public void Ball_Land()
         {
             ++count_num;
-            if (count_num == targetNum)
+            if (count_num == targetNum) // 공이 모두 돌아왔다면 
             {
                 Transform tr;
                 int flight_num = flightGroup.childCount;
                 for (int i = 0; i < flight_num; i++)
                 {
                     tr =  flightGroup.GetChild(0);
-                    tr.SetParent(progetileGroup);
+                    tr.SetParent(progetileGroup); // 모두 progetileGroup으로 되돌려줌 
                 }
                 tap_btn.SetActive(false);
-                _mediator.Event_Receive(Event_num.BOX_SPAWN);
+                _mediator.Event_Receive(Event_num.BOX_SPAWN); // 공이 다 돌아왔으므로 박스를 생성하는 이벤트를 시작함. 
             }
         }
 
+        /// <summary>
+        /// 볼의 개수, 발사 위치를 저장하게 해주는 함수. 이어하기용
+        /// </summary>
+        /// <returns></returns>
         public BallInfo_VO Set_BallInfo()
         {
             BallInfo_VO data = new BallInfo_VO();

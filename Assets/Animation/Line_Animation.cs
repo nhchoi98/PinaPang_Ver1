@@ -57,7 +57,7 @@ namespace Manager
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
-        public void Set_Line_Pos(Vector2 point1, Vector2 point2)
+        public void Set_Line_Pos(Vector2 point1 , Vector2 point2 )
         {
             _LineRenderer.SetPosition(1,point1);
             if (second_active)

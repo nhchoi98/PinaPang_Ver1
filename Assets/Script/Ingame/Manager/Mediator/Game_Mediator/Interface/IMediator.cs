@@ -4,7 +4,7 @@ namespace Ingame
 {
     public enum Event_num
     {
-        BALL_DOWN,
+        BALL_DOWN, // 
         USER_DIE,
         CHARATER_ARRIVE,
         CHARATER_MOVE,
@@ -55,7 +55,7 @@ namespace Ingame
         Launch_Green,
         Launch_Red,
         Abort_Launch,
-        Launch_MOTION,
+        Launch_MOTION, // 캐릭터 발사 모션에 맞추어 공을 발사해주게 하는 이벤트 
         SET_LAUNCH_INFO,
         Abort_Launch_PINATA,
         SET_NEW_STAGE,
@@ -86,12 +86,15 @@ namespace Ingame
         BATTERY,
         ATTENDANCE
         #endregion
-        
     }
     
     
     public interface IMediator
     {
+        /// <summary>
+        /// 중재자가 다른 컴포넌트로 부터 이벤트를 받게 되면, 실행되는 함수. 주로 다른 컴포넌트와 다른 컴포넌트 사이를 이어주어 명령을 전달해주는 핵심함수이다.  
+        /// </summary>
+        /// <param name="eventNum"></param>
         public void Event_Receive(Event_num eventNum);
     }
 }

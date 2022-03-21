@@ -8,16 +8,20 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 
+/// <summary>
+/// 발사 시작, 발사 중지, 발사 시 공의 속도를 조절해주는 스크립트. 
+/// </summary>
 public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
         private IMediator _mediator;
         [Header("Launch_Info")]
-        private bool launch_possible;
+        private bool launch_possible; // 발사를 할 수 있는 상태인지를 저장하는 booltype 변수 
         private Vector2 dir, drag_Start_Pos, dragging_Pos;
         private bool cancleDrag, startDrag;
         private Vector2 progetilePos;
         private IEnumerator launch_ienum;
         private int ball_count;
+        private const float min_launchAngle = 0.2f;
 
         private bool abort_launch, is_launching;
         
@@ -66,6 +70,9 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
             SetDragThreshold();
         }
         
+        /// <summary>
+        /// 해상도에 맞게 민감도를 조정해주는 함수. 
+        /// </summary>
         private void SetDragThreshold()
         {
             if (eventSystem != null)
@@ -74,6 +81,10 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
             }
         }
 
+        /// <summary>
+        /// 1.5배속 아이템이 실행되면, 볼 스피드와 관련된 상수를 조정해줌. 
+        /// </summary>
+        /// <param name="is_Activating"></param>
         public void Set_BallSpeed_Const(bool is_Activating)
         {
             if (is_Activating)
@@ -93,6 +104,7 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
         {
             switch (eventNum)
             {
+                // 발사 가능상태로 만들어줌 
                 case Event_num.Launch_Green:
                     launch_possible = true;
                     damage_text.text = string.Format("{0:#,0}", progetile_group.childCount);
@@ -100,29 +112,35 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
                     drag_img.enabled = true;
                     break;
                 
+                // 발사 불능 상태로 만들어줌.
                 case Event_num.Launch_Red:
                     launch_possible = false;
                     damage_text.gameObject.SetActive(false);
                     break;
                 
+                // 처음 게임에 들어오게 되면 (이어하기 아닌 경우), 발사 위치를 정중앙으로 초기화. 
                 case Event_num.INIT_DATA:
                     progetilePos = new Vector3(0f, Ground_Y, 0f);
                     break;
                 
+                // 발사 중지 이벤트 발생시 호출됨 
                 case Event_num.Abort_Launch:
                     Abort_Launch();
                     break;
 
+                // 캐릭터가 발사 모션을 취하게 되면, 타이밍에 맞게 호출되어 실제로 공을 발사시켜주는 함수 
                 case Event_num.Launch_MOTION:
                     drag_img.enabled = false;
                     StartCoroutine(launch_ienum);
                     break;
                 
+                // 피냐타가 파괴되었을 때, 공을 다 자동으로 내리기 위해서 호출되는 함수 
                 case Event_num.Abort_Launch_PINATA:
                     isPinata = true;
                     Abort_Launch();
                     break;
                 
+                // 인게임 튜토리얼이 끝나는 이벤트가 발생하면 호출  
                case  Event_num.Tutorial_Basic_Done:
                    progetilePos = new Vector3(0f, Ground_Y, 0f);
                    damage_text.transform.position =  new Vector3((Mathf.Abs(progetilePos.x)>463f ?  (progetilePos.x<-463f ? -463f:463f):progetilePos.x),progetilePos.y-70f, 0f);
@@ -138,11 +156,11 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
             // 드래그를 시작했을 때, 처음 터치한 지점의 좌표를 저장해줌 
             public void OnBeginDrag(PointerEventData eventData)
             {
-                if (!launch_possible)
+                if (!launch_possible) // 발사를 할 수 없는 조건이라면 드래깅을 시켜주지 않음 
                     return;
 
                 drag_Start_Pos = progetilePos;
-                _LineAnimation.Set_Start_Pos(progetilePos);
+                _LineAnimation.Set_Start_Pos(progetilePos); // 라인을 그려줌 
             }
 
             // 드래그를 계속 하면 LineRenderer의 좌표를 바꾸어줌 
@@ -154,11 +172,11 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
                 startDrag = true;
                 
                 dragging_Pos = eventData.pointerCurrentRaycast.worldPosition;
-                Determine_vector = dragging_Pos - drag_Start_Pos;
+                Determine_vector = dragging_Pos - drag_Start_Pos; // 방향 벡터를 계산해줌. 방향벡터의 첫 시작점은 공에서 부터임 
                 
                 
                 
-                if ( Determine_vector.normalized.y < -0.20)
+                if ( Determine_vector.normalized.y < -min_launchAngle) // 만약에 사용자가 기준선 밑으로 드래깅 했다면.. 
                 {
                     cancleDrag = true;
                     // 선이 사라지는 애니메이션 
@@ -166,28 +184,29 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
                     return;
                 }
 
-                else
+                else // 아니라면 
                 {
                     cancleDrag = false;
-                    if (Determine_vector.normalized.y < 0.20)
-                        return;
+                    if (Determine_vector.normalized.y < min_launchAngle) // 기준선 밑에서 드래깅을 시작했다면..
+                        return; // 선을 그려주지 않음 
                     
                     hit = Physics2D.CircleCast(progetilePos, 24.01f,Determine_vector, 10000,
-                        1 << LayerMask.NameToLayer("Wall") | 1<< LayerMask.NameToLayer("Object")|1<< LayerMask.NameToLayer("Pinata"));
-                    if (!_Item)
+                        1 << LayerMask.NameToLayer("Wall") | 1<< LayerMask.NameToLayer("Object")|1<< LayerMask.NameToLayer("Pinata")); //벽, 오브젝트, 피냐타 layer에만 충돌을 감지함 
+                    
+                    if (!_Item) // 꺾임 아이템을 쓰지 않았을 경우 
                     {
                         _Launch_Preview_Ball.position = hit.centroid;
-                        _LineAnimation.Set_Line_Pos(hit.centroid,hit.centroid);
+                        _LineAnimation.Set_Line_Pos(hit.centroid,hit.centroid); // 선을 한 개만 만들어줌 
                     }
 
-                    else
+                    else // 아이템을 썼다면 
                     {
-                        incomingVec = hit.centroid - (Vector2)progetilePos;
-                        reflect_Vec = Vector2.Reflect(incomingVec,hit.normal);
+                        incomingVec = hit.centroid - (Vector2)progetilePos; 
+                        reflect_Vec = Vector2.Reflect(incomingVec,hit.normal); // 반사되는 벡터를 계산함 
                         reflect_hit = Physics2D.CircleCast(hit.centroid, 23.99f,reflect_Vec, 10000,
                             1 << LayerMask.NameToLayer("Wall") | 1<< LayerMask.NameToLayer("Object") | 1<< LayerMask.NameToLayer("Pinata"));
-                        _LineAnimation.Set_Line_Pos(hit.centroid,reflect_hit.centroid);
-                        _Launch_Preview_Ball.position = reflect_hit.centroid;
+                        _LineAnimation.Set_Line_Pos(hit.centroid,reflect_hit.centroid); // 선을 두 개 그려줌 
+                        _Launch_Preview_Ball.position = reflect_hit.centroid; // 한 번 꺾여서 충돌이 예상되는 위치에 미리보기 공을 그려줌 
                     }
                     
                    
@@ -202,13 +221,13 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
                 if (cancleDrag || !launch_possible)
                     return;
 
-                else
+                else // 발사 불가능 조건이라면.. 
                 {
                     dir = (dragging_Pos - drag_Start_Pos).normalized;
                     
-                    if (dir.y < 0.20f)
-                        dir = new Vector2(dir.x, 0.20f);
-                    _LineAnimation.Remove_Line();
+                    if (dir.y < min_launchAngle) // 만약 사용자가 특정 각도 밑으로 드래깅 후 발사했다면 
+                        dir = new Vector2(dir.x, min_launchAngle); // 특정 각도를 기준 으로 발사 
+                    _LineAnimation.Remove_Line(); // 발사선을 지워줌 
                     Launch_Progetile();// GameManager의 Launch 함수 호출 
                 }
             }
@@ -220,8 +239,8 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
             {
                 launch_ienum = Launch();
                 launch_possible = false; // 발사 가능 조건 판단 false
-                _Launch_Preview_Ball.gameObject.SetActive(false); // 숨겨진 버튼 활성화 
-                item_inactive_btn.gameObject.SetActive(true);
+                _Launch_Preview_Ball.gameObject.SetActive(false); // 레이저 끝에 보이는 공 
+                item_inactive_btn.gameObject.SetActive(true); // 아이템 나중에 눌러주세요~ 하고 패널띄워주는 버튼이 켜기게함 
                 _mediator.Event_Receive(Event_num.SET_LAUNCH_INFO);
                 Charater.gameObject.GetComponent<Animator>().SetTrigger("Launch");
                 // 발사 취소 활성화 
@@ -233,18 +252,19 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
                 int sum = ball_num;
                 Transform TR;
                 is_launching = true;
-                Vector3 pos = (Vector3) dir * POWER * speedconst*(1+ ((float)launchCount/400f));
+                Vector3 pos = (Vector3) dir * POWER * speedconst*(1+ ((float)launchCount/400f)); // 발사 속도를 조절해주는 변수 
                 tap_Btn.SetActive(true);
                 if(launchCount < 150)
                     launchCount++;
+                
                 for (int i = 0; i < ball_num; i++)
                 {
-                    if (abort_launch)
+                    if (abort_launch) // 발사 중지 명령이 들어오면 
                     {
                         launch_ienum = null;
                         is_launching = false;
-                        damage_text.gameObject.SetActive(false);
-                        Set_ALL_GROUND();
+                        damage_text.gameObject.SetActive(false); // 공 개수 텍스트를 꺼줌 
+                        Set_ALL_GROUND(); // 공을 모두 내려줌 
                         yield break;
                     }
 
@@ -286,7 +306,6 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
         }
         private void Abort_Launch()
         {
-
             if (is_launching)
             {
                 abort_launch = true;
@@ -298,18 +317,29 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
             }
         }
 
+        /// <summary>
+        /// 발사 중지 버튼 눌렀을 때 공을 땅바닥으로 이동시켜주는 함수 
+        /// </summary>
         private void Set_ALL_GROUND()
         {
             tap_Btn.SetActive(false);
             StartCoroutine(Down_Ball());
         }
 
+        /// <summary>
+        /// 공 발사 가능 개수 텍스트의 위치를 잡아주는 함수.
+        /// </summary>
+        /// <param name="Pos"></param>
         public void Set_Pos(Vector2 Pos)
         {
             this.progetilePos = Pos;
             damage_text.transform.position = new Vector3((Mathf.Abs(progetilePos.x)>463f ?  (progetilePos.x<-463f ? -463f:463f):progetilePos.x),progetilePos.y-70f, 0f);
         }
 
+        /// <summary>
+        /// 발사 중지 명령시, 공을 특정 위치로 이동시켜주는 반복자. 
+        /// </summary>
+        /// <returns></returns>
         IEnumerator Down_Ball()
         {
             Transform tr;
@@ -330,9 +360,9 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
 
             while (true)
             {
-                if (count == target_num)
+                if (count == target_num) // 공이 다 내려왔다면
                 {
-                    count = 0;
+                    count = 0; // 갯수 세는 변수 초기화 
                     //_mediator.Event_Receive(Event_num.BALL_DOWN);
                     break;
                 }
@@ -345,8 +375,9 @@ public class LaunchManage : MonoBehaviour, IComponent, IBeginDragHandler, IDragH
                 tr = progetile_group.GetChild(i);
                 tr.position = progetilePos;
             }
-            if(!isPinata)
-                _mediator.Event_Receive(Event_num.BOX_SPAWN);
+            
+            if(!isPinata) // 피냐타를 소환하는 때가 아니라면
+                _mediator.Event_Receive(Event_num.BOX_SPAWN); // 바로 박스를 소환하는 이벤트를 호출함 
 
             this.isPinata = false;
             abort_launch = false;
