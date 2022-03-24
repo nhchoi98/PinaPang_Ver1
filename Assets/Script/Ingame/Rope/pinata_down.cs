@@ -34,7 +34,6 @@ namespace Pinata
         private IMediator _mediator;
         
         
-        
         private void Awake()
         {
             SoundManager sm = GameObject.FindWithTag("SM").GetComponent<SoundManager>();

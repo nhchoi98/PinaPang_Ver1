@@ -96,7 +96,7 @@ namespace Ingame
                 case 2:
                     obj = Instantiate(circle);
                     ibox = obj.GetComponent<IBox>();
-                    ibox.Set_ColorType(2,particle.Set_Particle());
+                    ibox.Set_ColorType(2,particle.Set_Particle()); // 
                     ibox.Set_Type(blocktype.NORMAL_CIRCLE);
                     break;
             }
@@ -138,7 +138,7 @@ namespace Ingame
         {
             GameObject obj;
             IBox ibox;
-            obj = Instantiate(box); // 이거 바꿔놓음  
+            obj = Instantiate(box);
             ibox = obj.GetComponent<IBox>();                  
             ibox.Set_ColorType(0,particle.Set_Particle());
             obj.transform.SetParent(respawnGroup);

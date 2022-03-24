@@ -346,27 +346,32 @@ namespace Ingame
                 switch (eventNum)
                 {
 
+                    // 볼을 강제로 내리는 버튼을 누르면 호출되는 이벤트 
                     case Event_num.BALL_DOWN:
                         speedControl.Event_Occur(eventNum);
                         break;
                     
+                    // 새로운 블록이 리스폰 되면 호출되는 이벤트 
                     case Event_num.New_block:
                         is_newBlock = true;
                         break;
 
+                    // 박스가 내려오는 이벤트가 발생하면 호출되는 이벤트. 
                     case Event_num.MOVE_DOWN:
                         movedown.Event_Occur(eventNum);
                         break;
 
+                    // 박스 및 필드형 아이템이 이동하는게 끝나면 호출되는 이벤트.
                     case Event_num.MOVE_DONE:
                         _questManager.Set_User_Stat_Save();
                         if (PlayerPrefs.GetInt("Tutorial_Item_End", 0) == 0 &&
                             PlayerPrefs.GetInt("Tutorial_Pinata_Done", 0) == 1)
                             tutorial_item.SetActive(true);
 
-                        Determine_Die();
+                        Determine_Die(); // GameOver 여부를 판단해주는 함수 호출 
                         break;
 
+                    // 박스와 플러스볼, 필드 아이템을 스폰함 
                     case Event_num.BOX_SPAWN:
                         speedControl.Event_Occur(eventNum);
                         _scoreManager.Set_Count_Zero();
@@ -374,6 +379,7 @@ namespace Ingame
                         StartCoroutine(Spawn_Box());
                         break;
 
+                    // 처음 게임에 들어오면 (이어하기 말고, 최초 진입시) 호출되는 이벤트 
                     case Event_num.INIT_DATA:
                         ballManage.Event_Occur(Event_num.INIT_DATA);
                         launchManage.Event_Occur(Event_num.INIT_DATA);
@@ -381,17 +387,20 @@ namespace Ingame
                         movedown.Event_Occur(Event_num.MOVE_DOWN);
                         break;
                     
+                    // 발사가 가능하도록 하는 이벤트 
                     case Event_num.Launch_Green:
                         _settingManager.ItemBtn_LaunchSet(true);
                         launchManage.Event_Occur(eventNum);
                         ground.Event_Occur(eventNum);
                         break;
 
+                    // 발사를 막는 이벤트
                     case Event_num.Launch_Red:
                         _settingManager.ItemBtn_LaunchSet(false);
                         launchManage.Event_Occur(Event_num.Launch_Red);
                         break;
 
+                    // 캐릭터가 발사 모션을 취하게 되면 호출되는 이벤트 
                     case Event_num.Launch_MOTION:
                         skill_set = true;
                         _settingManager.ItemBtn_LaunchSet(false);
@@ -400,25 +409,30 @@ namespace Ingame
                         speedControl.Event_Occur(eventNum);
                         break;
 
+                    // 캐릭터가 공이 떨어진 지점에 도착하면 호출되는 이벤트. 
                     case Event_num.CHARATER_ARRIVE:
                         charater_move = false;
                         break;
 
+                    // 캐릭터가 이동을 시작하면 호출되는 이벤트. 캐릭터가 이동 중 공이 발사가 되는것을 방지하기 위함
                     case Event_num.CHARATER_MOVE:
                         charater_move = true;
                         break;
 
+                    // 아바타의 스킬 유무를 지정해주는 이벤트 
                     case Event_num.AVATAR_SET:
                         charater.Event_Occur(eventNum);
                         break;
 
+                    // 발사 위치를 지정해주는 이벤트 
                     case Event_num.SET_LAUNCH_INFO:
                         ballManage.Event_Occur(eventNum);
                         break;
 
+                    // 부활이벤트가 일어나는 경우 호출되는 이벤트. 
                     case Event_num.SET_REVIVE:
                         removeBox.Event_Occur(eventNum);
-                        if (is_newBlock)
+                        if (is_newBlock) // 만약 처음 생성되는 블록이 있다면.. 
                         {
                             newBlockInfo.SetActive(true);
                             is_newBlock = false;
@@ -429,19 +443,23 @@ namespace Ingame
 
                         break;
 
+                    // 유저가 한 번 죽게되면 호출되는 이벤트. 
                     case Event_num.USER_DIE:
                         is_Die = true;
                         break;
 
+                    // 유저가 크로스아이템을 쓸 때 호출되는 이벤트. 
                     case Event_num.CROSS_ITEM:
                         determine_type.Event_Occur(eventNum);
                         break;
 
+                    // 부활 후, 상단 3개행의 박스를 부시기 위한 이벤트 
                     case Event_num.BOX_REMOVE:
                         is_Die = false;
                         removeBox.Event_Occur(eventNum);
                         break;
 
+                    // 피냐타가 필드에서 파괴되면 실행되는 이벤트 
                     case Event_num.PINATA_DIE:
                         _questManager.Set_Pinata();
                         speedControl.Event_Occur(eventNum);
@@ -450,12 +468,14 @@ namespace Ingame
                         warn.TurnOff_Warn();
                         break;
 
+                    // 피냐타가 필드에 스폰되면 실행되는 이벤트 
                     case Event_num.PINATA_SPAWN:
                         determine_type.Event_Occur(eventNum);
                         _scoreManager.Set_Count_Zero();
                         movedown.Event_Occur(Event_num.MOVE_DOWN); // # 3. 내려보냄 
                         break;
 
+                    // 피냐타가 파괴된 후, 장난감을 얻을 때 실행되는 이벤트 
                     case Event_num.COLLECTION_GET:
                         img_manage.Event_Occur(Event_num.BGM_SET_START); // 이미지 변환 
                         speedControl.Event_Occur(Event_num.BOX_SPAWN);
@@ -463,14 +483,17 @@ namespace Ingame
                         StartCoroutine(Spawn_Box());
                         break;
 
+                    // 피냐타가 있을 때 발사를 중지하면 호출되는 함수. 
                     case Event_num.Abort_Launch_PINATA:
-                        if (PlayerPrefs.GetInt("Tutorial_Item_end", 0) == 0) // 아이템 튜토리얼 시작 안했을 
+                        if (PlayerPrefs.GetInt("Tutorial_Item_end", 0) == 0) // 아이템 튜토리얼 시작 안했을 때,
                             pauseBtn.interactable = false; // pause 버튼 못 쓰게 막음 
 
                         speedControl.Event_Occur(Event_num.Abort_Launch_PINATA);
                         launchManage.Event_Occur(eventNum);
 
                         break;
+                    
+                    // 발사 중지시 호출되는 함수 
                     case Event_num.Abort_Launch:
                         speedControl.Event_Occur(Event_num.Abort_Launch);
                         launchManage.Event_Occur(eventNum);
@@ -479,7 +502,7 @@ namespace Ingame
                     case Event_num.SET_NEW_STAGE:
                         determine_type.Event_Occur(eventNum);
                         break;
-
+                    
                     case Event_num.BEAR_SKILL:
                         _avatarSkill.Bear_Skill();
                         break;

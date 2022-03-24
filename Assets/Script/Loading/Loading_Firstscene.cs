@@ -42,8 +42,10 @@ namespace Loading
         [SerializeField] private Button acceptBtn;
         
         [SerializeField] private AudioSource clickSound;
-        
-        
+
+        [Header("Version Update Panel")] 
+        public GameObject updatePanel;
+
         #if UNITY_IOS
         public event Action sentTrackingAuthorizationRequest;
         #endif
@@ -244,8 +246,6 @@ namespace Loading
                 op.allowSceneActivation = false;
                 StartCoroutine(Determine_Update());
             }
-
-            StartCoroutine(MainSplash());
         }
 
         private void Next_Scene()
@@ -312,20 +312,6 @@ namespace Loading
             }
         }
         
-        IEnumerator MainSplash()
-        {
-            Color color = BackGroundImg.color;                            //color 에 판넬 이미지 참조
-            while (BackGroundImg.color.a > 0f)
-            {
-                time1 += Time.deltaTime / F_time;
-                color.a = Mathf.Lerp(1f, 0f, time1);
-                BackGroundImg.color = color;
-                yield return null;
-            }
-
-            yield return null;
-        }
-        
         IEnumerator LoadScene()
         {
 
@@ -385,7 +371,7 @@ namespace Loading
         /// </summary>
         IEnumerator Determine_Update()
         {
-            ConfigManager.SetEnvironmentID("appupdate_check");
+            ConfigManager.SetEnvironmentID("7959b578-c7e3-4174-9568-b0bb11e667f8");
             ConfigManager.FetchCompleted += Update_Action;
             ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
             yield return null;
@@ -405,11 +391,23 @@ namespace Loading
                     versionNum = ConfigManager.appConfig.GetString("APP_VERSION");
                     if (versionNum == Application.version)
                         StartCoroutine(LoadScene());
-                        
+
                     else
-                        Debug.Log("팝업띄움");
+                        updatePanel.SetActive(true);
+                    
                     break;
             }
+        }
+        
+        public void OnClick_UpdatePanel()
+        {
+                #if UNITY_ANDROID
+                    Application.OpenURL("market://details?id=com.Anydog.PinaPang");
+                #endif
+
+                #if UNITY_IOS
+                    Application.OpenURL("itms-apps://itunes.apple.com/app/id1603184828")
+                #endif
         }
 
         private void OnDisable()
