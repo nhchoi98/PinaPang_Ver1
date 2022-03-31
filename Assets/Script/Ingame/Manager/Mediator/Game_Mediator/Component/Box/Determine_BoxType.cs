@@ -49,14 +49,7 @@ namespace Ingame
        
 
         public Transform diePool;
-        private void Load_PreviousData()
-        {
 
-            // # 1. Wave 정보 반영 
-            // # 2. 박스 위치 및 HP 반영 (별도 클래스로 해버리자)
-            // # 3. TargetNum_Info 정보 반영하기 
-        }
-        
         IEnumerator Remove_DieBox()
         {
             for (int i = 0; i < diePool.childCount; i++)
@@ -538,7 +531,7 @@ namespace Ingame
                 
                 case Event_num.LOAD_DATA:
                     probability = new Probability_Set();
-                    Load_PreviousData();
+                    
                     break;
                 
                 case Event_num.SET_NEW_STAGE:
@@ -606,11 +599,16 @@ namespace Ingame
 
         public void Set_StageData(StageInfoVO data)
         {
+            probability = new Probability_Set();
             this.stage = data.stage;
             this.wave = data.wave;
             _scoreManager.Load_Score_Data(data.score,data.stage);
-            // 이후 리스폰 하는 데이터를 읽어오는 작업을 실행함.
-        }
+            if (stage > normalVariation_Target) Set_Transformed_Num();        /// JSON에 정보 추가 필요. Transform num, classy num, obstacle num을 추가해야해! (03.30) 
+                
+            if (stage > x2_Target) Set_Classy_Num();
 
+            if (stage > obstacle_Target) Set_Obstacle_num();
+            Set_Spawn_Prob(); // 박스 확률 정보 수정해줌 
+        }
     }
 }

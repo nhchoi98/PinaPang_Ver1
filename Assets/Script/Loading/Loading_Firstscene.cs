@@ -43,9 +43,7 @@ namespace Loading
         
         [SerializeField] private AudioSource clickSound;
 
-        [Header("Version Update Panel")] 
-        public GameObject updatePanel;
-
+        [SerializeField] private GameObject updatePanel;
         #if UNITY_IOS
         public event Action sentTrackingAuthorizationRequest;
         #endif
@@ -246,6 +244,8 @@ namespace Loading
                 op.allowSceneActivation = false;
                 StartCoroutine(Determine_Update());
             }
+
+            StartCoroutine(MainSplash());
         }
 
         private void Next_Scene()
@@ -310,6 +310,20 @@ namespace Loading
 
                 TimeCount = 0;
             }
+        }
+        
+        IEnumerator MainSplash()
+        {
+            Color color = BackGroundImg.color;                            //color 에 판넬 이미지 참조
+            while (BackGroundImg.color.a > 0f)
+            {
+                time1 += Time.deltaTime / F_time;
+                color.a = Mathf.Lerp(1f, 0f, time1);
+                BackGroundImg.color = color;
+                yield return null;
+            }
+
+            yield return null;
         }
         
         IEnumerator LoadScene()

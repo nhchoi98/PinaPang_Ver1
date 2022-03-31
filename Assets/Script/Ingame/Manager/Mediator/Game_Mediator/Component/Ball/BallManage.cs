@@ -37,8 +37,9 @@ namespace Ingame
 
         public GameObject tap_btn;
 
-        [SerializeField] private Transform charater; 
-        
+        [SerializeField] private Transform charater;
+
+        public Text ballNum;
         private const float Ground_Y = -701.02f; // 공의 절대적인 Y좌표. 
         private void Awake()
         {
@@ -104,15 +105,6 @@ namespace Ingame
         /// <returns></returns>
         private IEnumerator PlusMove(Transform TR)
         {
-            /*
-            while (true) 
-            {
-                TR.position = Vector2.MoveTowards(TR.position, progetile_Pos, 3000f * Time.deltaTime);
-                if (progetile_Pos == (Vector2)TR.position)
-                    break;
-                yield return null;
-            }
-            */
             TR.DOMove(progetile_Pos,0.4f).SetEase(Ease.InExpo);// 플러스볼을 땅바닥으로 내림. 
             TR.DOKill();
             TR.gameObject.SetActive(false);
@@ -187,8 +179,29 @@ namespace Ingame
                         Destroy(flightGroup.GetChild(0).gameObject);
                     Init_Data();
                     break;
+                
             }
+        }
+
+        /// <summary>
+        /// data를 받아 이에 맞게 공도 만들어주고, 공 + 텍스트 + 캐릭터 위치도 잡아줌.
+        /// </summary>
+        /// <param name="data"></param>
+        public void Load_Data(BallInfo_VO data)
+        {
+            progetile_Pos = data.ballPos; // 공의 소환 위치 지정 
+            Make_new_Ball(data.ballNum);
+
+            charater.transform.position = data.charPos;
+            if (data.is_Fliped) // 캐릭터의 방향을 지정해주기 위함
+            {
+                charater.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                charater.gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            // Step 3. 텍스트의 위치를 지정해줌
             
+            ballNum.text = string.Format("{0:#,0}",data.ballNum);
+            ballNum.gameObject.transform.position = new Vector3((Mathf.Abs(progetile_Pos .x)>463f ?  (progetile_Pos .x<-463f ? -463f:463f):progetile_Pos .x),progetile_Pos .y-70f, 0f);
         }
 
         /// <summary>

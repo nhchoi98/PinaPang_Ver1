@@ -88,7 +88,8 @@ namespace Ingame
         private float timescale;
 
         [Header("Subject")] [SerializeField] private SaveIngame_Subject saveGame_Obj;
-
+        [Header("Load_GameData")] private bool is_StillGame;
+        [SerializeField] private SaveIngame_Subject gameObserver;
         private void Awake()
         {
             determine_type = blockComponent.gameObject.GetComponent<IComponent>();
@@ -218,7 +219,18 @@ namespace Ingame
 
             else
             {
-                Event_Receive(Event_num.INIT_DATA);
+                if (PlayerPrefs.GetInt("Still_Game", 0) == 1) // 게임 중간에 나갔을 경우 
+                {
+                    is_StillGame = true;
+                    gameObserver.Load_Game();
+                    // 이어하기 동작하게 만들어야함  
+                }
+
+                else // 첨 부터 시작인 경우 
+                {
+                    is_StillGame = false;
+                    Event_Receive(Event_num.INIT_DATA);
+                }
             }
         }
 
@@ -296,7 +308,15 @@ namespace Ingame
                 }
 
                 Event_Receive(Event_num.Launch_Green); // 발사 가능 상태로 전환하기 
-                saveGame_Obj.notifyObserver();
+                if (is_StillGame && !tutorial)
+                {
+                    saveGame_Obj.notifyObserver(); // 정보를 저장하라고 신호를 보냄 
+                    PlayerPrefs.SetInt("Still_Game", 1);
+                }   
+                else if (!is_StillGame) // 첨 시작일 경우, Flag만 활성화 시켜줌. 정보를 불러오는 경우에는 켜지면 안되자너. 
+                    is_StillGame = true;
+                
+
                 if (Tutorial_Candle_Data.IsPanelOpen())
                     tutorial_Candle.SetActive(true);
 

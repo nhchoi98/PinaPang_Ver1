@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Block;
+using Ingame_Data;
 using Manager;
 using Particle;
 using Progetile;
@@ -32,6 +33,7 @@ namespace Ingame
         [SerializeField] private ScoreManager scoreManager;
 
         [SerializeField] private Progetile_Particle _particle;
+        public Transform boxGroup;
         
         
         #region Spawn_Box_ONFIELD   
@@ -326,6 +328,62 @@ namespace Ingame
             }
         }
         
+        #endregion
+
+        #region Load_Data
+
+        public void Load_SpawnData(ref List<BoxInfoVO> dataList)
+        {
+            for (int i = 0; i < dataList.Count; i++)
+                Spawn_OnField(dataList[i]);
+
+
+        }
+
+
+        /// <summary>
+        /// 필드에 박스를 스폰하는 함수인데, 데이터 로드 할 때 쓰는 함수 
+        /// </summary>
+        /// <param name="spawnData"></param>
+        private void Spawn_OnField(BoxInfoVO spawnData)
+        {
+            GameObject obj;
+            IBox ibox;
+            switch (spawnData.type)
+            {
+                default: // 기본 박스 스폰하는 경우 
+                    obj = Instantiate(box);
+                    break;
+                case blocktype.NORMAL_TRI1:
+                    obj = Instantiate(triangle1);
+                    break;
+                
+                case blocktype.NORMAL_TRI2:
+                    obj = Instantiate(triangle2);
+                    break; 
+                    
+                case blocktype.NORMAL_TRI3:
+                    obj = Instantiate(triangle3);
+                    break;
+                    
+                case blocktype.NORMAL_TRI4:
+                    obj = Instantiate(triangle4);
+                    break;
+            }
+
+            obj.transform.position = spawnData.pos; // 위치 지정 
+            obj.transform.SetParent(boxGroup);
+            ibox = obj.GetComponent<IBox>();
+            ibox.Set_Type(spawnData.type); // type 지정 
+            ibox.Set_HP(spawnData.hp); // hp 지정 
+            ibox.Set_ColorType(1,particle.Set_Particle()); // 파티클 색상 지정 
+            if (spawnData.isCandle != 1)
+            {
+                ibox.Set_Candle(spawnData.isCandle); // 캔들 여부 지정 
+            }
+
+            ibox.Set_Event(scoreManager.args, ref _particle);
+        }
         #endregion
 
     }

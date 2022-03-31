@@ -210,6 +210,7 @@ namespace Setting
             ad.Remove_CallBack();
             _questManager.Set_User_Stat_Save();
             SceneManager.LoadScene("Loading_Scene_Game");
+            PlayerPrefs.SetInt("Still_Game", 0); // 이어하기 기능 중지 시키기 
             PlayerPrefs.SetInt("Ingame", 0);
             PlayerPrefs.SetInt("Play_Game",0);
         }

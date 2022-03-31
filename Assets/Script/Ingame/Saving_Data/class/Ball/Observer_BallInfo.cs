@@ -57,6 +57,9 @@ namespace Ingame_Data
         public void LoadData_ToIngame()
         {
             Read_Data();
+            ballData_instance.Load_Data(ballData);
+            // 1. 공을 개수 만큼 위치에 소환함 
+            // 2. 텍스트 위치도 바꾸어줌 
         }
     }
 }

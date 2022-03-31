@@ -225,9 +225,13 @@ namespace Block
 
             yield return null;
         }
-        public bool Get_Candle()
+        public int Get_Candle()
         {
-            return candle;
+            if (candle)
+                return candle_type;
+
+            else
+                return -1;
         }
 
         public int Get_HP()

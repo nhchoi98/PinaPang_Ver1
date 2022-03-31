@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Ingame;
 using UnityEngine;
 
 namespace Ingame_Data
@@ -10,6 +11,8 @@ namespace Ingame_Data
         private List<IObserver_Ingame> listObserver;
         [Header("Observer")]
         private IObserver_Ingame observer_Stage;
+
+        [SerializeField] private GameManage _gameManage;
 
         private void Awake()
         {
@@ -28,8 +31,16 @@ namespace Ingame_Data
             
         }
 
-        public void notifyObserver()
+        public void Load_Game()
         {
+            for(int i =0; i<this.transform.childCount; i++)
+                listObserver[i].LoadData_ToIngame();
+            
+            _gameManage.Event_Receive(Event_num.Launch_Green);
+        }
+
+        public void notifyObserver()
+        { 
             for (int i = 0; i < listObserver.Count; i++)
                 listObserver[i].Update_Status();
             

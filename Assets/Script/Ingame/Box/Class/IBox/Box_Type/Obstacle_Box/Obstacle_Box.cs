@@ -34,9 +34,9 @@ namespace Block
             Set_Color();
         }
 
-        public bool Get_Candle()
+        public int Get_Candle()
         {
-            return false;
+            return -1;
         }
 
         public int Get_HP()

@@ -92,6 +92,7 @@ namespace Manager
         
         private void Awake()
         {
+            PlayerPrefs.SetInt("Still_Game", 0);
             Set_Equip_Animation();
             Set_Infomation();
             Set_BonusPanel();
