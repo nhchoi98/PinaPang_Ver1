@@ -112,6 +112,9 @@ namespace Ingame_Data
         {
             Read_Data();
             _respawnBox.Load_SpawnData(ref boxData);
+            isInit = true;
+            boxData = new List<BoxInfoVO>();
+            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
     }
 }

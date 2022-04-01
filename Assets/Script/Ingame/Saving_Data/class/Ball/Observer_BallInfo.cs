@@ -8,6 +8,7 @@ namespace Ingame_Data
     {
         private BallInfo_VO ballData;
         [SerializeField] private BallManage ballData_instance;
+        [SerializeField] private LaunchManage _launchManage;
         private bool isInit = false;
         
         public void Update_Status()
@@ -58,6 +59,8 @@ namespace Ingame_Data
         {
             Read_Data();
             ballData_instance.Load_Data(ballData);
+            _launchManage.Set_Pos(ballData.ballPos);
+            isInit = true;
             // 1. 공을 개수 만큼 위치에 소환함 
             // 2. 텍스트 위치도 바꾸어줌 
         }
