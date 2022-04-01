@@ -7,6 +7,7 @@ using Progetile;
 using Score;
 using Tutorial;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ingame
 {
@@ -16,7 +17,9 @@ namespace Ingame
     public class RespawnBox : MonoBehaviour
     {
         [SerializeField] private Transform respawnGroup;
-        
+
+        public Transform plusGroup_Active;
+        public GameObject plusBall;
         [Header("Basic")]
         public GameObject box, triangle1, triangle2, triangle3, triangle4,  circle, half, half_2;
 
@@ -34,6 +37,7 @@ namespace Ingame
 
         [SerializeField] private Progetile_Particle _particle;
         public Transform boxGroup;
+        [SerializeField] private BallManage _ballManage;
         
         
         #region Spawn_Box_ONFIELD   
@@ -336,8 +340,6 @@ namespace Ingame
         {
             for (int i = 0; i < dataList.Count; i++)
                 Spawn_OnField(dataList[i]);
-
-
         }
 
 
@@ -369,15 +371,23 @@ namespace Ingame
                 case blocktype.NORMAL_TRI4:
                     obj = Instantiate(triangle4);
                     break;
+                
+                case blocktype.PLUSBALL:
+                    obj = Instantiate(plusBall);
+                    obj.GetComponent<PlusBall>().DiePool = plusGroup_Active;
+                    obj.GetComponent<Animator>().enabled = true;
+                    obj.GetComponent<CircleCollider2D>().enabled = true;
+                    obj.GetComponent<Image>().sprite = _ballManage.Get_Ballimg();
+                    break;
             }
 
-            obj.transform.position = spawnData.pos; // 위치 지정 
+            obj.transform.position = new Vector3(spawnData.pos_x,_Determine_Pos.Which_Pos(spawnData.pos_y,0).y); 
             obj.transform.SetParent(boxGroup);
             ibox = obj.GetComponent<IBox>();
             ibox.Set_Type(spawnData.type); // type 지정 
             ibox.Set_HP(spawnData.hp); // hp 지정 
             ibox.Set_ColorType(1,particle.Set_Particle()); // 파티클 색상 지정 
-            if (spawnData.isCandle != 1)
+            if (spawnData.isCandle != -1)
             {
                 ibox.Set_Candle(spawnData.isCandle); // 캔들 여부 지정 
             }

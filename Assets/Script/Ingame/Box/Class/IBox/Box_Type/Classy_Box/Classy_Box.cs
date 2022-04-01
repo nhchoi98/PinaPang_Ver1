@@ -95,6 +95,11 @@ namespace Block
             else
                 ++row;
         }
+
+        public int Get_Row()
+        {
+            return row;
+        }
         
         #region Attack
 

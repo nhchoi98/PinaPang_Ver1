@@ -13,5 +13,7 @@ namespace Item
         public int Get_Row();
         public Vector2 Get_Pos();
         public void Set_Load(); // 이어하기에서 호출시 불러와지는 함수  
+        public void Set_Type(ItemType type);
+        public ItemType Get_Type();
     }
 }

@@ -15,6 +15,7 @@ namespace Item
         public Animator Animator;
 
         [Header("Pos")] public int row;
+        public ItemType type;
         private void Start() => Set_Dir();
         /// <summary>
         /// 난반사 아이템이 들어오면, 어느 방향으로 튕겨낼 지를 결정해주는 변수 
@@ -84,6 +85,16 @@ namespace Item
         public void Set_Load()
         {
             return; 
+        }
+        
+        public void Set_Type(ItemType type)
+        {
+            this.type = type;
+        }
+
+        public ItemType Get_Type()
+        {
+            return type;
         }
     }
 }

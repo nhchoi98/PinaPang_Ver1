@@ -32,7 +32,8 @@ namespace Item
         public bool isCol;
 
         [Header("Pos_Data")] 
-        public int row; 
+        public int row;
+        public ItemType type;
 
         private void Start()
         {
@@ -204,6 +205,16 @@ namespace Item
         public void Set_Load()
         {
             Update_List();
+        }
+
+        public void Set_Type(ItemType type)
+        {
+            this.type = type;
+        }
+
+        public ItemType Get_Type()
+        {
+            return type;
         }
     }
 }

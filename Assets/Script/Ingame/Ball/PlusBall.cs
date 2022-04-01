@@ -10,7 +10,7 @@ using Progetile;
 public class PlusBall : MonoBehaviour, IBox
 {
     [SerializeField]
-    private Transform  DiePool;
+    public Transform  DiePool;
     public AudioSource Ball_HIT;
     public GameObject Plusball_destroy;
     private bool Is_hit = false;
@@ -106,7 +106,7 @@ public class PlusBall : MonoBehaviour, IBox
 
     public int whichRow()
     {
-        return 0;
+        return row;
     }
 
     public void Set_Row(int value)
@@ -123,6 +123,11 @@ public class PlusBall : MonoBehaviour, IBox
         return blocktype.PLUSBALL;
     }
 
+    public int Get_Row()
+    {
+        return row;
+    }
+    
     public Vector2 Get_Position()
     {
         return this.transform.position;

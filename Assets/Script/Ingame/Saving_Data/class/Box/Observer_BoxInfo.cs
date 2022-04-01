@@ -5,6 +5,7 @@ using System.IO;
 using Block;
 using Manager;
 using Newtonsoft.Json;
+using UnityEngine.AI;
 
 /*
  * 필드에 존재하는 박스의 정보를 저장하는 스크립트 
@@ -40,11 +41,11 @@ namespace Ingame_Data
                 IBox info = boxGroup.GetChild(i).gameObject.GetComponent<IBox>();
                 var hp = info.Get_HP();
                 var candle = info.Get_Candle();
-                var pos = new Vector2(boxGroup.GetChild(i).position.x, _Determine_Pos.Which_Pos(0,info.whichRow()-1).y);
                 var type = info.Get_Type();
                 BoxInfoVO data = new BoxInfoVO();
                 data.hp = hp;
-                data.pos = pos;
+                data.pos_x = boxGroup.GetChild(i).transform.position.x;
+                data.pos_y = info.Get_Row();
                 data.isCandle = candle;
                 data.type = type;
                 boxData.Add(data);
@@ -59,14 +60,8 @@ namespace Ingame_Data
             if (!File.Exists(DATA_PATH)) // Path에 파일이 없다면...
             {
                 Directory.CreateDirectory(Application.persistentDataPath + "/Ingame_Data");
-                BoxInfoVO data = new BoxInfoVO();
-                data.hp = 1;
-                data.pos = Vector2.zero;
-                data.isCandle = -1;
-                data.type = blocktype.X2_TRI1;
-                // 더미 데이터를 하나 넣어놓음.
-                var DATA_STR = JsonUtility.ToJson(data);
-                File.WriteAllText(DATA_PATH,DATA_STR);   
+                var str = JsonConvert.SerializeObject(boxData,settings); // 아예 비어있으면?
+                File.WriteAllText(DATA_PATH,str);    
             }
 
             else
@@ -83,14 +78,8 @@ namespace Ingame_Data
             if (!File.Exists(DATA_PATH)) // Path에 파일이 없다면...
             {
                 Directory.CreateDirectory(Application.persistentDataPath + "/Ingame_Data");
-                BoxInfoVO data = new BoxInfoVO();
-                data.hp = 1;
-                data.pos = Vector2.zero;
-                data.isCandle = -1;
-                data.type = blocktype.X2_TRI1;
-                // 더미 데이터를 하나 넣어놓음.
-                var DATA_STR = JsonUtility.ToJson(data);
-                File.WriteAllText(DATA_PATH,DATA_STR);   
+                var str = JsonConvert.SerializeObject(boxData,settings);
+                File.WriteAllText(DATA_PATH,str);   
             }
 
             else

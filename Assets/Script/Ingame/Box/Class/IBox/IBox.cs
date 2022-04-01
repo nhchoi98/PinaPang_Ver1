@@ -44,6 +44,7 @@ namespace Block
         public int Get_HP();
         public int whichRow(); // 열 정보 반환해주는 함수 
         public void Set_Row(int value);
+        public int Get_Row();
         public blocktype Get_Type(); 
         public Vector2 Get_Position();
 

@@ -35,6 +35,17 @@ public class Observer_Item : MonoBehaviour, IObserver_Ingame
         if(itemData.Count!=0)
             itemData.Clear();
         
+        for (int i = 0; i < itemGroup.childCount; i++)
+        {
+            IItem_Data info = itemGroup.GetChild(i).gameObject.GetComponent<IItem_Data>();
+            ItemInfoVO data = new ItemInfoVO();
+            data.pos_X = itemGroup.GetChild(i).position.x;
+            data.pos_Y = info.Get_Row();
+            data.type = info.Get_Type();
+            itemData.Add(data);
+        }
+        // 추가추가 
+        
         Write_Data();
     }
 
@@ -108,7 +119,7 @@ public class Observer_Item : MonoBehaviour, IObserver_Ingame
     private void Write_Data()
     {
         // Step 1. 파일이 없으면, 만들고 시작 
-        var DATA_PATH = Application.persistentDataPath + "/Ingame_Data/Boxdata.json";
+        var DATA_PATH = Application.persistentDataPath + "/Ingame_Data/Itemdata.json";
         if (!File.Exists(DATA_PATH)) // Path에 파일이 없다면...
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/Ingame_Data");
@@ -130,4 +141,12 @@ public class Observer_Item : MonoBehaviour, IObserver_Ingame
         }
         // 저장할 애들을 List에서 빼와서 Arr의 형태로 저장함.
     }
+    
+    internal class Wrapper
+    {
+        [JsonProperty("JsonValues")]
+        public ItemInfoVO data { get; set; }
+            
+    }
 }
+

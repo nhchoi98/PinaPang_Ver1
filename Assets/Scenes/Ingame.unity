@@ -22139,6 +22139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnGroup: {fileID: 1965564509}
+  plusGroup_Active: {fileID: 1247863658}
+  plusBall: {fileID: 33295233821702826, guid: 58e58a7cb9fa2d54ea41e0ab4c80c988, type: 3}
   box: {fileID: 5786642126110741535, guid: 74190f0ec3c351f4d852043dc5323413, type: 3}
   triangle1: {fileID: 586035893688395253, guid: ac7295409af3d2c4dbb0cee01c8d4dbb,
     type: 3}
@@ -22176,6 +22178,7 @@ MonoBehaviour:
   scoreManager: {fileID: 537648958}
   _particle: {fileID: 1317498581}
   boxGroup: {fileID: 2121840871}
+  _ballManage: {fileID: 618862945}
 --- !u!1 &524584539
 GameObject:
   m_ObjectHideFlags: 0

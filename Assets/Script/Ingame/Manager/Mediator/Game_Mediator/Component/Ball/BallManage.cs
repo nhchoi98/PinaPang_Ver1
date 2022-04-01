@@ -54,6 +54,10 @@ namespace Ingame
             // #3. 파티클 활성 유무 체크하기 
         }
 
+        public Sprite Get_Ballimg()
+        {
+            return ballImg;
+        }
         #region Init_Data
 
         /// <summary>

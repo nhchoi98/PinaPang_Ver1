@@ -182,6 +182,7 @@ namespace Ingame
                     TR = Instantiate(raw_Item).transform;
                     TR.SetParent(ItemGroup);
                     TR.position = Spawn_Pos_List[pos_rand];
+                    TR.gameObject.GetComponent<IItem_Data>().Set_Type(ItemType.rowItem);
                     TR.gameObject.GetComponent<Raw_Item>().locateBox = this;
                 }
 
@@ -190,6 +191,7 @@ namespace Ingame
                     TR = Instantiate(col_Item).transform;
                     TR.SetParent(ItemGroup);
                     TR.position = Spawn_Pos_List[pos_rand ];
+                    TR.gameObject.GetComponent<IItem_Data>().Set_Type(ItemType.colItem);
                     TR.gameObject.GetComponent<Col_Item>().locateBox = this;
                 }
 
@@ -198,6 +200,7 @@ namespace Ingame
                 {
                     TR = Instantiate(randomDir).transform;
                     TR.SetParent(ItemGroup);
+                    TR.gameObject.GetComponent<IItem_Data>().Set_Type(ItemType.randomDir);
                     TR.position = Spawn_Pos_List[pos_rand];
                 }
             }
@@ -210,6 +213,7 @@ namespace Ingame
                     TR.SetParent(ItemGroup);
                     TR.gameObject.GetComponent<Raw_Item>().locateBox = this;
                     TR.gameObject.GetComponent<Col_Item>().locateBox = this;
+                    TR.gameObject.GetComponent<IItem_Data>().Set_Type(ItemType.crossItem);
                     TR.position = Spawn_Pos_List[pos_rand];
                 }
 

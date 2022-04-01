@@ -59,6 +59,11 @@ namespace Block
             return row;
         }
 
+        public int Get_Row()
+        {
+            return row;
+        }
+        
         public void Set_Row(int value)
         {
             if (value != -1)

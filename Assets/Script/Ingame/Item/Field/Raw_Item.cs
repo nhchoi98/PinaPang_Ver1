@@ -36,6 +36,8 @@ namespace Item
 
         [Header("Pos_Data")] 
         public int row;
+
+        private ItemType type;
         private void Start()
         {
             comboSequence = DOTween.Sequence()
@@ -192,5 +194,18 @@ namespace Item
                 is_pinata = true;
             }
         }
+        
+        public void Set_Type(ItemType type)
+        {
+            this.type = type;
+        }
+
+        public ItemType Get_Type()
+        {
+            return type;
+        }
     }
+    
+    
+    
 }
