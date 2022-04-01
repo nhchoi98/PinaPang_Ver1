@@ -72,10 +72,10 @@ namespace Ingame
             if (TR == null)
                 yield break;
             
-            if (TR.CompareTag("Box") || TR.CompareTag("Obstacle"))
+            if (TR.CompareTag("Box") || TR.CompareTag("Obstacle") || TR.CompareTag("PlusBall"))
             {
                 row = TR.gameObject.GetComponent<IBox>().whichRow();
-                TR.gameObject.GetComponent<IBox>().Set_Row(1);
+                TR.gameObject.GetComponent<IBox>().Set_Row(-1);
                 Target_Pos = new Vector3(TR.position.x, _Determine_Pos.Which_Pos(row+1,0).y, 0f); // 박스가 움직일 위치를 계산함. 
             }
             
@@ -162,6 +162,11 @@ namespace Ingame
 
             if(Is_destroy) // 필드 아이템이 1회 피격되어서 필드에서 사라져야 한다면..
                 TR.GetComponent<Determine_Destroy>().Set_Animation(); // 사라지게 만듬 
+
+            else
+            {
+                TR.gameObject.GetComponent<IItem_Data>().Set_Row(-1);
+            }
             
             yield return null;
             

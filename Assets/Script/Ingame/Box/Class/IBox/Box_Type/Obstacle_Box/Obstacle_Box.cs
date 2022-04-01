@@ -61,7 +61,11 @@ namespace Block
 
         public void Set_Row(int value)
         {
-            row += value;
+            if (value != -1)
+                row += value;
+
+            else
+                ++row;
         }
         
         #region Attack

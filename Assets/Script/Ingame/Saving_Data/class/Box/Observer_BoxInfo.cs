@@ -3,10 +3,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using Block;
-using LitJson;
 using Manager;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 /*
  * 필드에 존재하는 박스의 정보를 저장하는 스크립트 

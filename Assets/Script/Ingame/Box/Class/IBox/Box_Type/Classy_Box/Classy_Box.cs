@@ -89,8 +89,13 @@ namespace Block
 
         public void Set_Row(int value)
         {
-            row += value;
+            if (value != -1)
+                row += value;
+
+            else
+                ++row;
         }
+        
         #region Attack
 
         // 박스 피격시의 액션을 결정지어주는 함수 

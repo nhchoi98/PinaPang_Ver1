@@ -6,13 +6,15 @@ using UnityEngine;
 
 namespace Item
 {
-    public class Random_Direction : MonoBehaviour
+    public class Random_Direction : MonoBehaviour, IItem_Data
     {
         private Vector2 dir;
         private float x, y;
         [SerializeField] private Determine_Destroy _determineDestroy;
         public AudioSource[] sound;
         public Animator Animator;
+
+        [Header("Pos")] public int row;
         private void Start() => Set_Dir();
         /// <summary>
         /// 난반사 아이템이 들어오면, 어느 방향으로 튕겨낼 지를 결정해주는 변수 
@@ -61,5 +63,27 @@ namespace Item
             Destroy(this.gameObject);
         }
 
+        public void Set_Row(int value)
+        {
+            if (row == -1)
+                ++row;
+            else
+                row += value;
+        }
+
+        public int Get_Row()
+        {
+            return row;
+        }
+
+        public Vector2 Get_Pos()
+        {
+            return transform.position;
+        }
+
+        public void Set_Load()
+        {
+            return; 
+        }
     }
 }

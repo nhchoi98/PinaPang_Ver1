@@ -10,7 +10,7 @@ using Pinata;
 
 namespace Item
 {
-    public class Col_Item : MonoBehaviour
+    public class Col_Item : MonoBehaviour, IItem_Data
     {
         public LocateBox locateBox;
         private List<IBox> AttackList = new List<IBox>(); // 원래는 private
@@ -30,6 +30,9 @@ namespace Item
         public Sprite normalImg;
         private bool flag;
         public bool isCol;
+
+        [Header("Pos_Data")] 
+        public int row; 
 
         private void Start()
         {
@@ -175,6 +178,32 @@ namespace Item
         {
             comboSequence.Kill();
             Destroy(this.gameObject);
+        }
+
+        public void Set_Row(int value)
+        {
+            if (row == -1)
+                ++row;
+            else
+                row += value;
+        }
+
+        public int Get_Row()
+        {
+            return row;
+        }
+
+        public Vector2 Get_Pos()
+        {
+            return transform.position;
+        }
+
+        /// <summary>
+        /// 공격 대상들을 초기화 시켜줌 
+        /// </summary>
+        public void Set_Load()
+        {
+            Update_List();
         }
     }
 }

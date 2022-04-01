@@ -293,9 +293,12 @@ namespace Block
 
         public void Set_Row(int value)
         {
-            row += value;
-        }
+            if (value != -1)
+                row += value;
 
+            else
+                ++row;
+        }
         public blocktype Get_Type()
         {
             return type;

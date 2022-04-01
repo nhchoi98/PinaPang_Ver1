@@ -14,6 +14,7 @@ public class PlusBall : MonoBehaviour, IBox
     public AudioSource Ball_HIT;
     public GameObject Plusball_destroy;
     private bool Is_hit = false;
+    private int row;
     private void Awake()
     {
         SoundManager SM = GameObject.FindWithTag("SM").GetComponent<SoundManager>();
@@ -110,7 +111,11 @@ public class PlusBall : MonoBehaviour, IBox
 
     public void Set_Row(int value)
     {
-        return;
+        if (value != -1)
+            row += value;
+
+        else
+            ++row;
     }
 
     public blocktype Get_Type()

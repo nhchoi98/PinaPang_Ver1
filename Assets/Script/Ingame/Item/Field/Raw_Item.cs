@@ -10,10 +10,9 @@ using Pinata;
 
 namespace Item
 {
-    public class Raw_Item : MonoBehaviour
+    public class Raw_Item : MonoBehaviour, IItem_Data
     {
         public LocateBox locateBox;
-        
         
         [Header("Field_Obj")]
         private List<IBox> AttackList = new List<IBox>(); // 원래는 private
@@ -34,36 +33,17 @@ namespace Item
         public Sprite normalImg;
         private bool flag;
         public bool isCol;
+
+        [Header("Pos_Data")] 
+        public int row;
         private void Start()
         {
-            
             comboSequence = DOTween.Sequence()
                 .SetAutoKill(false)
                 .Append(DOTween.ToAlpha(() => hitAnimation.color, alpha => hitAnimation.color = alpha, 1f, 0.1f))
                 .Append(DOTween.ToAlpha(() => hitAnimation.color, alpha => hitAnimation.color = alpha, 0f, 0.1f))
                 .OnComplete(ItemDisable);
             Calc_HitAni_Position();
-            
-            for (int i = 0; i < locateBox.boxGroup.childCount; i++)
-            {
-                Transform TR = locateBox.boxGroup.GetChild(i);
-                if (Mathf.Abs(TR.position.y - this.transform.position.y) < 10)
-                {
-                    if (TR.gameObject.CompareTag("Box"))
-                        AttackList.Add(TR.gameObject.GetComponent<IBox>());
-                    
-                }
-                
-            }
-            
-            // 피냐타를 공격 대상에 추가 
-            if (locateBox.pinataGroup.childCount != 0)
-            {
-                Transform TR = locateBox.pinataGroup.GetChild(0).GetChild(0).GetChild(1);
-                tr_pinata = TR;
-                attack_pinata =  locateBox.pinataGroup.GetChild(0).GetChild(0).GetChild(1).gameObject.GetComponent<Pinata_Down>();
-                is_pinata = true;
-            }
         }
 
         
@@ -166,6 +146,51 @@ namespace Item
         {
             comboSequence.Kill();
             Destroy(this.gameObject);
+        }
+        
+        public void Set_Row(int value)
+        {
+            if (row == -1)
+                ++row;
+            else
+                row += value;
+        }
+
+        public int Get_Row()
+        {
+            return row;
+        }
+
+        public Vector2 Get_Pos()
+        {
+            return transform.position;
+        }
+
+        /// <summary>
+        /// 공격 대상들을 초기화 시켜줌 
+        /// </summary>
+        public void Set_Load()
+        {
+            for (int i = 0; i < locateBox.boxGroup.childCount; i++)
+            {
+                Transform TR = locateBox.boxGroup.GetChild(i);
+                if (Mathf.Abs(TR.position.y - this.transform.position.y) < 10)
+                {
+                    if (TR.gameObject.CompareTag("Box"))
+                        AttackList.Add(TR.gameObject.GetComponent<IBox>());
+                    
+                }
+                
+            }
+            
+            // 피냐타를 공격 대상에 추가 
+            if (locateBox.pinataGroup.childCount != 0)
+            {
+                Transform TR = locateBox.pinataGroup.GetChild(0).GetChild(0).GetChild(1);
+                tr_pinata = TR;
+                attack_pinata =  locateBox.pinataGroup.GetChild(0).GetChild(0).GetChild(1).gameObject.GetComponent<Pinata_Down>();
+                is_pinata = true;
+            }
         }
     }
 }
