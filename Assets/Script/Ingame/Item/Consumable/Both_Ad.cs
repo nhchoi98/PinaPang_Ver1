@@ -33,6 +33,9 @@ namespace Ad
         public Transform itemTR;
         public Transform diePool;
         [SerializeField] private LocateBox _locateBox;
+        
+        float time;
+        float time_const;
 
         void Start()
         {
@@ -143,22 +146,31 @@ namespace Ad
             }
         }
 
-        IEnumerator Timer()
+        IEnumerator Timer(bool load_Time = false, float Ltime = 300f)
         {
             // Step 1. 필드상의 아이템 전부 바꾸어줌 . 
             Change_Item_To_CrossRazer();
             // Step 2. 기타 설정을 해줌 
-            _settingManager.OnClick_Item_Exit();
-            _questManager.Set_Item();
-            _soundManager.item.Play(); // 사운드 
+            if (!load_Time)
+            {
+                _settingManager.OnClick_Item_Exit();
+                _questManager.Set_Item();
+                _soundManager.item.Play(); // 사운드
+            }
+            
             timer.gameObject.transform.GetChild(0).gameObject.SetActive(false); // 옆에 보너스 표시 지워주기 
             _manage.Event_Receive(Event_num.CROSS_ITEM);
             Image panel = item_icon.GetChild(1).gameObject.GetComponent<Image>();
             item_icon.SetAsLastSibling();
             item_icon.gameObject.SetActive(true);
             activation.SetActive(true);
-            float time = 300f  + (_dataManager.item_duration_const-1000f);
-            float time_const = 300f + (_dataManager.item_duration_const-1000f);
+            time_const = 300f + (_dataManager.item_duration_const-1000f);
+            if (!load_Time)
+                time = 300f + (_dataManager.item_duration_const - 1000f);
+
+            else
+                time = Ltime;
+            
             timer.text = ((int) time).ToString();
             timer_lower.text = ((int) time).ToString();
             while (true)
@@ -185,6 +197,7 @@ namespace Ad
             }
             
             activation.SetActive(false);
+            time = 0;
             timer.text = 300.ToString(); // 원래대로 초기화 
             timer.gameObject.transform.GetChild(0).gameObject.SetActive(true); // 옆에 보너스 표시 지워주기
             timer_lower.text = ((int) time_const).ToString();
@@ -194,6 +207,17 @@ namespace Ad
 
         }
 
+        #region Load&Save Data
+        public void Save_Data(ref float time, ref bool isActive)
+        {
+            time = this.time;
+            if (time == 0)
+                isActive = false;
+
+            else
+                isActive = true;
+        }
+        #endregion
 
         public void Set_Mediator(IMediator mediator)
         {

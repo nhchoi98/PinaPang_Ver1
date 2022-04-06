@@ -33,6 +33,9 @@ using System.Collections;
          public GameObject exitBtn;
          public Button pauseBtn;
          public GameObject crossButton,speedButton;
+         
+         float time;
+         float time_const;
          /// <summary>
          /// 1. Ad 버튼 활성 유무
          /// 2. 시간 체크 
@@ -184,15 +187,26 @@ using System.Collections;
              ad_btn.interactable = false;
          }
 
-         IEnumerator Timer()
+         IEnumerator Timer(bool load_Time = false, float Ltime = 300f)
          {
+
+             if (!load_Time)
+             {
+                 _settingManager.OnClick_Item_Exit();
+                 _questManager.Set_Item();
+                 _soundManager.item.Play(); // 사운드 
+             }
+             
              _lineAnimation.Set_SecondLine(true);
-             _settingManager.OnClick_Item_Exit();
-             _questManager.Set_Item();
-             _soundManager.item.Play(); // 사운드 
              timer.gameObject.transform.GetChild(0).gameObject.SetActive(false); // 옆에 보너스 표시 지워주기 
-             float time = 300f  + (_dataManager.item_duration_const-1000f);
-             float time_const = 300f + (_dataManager.item_duration_const-1000f);
+             time_const = 300f + (_dataManager.item_duration_const-1000f);
+
+             if (!load_Time)
+                 time = 300f + (_dataManager.item_duration_const - 1000f);
+
+             else
+                 time = Ltime;
+             
              Image panel = item_icon.GetChild(1).gameObject.GetComponent<Image>();
              item_icon.SetAsLastSibling();
              item_icon.gameObject.SetActive(true);
@@ -235,6 +249,19 @@ using System.Collections;
 
          }
 
+         
+         #region Load&Save Data
+         public void Save_Data(ref float time, ref bool isActive)
+         {
+             time = this.time;
+             if (time == 0)
+                 isActive = false;
+
+             else
+                 isActive = true;
+         }
+         #endregion
+         
          public void Set_Mediator(IMediator mediator)
          {
              this._mediator = mediator;

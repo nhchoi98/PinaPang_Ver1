@@ -1,14 +1,9 @@
 
-/*
- *
- * 
- */
 using System.Collections;
 using Ad;
 using UnityEngine.UI;
 using Challenge;
 using Data;
-using Ingame;
 using Ingame_Data;
 using Manager;
 using Score;
@@ -16,7 +11,6 @@ using Timer;
 using Tutorial;
 using UnityEngine;
 using Warn;
-using DG.Tweening;
 
 namespace Ingame
 {

@@ -531,7 +531,6 @@ namespace Ingame
                 
                 case Event_num.LOAD_DATA:
                     probability = new Probability_Set();
-                    
                     break;
                 
                 case Event_num.SET_NEW_STAGE:
