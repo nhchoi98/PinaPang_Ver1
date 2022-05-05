@@ -217,6 +217,13 @@ namespace Ad
             else
                 isActive = true;
         }
+        
+        public void Load_Data(float time, bool isActive)
+        {
+            if (isActive)
+                StartCoroutine(Timer(true, time));
+
+        }
         #endregion
 
         public void Set_Mediator(IMediator mediator)

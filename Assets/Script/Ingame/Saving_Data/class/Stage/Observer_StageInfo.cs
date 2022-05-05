@@ -10,6 +10,7 @@ namespace Ingame_Data
         private StageInfoVO stageData;
         [SerializeField] private Determine_BoxType boxData;
         private bool isInit = false;
+        private bool isRevive, isBest;
         public void Update_Status()
         {
             if (!isInit)
@@ -19,9 +20,18 @@ namespace Ingame_Data
             }
 
             this.stageData = boxData.Get_StageData();
+            stageData.is_Revive = this.isRevive;
             Write_Data();
         }
 
+        /// <summary>
+        /// 부활 하면, 데이터에 부활했다고 저장 
+        /// </summary>
+        public void Set_Revive()
+        {
+            isRevive = true;
+        }
+        
         #region  IO
         public void Read_Data()
         {
@@ -37,9 +47,11 @@ namespace Ingame_Data
             {
                 Directory.CreateDirectory(Application.persistentDataPath + "/Ingame_Data");
                 DATA = new StageInfoVO();
+                DATA.is_Best = false;
                 DATA.score = 0;
                 DATA.stage = 0;
                 DATA.wave = 0;
+                DATA.is_Revive = false;
                 var DATA_STR = JsonUtility.ToJson(DATA) ;
                 File.WriteAllText(DATA_PATH,DATA_STR);   
             }
@@ -59,6 +71,7 @@ namespace Ingame_Data
         {
             Read_Data();
             boxData.Set_StageData(stageData);
+            // 부활 여부 로드해주기 
         }
     }
 }

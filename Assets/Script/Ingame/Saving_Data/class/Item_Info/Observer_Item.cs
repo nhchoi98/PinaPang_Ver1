@@ -51,6 +51,8 @@ namespace Ingame
         public void LoadData_ToIngame()
         {
             Read_Data();
+            const float Y_START_POS = 571f;
+            const float Y_offset = -155f;
             // 게임의 정보를 불러오는 액션
             for (int i = 0; i < itemData.Count; i++)
             {
@@ -60,6 +62,7 @@ namespace Ingame
                     case ItemType.colItem:
                         TR = Instantiate(colItem).transform;
                         TR.gameObject.GetComponent<Col_Item>().locateBox = this._locateBox;
+                        
 
                         break;
 
@@ -81,8 +84,8 @@ namespace Ingame
                 }
 
                 TR.SetParent(itemGroup);
-                TR.position = new Vector3(itemData[i].pos_X, _Determine_Pos.Which_Pos(0, itemData[i].pos_Y + 1).y);
-                TR.gameObject.GetComponent<IItem_Data>().Set_Row(itemData[i].pos_Y);
+                TR.position = new Vector3(itemData[i].pos_X, (Y_START_POS+((itemData[i].pos_Y)*Y_offset)),0); 
+                TR.gameObject.GetComponent<IItem_Data>().Set_Row(itemData[i].pos_Y+1);
                 TR.gameObject.GetComponent<IItem_Data>().Set_Load(); // 다시 불러와서 필드 내의 어떤 아이템 공격할지 지정해줌 
 
             }

@@ -593,6 +593,7 @@ namespace Ingame
             stageData.score = this._scoreManager.score;
             stageData.wave = this.wave;
             stageData.stage = this.stage;
+            stageData.is_Best = _scoreManager.Is_Best();
             return stageData;
         }
 
@@ -601,12 +602,14 @@ namespace Ingame
             probability = new Probability_Set();
             this.stage = data.stage;
             this.wave = data.wave;
-            _scoreManager.Load_Score_Data(data.score,data.stage);
+            _scoreManager.Load_Score_Data(data.score,data.stage, data.is_Best);
             if (stage > normalVariation_Target) Set_Transformed_Num();        /// JSON에 정보 추가 필요. Transform num, classy num, obstacle num을 추가해야해! (03.30) 
                 
             if (stage > x2_Target) Set_Classy_Num();
 
             if (stage > obstacle_Target) Set_Obstacle_num();
+            if(data.is_Revive)
+                _mediator.Event_Receive(Event_num.USER_DIE); // 부활 여부를 로드해줌 
             Set_Spawn_Prob(); // 박스 확률 정보 수정해줌 
         }
     }

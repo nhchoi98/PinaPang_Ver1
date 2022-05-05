@@ -66,7 +66,7 @@ namespace Item
 
         public void Set_Row(int value)
         {
-            if (row == -1)
+            if (value == -1)
                 ++row;
             else
                 row += value;

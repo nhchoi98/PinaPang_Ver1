@@ -23,6 +23,7 @@ public class PlusBall : MonoBehaviour, IBox
 
     private void OnEnable()
     {
+        row = 0;
         Is_hit = false;
     }
 

@@ -372,6 +372,52 @@ namespace Ingame
                     obj = Instantiate(triangle4);
                     break;
                 
+                case blocktype.NORMAL_CIRCLE:
+                    obj = Instantiate(circle);
+                    break;
+                
+                case blocktype.X2_TRI1:
+                    obj = Instantiate(x2Triangle1);
+                    break;
+                
+                case blocktype.X2_TRI2:
+                    obj = Instantiate(x2Triangle2);
+                    break;
+                
+                case blocktype.X2_TRI3:
+                    obj = Instantiate(x2Triangle3);
+                    break;
+                
+                case blocktype.X2_TRI4:
+                    obj = Instantiate(x2Triangle3);
+                    break;
+                
+                case blocktype.X2_CIRCLE:
+                    obj = Instantiate(x2Circle);
+                    break;
+                
+                case blocktype.OBSTACLE_RECT:
+                    obj = Instantiate(boxObstacle);
+                    break;
+                
+                case blocktype.OBSTACLE_TRI1:
+                    obj = Instantiate(triObstacle1);
+                    break;
+                
+                case blocktype.OBSTACLE_TRI2:
+                    obj = Instantiate(triObstacle2);
+                    break;
+                
+                case blocktype.OBSTACLE_TRI3:
+                    obj = Instantiate(triObstacle3);
+                    break;
+                
+                case blocktype.OBSTACLE_TRI4:
+                    obj = Instantiate(triObstacle4);
+                    break;
+                
+                
+                // 기타 박스들 추가해야함 
                 case blocktype.PLUSBALL:
                     obj = Instantiate(plusBall);
                     obj.GetComponent<PlusBall>().DiePool = plusGroup_Active;
@@ -381,12 +427,14 @@ namespace Ingame
                     break;
             }
 
-            obj.transform.position = new Vector3(spawnData.pos_x,_Determine_Pos.Which_Pos(spawnData.pos_y,0).y); 
+            obj.transform.position = new Vector3(spawnData.pos_x,_Determine_Pos.Which_Pos(spawnData.pos_y,0).y);  //스폰될 위치를 잡아줌 
             obj.transform.SetParent(boxGroup);
             ibox = obj.GetComponent<IBox>();
             ibox.Set_Type(spawnData.type); // type 지정 
             ibox.Set_HP(spawnData.hp); // hp 지정 
             ibox.Set_ColorType(1,particle.Set_Particle()); // 파티클 색상 지정 
+            ibox.Set_Row(spawnData.pos_y); // 열 정보를 지정해줌 
+            
             if (spawnData.isCandle != -1)
             {
                 ibox.Set_Candle(spawnData.isCandle); // 캔들 여부 지정 

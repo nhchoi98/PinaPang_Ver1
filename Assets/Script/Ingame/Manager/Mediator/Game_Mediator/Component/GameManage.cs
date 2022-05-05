@@ -122,7 +122,7 @@ namespace Ingame
                 itemBtn.SetActive(false);
 
         }
-
+        
         private void OnApplicationQuit()
         {
             FirstPurchase_Timer.Save_Data();
@@ -445,6 +445,8 @@ namespace Ingame
 
                     // 부활이벤트가 일어나는 경우 호출되는 이벤트. 
                     case Event_num.SET_REVIVE:
+                        // 부활 됐다고 알려줌 
+                        gameObserver.gameObject.transform.GetChild(0).gameObject.GetComponent<Observer_StageInfo>().Set_Revive();
                         removeBox.Event_Occur(eventNum);
                         if (is_newBlock) // 만약 처음 생성되는 블록이 있다면.. 
                         {

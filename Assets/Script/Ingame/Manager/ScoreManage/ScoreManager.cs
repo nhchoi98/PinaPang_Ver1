@@ -82,7 +82,7 @@ namespace Score
             _score_outline5.text = string.Format("{0:#,0}", score);
         }
         
-        public void Load_Score_Data(int score, int stage)
+        public void Load_Score_Data(int score, int stage, bool isBest)
         {
             this.score = score;
             _score.text = string.Format("{0:#,0}", score);
@@ -91,8 +91,21 @@ namespace Score
             _score_outline3.text = string.Format("{0:#,0}", score);
             _score_outline4.text = string.Format("{0:#,0}", score);
             _score_outline5.text = string.Format("{0:#,0}", score);
+            if (isBest)
+            {
+                Best_Score = score;
+                Set_BestScore_Color();
+                bestScore_level = true;
+            }
+
             Set_score_const(stage);
         }
+
+        public bool Is_Best()
+        {
+            return bestScore_level;
+        }
+        
         private void Awake()
         {
             args = new IBox.event_delegate(Combo);
