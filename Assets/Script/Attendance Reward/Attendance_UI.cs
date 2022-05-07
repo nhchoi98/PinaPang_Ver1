@@ -64,6 +64,8 @@ namespace Attendance
         public Scrollbar scrollbar;
         public GameObject secondPage;
         
+        [SerializeField] private GameObject continue_Game;
+        
         void OnEnable()
         {
             bool flag = false;
@@ -117,15 +119,17 @@ namespace Attendance
                 
             }
 
-            if (!flag)
+            if (!flag) // 아무 보상을 받지 않는다면...
             {
                 exitBtn.interactable = true;
+                if (PlayerPrefs.GetInt("Still_Game", 0) == 1)
+                    continue_Game.SetActive(true);
                 // 보상 받기 버튼 활성화 
             }
 
             else
             {
-                if (PlayerPrefs.GetInt("Tutorial_Attendance", 0) != 0)
+                if (PlayerPrefs.GetInt("Tutorial_Attendance", 0) != 0) // 이미 튜토리얼 보상을 받았다면, 화면 켜주기. 
                 {
                     panel.SetActive(true);
                 }
@@ -162,6 +166,12 @@ namespace Attendance
             {
                 _charaterPackTimer.Open_Lobby_Popup();
                 reward_panel = false;
+            }
+
+            else
+            {
+                if (PlayerPrefs.GetInt("Still_Game", 0) == 1)
+                    continue_Game.SetActive(true);
             }
             panel.SetActive(false);
         }
@@ -200,7 +210,7 @@ namespace Attendance
                 exitBack_Btn.interactable = true;
             }
 
-            reward_panel = true;
+            reward_panel = true; // 출석 보상을 받고 패널이 켜졌음. 
 
                 // 또 있나 찾아보기~
                 for (int i = 0; i < ITEM_NUM-4; i++)

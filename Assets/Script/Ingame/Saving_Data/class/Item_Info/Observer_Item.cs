@@ -62,7 +62,6 @@ namespace Ingame
                     case ItemType.colItem:
                         TR = Instantiate(colItem).transform;
                         TR.gameObject.GetComponent<Col_Item>().locateBox = this._locateBox;
-                        
 
                         break;
 
@@ -85,8 +84,10 @@ namespace Ingame
 
                 TR.SetParent(itemGroup);
                 TR.position = new Vector3(itemData[i].pos_X, (Y_START_POS+((itemData[i].pos_Y)*Y_offset)),0); 
-                TR.gameObject.GetComponent<IItem_Data>().Set_Row(itemData[i].pos_Y+1);
+               // TR.gameObject.GetComponent<IItem_Data>().Set_Row(itemData[i].pos_Y+1);
                 TR.gameObject.GetComponent<IItem_Data>().Set_Load(); // 다시 불러와서 필드 내의 어떤 아이템 공격할지 지정해줌 
+                TR.gameObject.GetComponent<IItem_Data>().Set_Type(itemData[i].type);
+                TR.gameObject.GetComponent<IItem_Data>().Set_Row(itemData[i].pos_Y);
 
             }
 
@@ -103,9 +104,6 @@ namespace Ingame
             {
                 Directory.CreateDirectory(Application.persistentDataPath + "/Ingame_Data");
                 ItemInfoVO data = new ItemInfoVO();
-                data.pos_X = 1f;
-                data.pos_Y = 1;
-                data.type = ItemType.colItem;
                 // 더미 데이터를 하나 넣어놓음.
                 var DATA_STR = JsonUtility.ToJson(data);
                 File.WriteAllText(DATA_PATH, DATA_STR);
@@ -126,9 +124,6 @@ namespace Ingame
             {
                 Directory.CreateDirectory(Application.persistentDataPath + "/Ingame_Data");
                 ItemInfoVO data = new ItemInfoVO();
-                data.pos_X = 1f;
-                data.pos_Y = 1;
-                data.type = ItemType.colItem;
                 // 더미 데이터를 하나 넣어놓음.
                 var DATA_STR = JsonUtility.ToJson(data);
                 File.WriteAllText(DATA_PATH, DATA_STR);

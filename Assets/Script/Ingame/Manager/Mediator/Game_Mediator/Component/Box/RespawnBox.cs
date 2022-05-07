@@ -416,6 +416,10 @@ namespace Ingame
                     obj = Instantiate(triObstacle4);
                     break;
                 
+                case blocktype.X2_RECT:
+                    obj = Instantiate(x2Box);
+                    break;
+                
                 
                 // 기타 박스들 추가해야함 
                 case blocktype.PLUSBALL:

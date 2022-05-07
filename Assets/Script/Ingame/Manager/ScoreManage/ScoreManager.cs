@@ -98,7 +98,7 @@ namespace Score
                 bestScore_level = true;
             }
 
-            Set_score_const(stage);
+            Set_scoreConst_LoadData(stage);
         }
 
         public bool Is_Best()
@@ -311,6 +311,32 @@ namespace Score
             }
         }
 
+        /// <summary>
+        /// 이어하기 시 배율을 결정해주는 함수 
+        /// </summary>
+        /// <param name="stage"></param>
+        public void Set_scoreConst_LoadData(int stage)
+        {
+            if (stage < 21)
+                score_const = 1f;
+            
+            else if (stage >= 21 && stage < 51)
+                score_const = 1.5f;
+            
+            else if (stage >= 51 && stage < 101)
+                score_const = 2.0f;
+            
+            else if(stage >= 101 && stage <201)
+                score_const = 2.5f;
+            
+            else if(stage>=201 && stage<301)
+                score_const = 3f;
+
+            else
+                score_const = 4f;
+        }
+        
+        
         public void Set_score_const(int stage)
         {
             switch (stage)

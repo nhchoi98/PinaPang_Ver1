@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.IO;
 using Charater;
 using Fire;
 using Ingame;
@@ -20,6 +20,69 @@ namespace Manager
         [Header("UI")] public GameObject Bonus_Time;
 
         [SerializeField] private LocateBox _locateBox;
+
+        private void Start()
+        {
+            if (PlayerPrefs.GetInt("Still_Game", 0) == 1)
+                Load_SaveData();
+        }
+
+        /// <summary>
+        /// 이어하기 시 호출되는 함수. 
+        /// </summary>
+        public void Load_SaveData()
+        {
+            CandleCharaterVO data;
+            var DATA_PATH = Application.persistentDataPath + "/Ingame_Data/CandleShown_Data.json";
+            
+            // Step 1. 정보를 불러옴
+            if (File.Exists(DATA_PATH))
+            {
+                var json_string = File.ReadAllText(DATA_PATH);
+                data = JsonUtility.FromJson<CandleCharaterVO>(json_string); 
+            }
+
+            else
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/Ingame_Data");
+                data = new CandleCharaterVO();
+                var DATA_STR = JsonUtility.ToJson(data);
+                File.WriteAllText(DATA_PATH,DATA_STR);   
+            }
+            // Step 2. UI상에  및 데이터 반영해줌 
+            _Bonus_Check[0] = data.firstCharater ;
+            _Bonus_Check[1] = data.secondCharater;
+            _Bonus_Check[2] = data.thirdCharater;
+            _Bonus_Check[3] = data.forthCharater;
+            _Bonus_Check[4] = data.fifthCharter;
+            _Bonus_Check[5] = data.sixthCharater;
+
+            for (int i = 0; i < 6; i++)
+            {
+                if(_Bonus_Check[i])
+                    _Bonus_TR.GetChild(i).gameObject.SetActive(true);
+            }
+
+        }
+
+        // 어떤 글자가 습득되었는지를 저장하는 함수 
+        public void Save_Charater_Data()
+        {
+            CandleCharaterVO data = new CandleCharaterVO();
+            data.firstCharater = _Bonus_Check[0];
+            data.secondCharater = _Bonus_Check[1];
+            data.thirdCharater = _Bonus_Check[2];
+            data.forthCharater = _Bonus_Check[3];
+            data.fifthCharter = _Bonus_Check[4];
+            data.sixthCharater = _Bonus_Check[5];
+            
+            
+            var DATA_PATH = Application.persistentDataPath + "/Ingame_Data/CandleShown_Data.json";
+            var DATA = JsonUtility.ToJson(data);
+            File.WriteAllText(DATA_PATH,DATA);   
+           
+        }
+        
         
         /// <summary>
         /// 글자를 획득하면 호출되는 함수 
@@ -46,6 +109,7 @@ namespace Manager
                     _Bonus_Respawn[type] = true;
                 }
                 
+                
             }
         }
 
@@ -56,6 +120,7 @@ namespace Manager
                 _Bonus_Check[i] = false;
                 _Bonus_Respawn[i] = false;
             }
+            
         }
         
         public bool Get_Bonus_Charater(int type)

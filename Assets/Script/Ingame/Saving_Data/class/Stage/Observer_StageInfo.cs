@@ -2,6 +2,7 @@ using Ingame;
 using LitJson;
 using UnityEngine;
 using System.IO;
+using Manager;
 
 namespace Ingame_Data
 {
@@ -9,6 +10,7 @@ namespace Ingame_Data
     {
         private StageInfoVO stageData;
         [SerializeField] private Determine_BoxType boxData;
+        [SerializeField] private BonusCharater candleData; // 캔들을 습득 했는지 안했는지? 
         private bool isInit = false;
         private bool isRevive, isBest;
         public void Update_Status()
@@ -21,6 +23,7 @@ namespace Ingame_Data
 
             this.stageData = boxData.Get_StageData();
             stageData.is_Revive = this.isRevive;
+            candleData.Save_Charater_Data();
             Write_Data();
         }
 
@@ -30,6 +33,8 @@ namespace Ingame_Data
         public void Set_Revive()
         {
             isRevive = true;
+            stageData.is_Revive = true;
+            Write_Data();
         }
         
         #region  IO
@@ -70,6 +75,8 @@ namespace Ingame_Data
         public void LoadData_ToIngame()
         {
             Read_Data();
+            if (stageData.is_Revive)
+                isRevive = true;
             boxData.Set_StageData(stageData);
             // 부활 여부 로드해주기 
         }

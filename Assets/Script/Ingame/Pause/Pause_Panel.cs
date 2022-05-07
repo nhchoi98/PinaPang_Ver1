@@ -1,3 +1,4 @@
+using Ad;
 using Challenge;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,8 @@ namespace Setting
         public GameObject confirm_Panel;
 
         [SerializeField] private  Ad_Mediator ad;
+
+        [SerializeField] private GameObject gameOver_Panel;
         private bool init_vibe;
         /// <summary>
         /// 1. 볼륨
@@ -207,12 +210,18 @@ namespace Setting
         public void HomeBtn()
         {
             ad.Destroy_Banner();
-            ad.Remove_CallBack();
             _questManager.Set_User_Stat_Save();
-            SceneManager.LoadScene("Loading_Scene_Game");
-            PlayerPrefs.SetInt("Still_Game", 0); // 이어하기 기능 중지 시키기 
-            PlayerPrefs.SetInt("Ingame", 0);
-            PlayerPrefs.SetInt("Play_Game",0);
+            if (!Noads_instance.Get_Is_Noads() && !Noads_instance.Get_Is_Noads_New())
+            {
+                IMediator _mediator = GameObject.FindWithTag("adcontrol").GetComponent<IMediator>();
+                _mediator.Event_Receive(Event_num.USER_DIE);
+            }
+            
+            else
+                gameOver_Panel.SetActive(true);
+            
+            this.gameObject.SetActive(false); // 일시 정지 화면 끄기 
+            // 보상 화면 띄우기 
         }
 
         public void PausePanel_HomeBtn()

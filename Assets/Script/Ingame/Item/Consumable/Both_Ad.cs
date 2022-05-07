@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Challenge;
 using Ingame;
+using Ingame_Data;
 using Item;
 using Log;
 
@@ -33,6 +34,9 @@ namespace Ad
         public Transform itemTR;
         public Transform diePool;
         [SerializeField] private LocateBox _locateBox;
+
+        [SerializeField] private Observer_Item _itemInfo;
+        [SerializeField] private Observer_ItemTime _itemTime;
         
         float time;
         float time_const;
@@ -120,6 +124,7 @@ namespace Ad
             Transform tr;
             List<Transform> fieldItem = new List<Transform>();
             List<Vector2> position = new List<Vector2>();
+            List<int> rowData = new List<int>();
 
             var targetNum = itemTR.childCount;
             for (int i = 0; i < targetNum; i++)
@@ -128,15 +133,19 @@ namespace Ad
                     continue;
                 
                 position.Add(itemTR.GetChild(0).position);
+                rowData.Add(itemTR.GetChild(0).gameObject.GetComponent<IItem_Data>().Get_Row());
                 tr = itemTR.GetChild(0);
                 tr.SetParent(diePool);
                 tr.gameObject.SetActive(false);
             }
+            
             for (int i = 0; i < position.Count; i++)
             {
                 tr = Instantiate(crossObj, position[i], Quaternion.identity).transform;
                 tr.GetComponent<Raw_Item>().locateBox = _locateBox;
                 tr.GetComponent<Col_Item>().locateBox = _locateBox;
+                tr.GetComponent<IItem_Data>().Set_Type(ItemType.crossItem);
+                tr.GetComponent<IItem_Data>().Set_Row(rowData[i]);
                 fieldItem.Add(tr);
             }
 
@@ -144,18 +153,21 @@ namespace Ad
             {
                 fieldItem[i].SetParent(itemTR);
             }
+            
+            _itemInfo.Update_Status(); // 필드 정보 다시 저장 왜냐면 새로운 친구들이 생겼으니! 
         }
 
         IEnumerator Timer(bool load_Time = false, float Ltime = 300f)
         {
             // Step 1. 필드상의 아이템 전부 바꾸어줌 . 
-            Change_Item_To_CrossRazer();
             // Step 2. 기타 설정을 해줌 
             if (!load_Time)
             {
                 _settingManager.OnClick_Item_Exit();
                 _questManager.Set_Item();
                 _soundManager.item.Play(); // 사운드
+                Change_Item_To_CrossRazer();
+                _itemTime.Update_Status();
             }
             
             timer.gameObject.transform.GetChild(0).gameObject.SetActive(false); // 옆에 보너스 표시 지워주기 

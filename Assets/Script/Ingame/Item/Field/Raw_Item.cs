@@ -48,6 +48,30 @@ namespace Item
             Calc_HitAni_Position();
         }
 
+        public void Update_List()
+        {
+            for (int i = 0; i < locateBox.boxGroup.childCount; i++)
+            {
+                Transform TR = locateBox.boxGroup.GetChild(i);
+                if (Mathf.Abs(TR.position.y - this.transform.position.y) < 10)
+                {
+                    if (TR.gameObject.CompareTag("Box"))
+                        AttackList.Add(TR.gameObject.GetComponent<IBox>());
+                    
+                }
+                
+            }
+            
+            // 피냐타를 공격 대상에 추가 
+            if (locateBox.pinataGroup.childCount != 0)
+            {
+                Transform TR = locateBox.pinataGroup.GetChild(0).GetChild(0).GetChild(1);
+                tr_pinata = TR;
+                attack_pinata =  locateBox.pinataGroup.GetChild(0).GetChild(0).GetChild(1).gameObject.GetComponent<Pinata_Down>();
+                is_pinata = true;
+            }
+        }
+        
         
         private void Calc_HitAni_Position()
         {

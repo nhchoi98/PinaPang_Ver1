@@ -609,7 +609,8 @@ namespace Ingame
 
             if (stage > obstacle_Target) Set_Obstacle_num();
             if(data.is_Revive)
-                _mediator.Event_Receive(Event_num.USER_DIE); // 부활 여부를 로드해줌 
+                _mediator.Event_Receive(Event_num.SET_GAMEOVER); // 부활 여부를 로드해줌 
+            
             Set_Spawn_Prob(); // 박스 확률 정보 수정해줌 
         }
     }

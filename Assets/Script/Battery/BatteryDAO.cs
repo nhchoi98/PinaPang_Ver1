@@ -125,7 +125,6 @@ namespace Battery
         public void Loading_Charge()
         {
             TimeSpan delta = DateTime.UtcNow - data.accessTime;
-            
             if (delta < TimeSpan.FromMinutes(6))
                 return;
             
@@ -156,10 +155,7 @@ namespace Battery
                 while (true)
                 {
                     data.accessTime += TimeSpan.FromMinutes(6);
-                    delta = DateTime.UtcNow - data.accessTime;
-                    if (delta < TimeSpan.FromMinutes(6))
-                        break;
-                    
+
                     if (data.count < 30)
                         data.count += 1;
 
@@ -174,6 +170,10 @@ namespace Battery
                         data.accessTime = DateTime.UtcNow;
                         break;
                     }
+                    
+                    delta = DateTime.UtcNow - data.accessTime;
+                    if (delta < TimeSpan.FromMinutes(6))
+                        break;
                 }
                 // 시간 차이에 따른 충전량 계산 
                 // 가장 마지막 충전량을 기준으로 access time 재작성 

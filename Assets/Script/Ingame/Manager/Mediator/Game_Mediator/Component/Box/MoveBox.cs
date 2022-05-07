@@ -46,6 +46,15 @@ namespace Ingame
                 {
                     if (item_List[i].gameObject.layer == 11) // 열 아이템 이라면 
                         item_List[i].gameObject.GetComponent<Col_Item>().Update_List(); // 어떤걸 파괴할 지에 대한 리스트를 업데이트 해줌 
+                    
+                    else if(item_List[i].gameObject.layer == 13)
+                        item_List[i].gameObject.GetComponent<Raw_Item>().Update_List(); // 어떤걸 파괴할 지에 대한 리스트를 업데이트 해줌 
+                    
+                    else if (item_List[i].gameObject.layer == 14)
+                    {
+                        item_List[i].gameObject.GetComponent<Col_Item>().Update_List(); // 어떤걸 파괴할 지에 대한 리스트를 업데이트 해줌 
+                        item_List[i].gameObject.GetComponent<Raw_Item>().Update_List(); // 어떤걸 파괴할 지에 대한 리스트를 업데이트 해줌 
+                    }
                 }
                 
                 StartCoroutine(Move_Down_Item(item_List[i],value)); 

@@ -14,6 +14,7 @@ namespace Ingame
         #region Background_Set
         BGM_SET_START,
         #endregion
+        SET_GAMEOVER,
 
         #region BOX
         BOX_SPAWN,

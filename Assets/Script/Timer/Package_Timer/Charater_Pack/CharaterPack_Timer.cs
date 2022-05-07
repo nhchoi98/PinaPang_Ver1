@@ -25,6 +25,8 @@ namespace Timer
 
         [Header("Lobby_Timer")] public Transform lobbyTimer;
         private Text lobbyTimer_Text;
+
+
         
         // 그냥 시작 하는 경우에는, shop의 패널만 띄워줌. 코드를 구분해야겠네.
         private void Awake()
@@ -166,8 +168,9 @@ namespace Timer
                 Set_Lobby_Timer();
                 Set_Panel();
             }
+
+            if (which_charater != 99)
             
-            if(which_charater!=99)
                 popup_Panel.SetActive(true);
             
         }

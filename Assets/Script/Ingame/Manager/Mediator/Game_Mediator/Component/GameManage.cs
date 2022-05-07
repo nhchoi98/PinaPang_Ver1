@@ -158,10 +158,7 @@ namespace Ingame
         public void OnClick_Home()
         {
             ad.Destroy_Banner();
-            ad.Remove_CallBack();
             _questManager.Set_User_Stat_Save();
-            PlayerPrefs.SetInt("Ingame", 0);
-            PlayerPrefs.SetInt("Play_Game", 0);
             Application.Quit();
         }
 
@@ -281,6 +278,7 @@ namespace Ingame
 
                     else
                     {
+                        PlayerPrefs.SetInt("Still_Game", 0); // 부활하지 않으면 revive 안되게 하기 위함 (revive창 도중 나갔을 떄의 처리)) 
                         revive.SetActive(true);
                         gameOver = true;
                     }
@@ -446,7 +444,6 @@ namespace Ingame
                     // 부활이벤트가 일어나는 경우 호출되는 이벤트. 
                     case Event_num.SET_REVIVE:
                         // 부활 됐다고 알려줌 
-                        gameObserver.gameObject.transform.GetChild(0).gameObject.GetComponent<Observer_StageInfo>().Set_Revive();
                         removeBox.Event_Occur(eventNum);
                         if (is_newBlock) // 만약 처음 생성되는 블록이 있다면.. 
                         {
@@ -471,6 +468,8 @@ namespace Ingame
 
                     // 부활 후, 상단 3개행의 박스를 부시기 위한 이벤트 
                     case Event_num.BOX_REMOVE:
+                        gameObserver.gameObject.transform.GetChild(0).gameObject.GetComponent<Observer_StageInfo>().Set_Revive();
+                        PlayerPrefs.SetInt("Still_Game", 1);
                         is_Die = false;
                         removeBox.Event_Occur(eventNum);
                         break;
@@ -529,6 +528,10 @@ namespace Ingame
 
                     case Event_num.TUTORIAL_PINATA:
                         tutorial_Pinata.SetActive(true);
+                        break;
+                    
+                    case Event_num.SET_GAMEOVER:
+                        gameOver = true;
                         break;
                 }
             }

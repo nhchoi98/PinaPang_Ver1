@@ -74,6 +74,7 @@ namespace Ingame
 
             candle_spawned = false;
             Spawn_Pos_List.Clear();
+            _candleObj.Save_Data(_boxType.Get_Stage(), pinata_ison);
         }
 
         public void Set_Both_Item()

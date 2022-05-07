@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1676433578661375244}
   - component: {fileID: 3500070252928031286}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 8999700186957004772}
   - component: {fileID: 1715081941932021333}
   - component: {fileID: 2701351856282521576}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Opening_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 8094558546032870141}
   - component: {fileID: 812266914662509627}
   - component: {fileID: 840300860644137414}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Both_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,6 +324,7 @@ MonoBehaviour:
   normalImg: {fileID: 4159140946596504011, guid: 2c98017d791eb694e9e9f94ca0c034c0,
     type: 3}
   isCol: 0
+  row: 0
 --- !u!114 &812266914662509627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +349,8 @@ MonoBehaviour:
   normalImg: {fileID: 4159140946596504011, guid: 2c98017d791eb694e9e9f94ca0c034c0,
     type: 3}
   isCol: 1
+  row: 0
+  type: 0
 --- !u!95 &840300860644137414
 Animator:
   serializedVersion: 3
@@ -379,7 +382,7 @@ GameObject:
   - component: {fileID: 7400419230885003818}
   - component: {fileID: 7400419230885003817}
   - component: {fileID: 7400419230885003816}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,6 +590,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Both_Item_Preview
       objectReference: {fileID: 0}
+    - target: {fileID: 3558506399196606023, guid: f5817dbb2e607d7459b19194a7251b8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7870108872959066293, guid: f5817dbb2e607d7459b19194a7251b8d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f5817dbb2e607d7459b19194a7251b8d, type: 3}
@@ -729,6 +737,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Both_Item_row
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590453084877293747, guid: dcb4b98f302adef488df928c1e3449ba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7490595896463708680, guid: dcb4b98f302adef488df928c1e3449ba, type: 3}

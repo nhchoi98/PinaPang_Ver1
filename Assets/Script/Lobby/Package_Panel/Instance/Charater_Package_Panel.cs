@@ -13,6 +13,7 @@ namespace Timer
         [SerializeField] private Text timerText;
         [SerializeField] private GameObject parent_Obj;
         [SerializeField] private GameObject tapToContinue;
+        [SerializeField] private GameObject continue_Game;
 
         void OnEnable()
         {
@@ -54,6 +55,8 @@ namespace Timer
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (PlayerPrefs.GetInt("Still_Game", 0) == 1)
+                continue_Game.SetActive(true);
             parent_Obj.gameObject.SetActive(false);
         }
 

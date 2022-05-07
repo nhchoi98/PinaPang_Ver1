@@ -27,6 +27,8 @@ namespace Collection
         private int now_collection, target_collection;
         private int collection_count;
 
+        [SerializeField] private Observer_CollectionInfo _collectionManager;
+
         public int total_ingame_count { get; private set; }
 
         /// <summary>   
@@ -41,9 +43,23 @@ namespace Collection
             _mediator = GameObject.FindWithTag("GameController").GetComponent<IMediator>();
             total_ingame_count = 0;
             collectionList = new List<Tuple<int, int>>();
+            // 정보를 추가적으로 불러와야 할 경우, 여기서 불러옴 
 
         }
 
+        public void Load_Data(ref List<Tuple<int, int>> collectionList)
+        {
+            this.collectionList = new List<Tuple<int, int>>();
+            for (int i = 0; i < collectionList.Count; i++)
+            {
+                this.collectionList.Add(collectionList[i]);
+            }
+
+            total_ingame_count = collectionList.Count; 
+            collection_num = dao.Get_count();
+            col_Text.text = "X" + string.Format("{0:#,0}", collection_num+total_ingame_count);
+        }
+        
         private void Set_Collection()
         {
             int rand = UnityEngine.Random.Range(0, 50);
@@ -60,6 +76,7 @@ namespace Collection
             }
 
             collectionList.Add(new Tuple<int, int>(rand, 1));
+        
         }
 
         /// <summary>
@@ -104,6 +121,8 @@ namespace Collection
                 obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(path);
                 StartCoroutine(Flight_Object(obj.transform, i));
             }
+
+            _collectionManager.Get_CollectionData(ref collectionList);
             yield return null;
         }
 
