@@ -12,7 +12,7 @@ namespace Ingame
         private IMediator _mediator;
         public GameObject skillBtn;
         public GameObject skill;
-        private int index;
+        private int index;  
 
         private bool is_active;
         

@@ -15,8 +15,6 @@ namespace Ingame_Data
         private IObserver_Ingame observer_Stage;
 
         [SerializeField] private GameManage _gameManage;
-        public GameObject saveInfo;
-        public Text stageInfo;
 
         [SerializeField] private Determine_BoxType _boxType;
         private void Awake()
@@ -48,9 +46,7 @@ namespace Ingame_Data
         { 
             for (int i = 0; i < listObserver.Count; i++)
                 listObserver[i].Update_Status();
-            
-            stageInfo.text = "STAGE " + ((_boxType.Get_Stage() -1).ToString()) + " <color=#74E212>SAVED</color>";
-            saveInfo.SetActive(true);
+           
             // 저장되었음을 알리는 ui 띄워주기 
             
         }

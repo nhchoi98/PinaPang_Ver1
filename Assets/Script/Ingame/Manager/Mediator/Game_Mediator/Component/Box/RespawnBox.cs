@@ -117,13 +117,13 @@ namespace Ingame
                 case 1: // 반반박스인경우 
                     if (rand_2 == 0)
                     {
-                        ibox.Set_Type(blocktype.NORMAL_TRI1);
-                        ibox_2.Set_Type(blocktype.NORMAL_TRI4);
+                        ibox.Set_Type(blocktype.NORMAL_TRI2);
+                        ibox_2.Set_Type(blocktype.NORMAL_TRI3);
                     }
                     else
                     {
-                        ibox.Set_Type(blocktype.NORMAL_TRI2);
-                        ibox.Set_Type(blocktype.NORMAL_TRI3);
+                        ibox.Set_Type(blocktype.NORMAL_TRI1);
+                        ibox_2.Set_Type(blocktype.NORMAL_TRI4);
                     }
 
                     ibox.Set_HP(stage/2);

@@ -222,6 +222,7 @@ namespace Ingame
                 {
                     TR = Instantiate(randomDir).transform;
                     TR.SetParent(ItemGroup);
+                    TR.gameObject.GetComponent<IItem_Data>().Set_Type(ItemType.randomDir);
                     TR.position = Spawn_Pos_List[pos_rand];
                 }
             }

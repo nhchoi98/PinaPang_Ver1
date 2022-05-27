@@ -127,11 +127,15 @@ namespace Ad
             List<int> rowData = new List<int>();
 
             var targetNum = itemTR.childCount;
+            var targetIndex = 0;
             for (int i = 0; i < targetNum; i++)
             {
-                if (itemTR.GetChild(0).gameObject.CompareTag("random_item")) 
+                if (itemTR.GetChild(targetIndex).gameObject.CompareTag("random_item"))
+                {
+                    targetIndex++;
                     continue;
-                
+                }
+
                 position.Add(itemTR.GetChild(0).position);
                 rowData.Add(itemTR.GetChild(0).gameObject.GetComponent<IItem_Data>().Get_Row());
                 tr = itemTR.GetChild(0);

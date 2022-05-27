@@ -89,9 +89,11 @@ namespace Manager
         
         private bool is_open;
         public GameObject forbid_cast;
-        
+
+        [SerializeField] private GameObject pausePanel;
         private void Awake()
         {
+            pausePanel.SetActive(false);
             PlayerPrefs.SetInt("Still_Game", 0);
             Set_Equip_Animation();
             Set_Infomation();

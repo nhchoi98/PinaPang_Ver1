@@ -89,11 +89,22 @@ namespace Ingame
             
             data.sixth_stage = charater_target[5].Item2;
             data.sixth_type = charater_target[5].Item1;
-            
-            
+
+
             var DATA_PATH = Application.persistentDataPath + "/Ingame_Data/CharaterData.json";
-            var DATA = JsonUtility.ToJson(data);
-            File.WriteAllText(DATA_PATH,DATA);   
+            if (File.Exists(DATA_PATH))
+            {
+                var DATA = JsonUtility.ToJson(data);
+                File.WriteAllText(DATA_PATH, DATA);
+            }
+            
+            else
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/Ingame_Data");
+                data = new CharaterInfoVO();
+                var DATA_STR = JsonUtility.ToJson(data);
+                File.WriteAllText(DATA_PATH,DATA_STR);   
+            }
             // 경로 지정해주기 
         }
         

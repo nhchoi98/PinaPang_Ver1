@@ -38,6 +38,9 @@ namespace Ingame_Data
             
             for (int i = 0; i < boxGroup.childCount; i++)
             {
+                if (boxGroup.GetChild(i).gameObject.GetComponent<IBox>() == null)
+                    continue;
+                
                 IBox info = boxGroup.GetChild(i).gameObject.GetComponent<IBox>();
                 var hp = info.Get_HP();
                 var candle = info.Get_Candle();
